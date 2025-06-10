@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "Build NDS",
+        "type": "shell",
+        "command": "C:\\msys64\\usr\\bin\\bash.exe",
+        "args": [
+            "-lc",
+            "cd d: && cd /d/nadau/Documents/Projects/NQMR/ && make"
+        ],
+        "options": {
+            "cwd": "${workspaceFolder}"
+        },
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "problemMatcher": [
+            "$gcc"
+        ]
+    },
+    {
+        "label": "Run in melonDS",
+        "type": "shell",
+        "dependsOn": "Build NDS",
+        "command": "C:\\msys64\\usr\\bin\\bash.exe",
+        "args": [
+            "-lc",
+            "/d/nadau/Documents/Games/DS/melonDS.exe /d/nadau/Documents/Projects/NQMR/NQMT.nds"
+        ],
+        "options": {
+            "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": []
+    }
+]
+}

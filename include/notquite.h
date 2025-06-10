@@ -1,0 +1,37 @@
+#pragma once
+#include "nqmt_engine.h"
+
+#define DOWN  0
+#define RIGHT 1
+#define UP    2
+#define LEFT  3
+
+typedef struct{
+    unsigned short id;
+    unsigned short type;
+    Vector2i position;
+    bool isValid;
+}Arrow;
+
+#pragma pack(push, 1)
+typedef struct 
+{
+    u8 type;
+    u32 start;
+    u16 duration;
+}BMNote;
+#pragma pack(pop)
+
+int SetArrowSprite(SpriteHeader sh);
+
+int SetArrow(Arrow ar);
+
+int loadBeatMap(const char* path);
+
+int readNextBeat();
+
+int updateBeatBuffer();
+
+void fromBeatmap(Arrow *arrows, int size);
+
+u16* getArrowOffset();

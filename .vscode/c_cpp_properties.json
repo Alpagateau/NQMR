@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Nintendo DS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/msys64/opt/devkitpro/**",
+                "C:/msys64/opt/devkitpro/calico/include/calico/gba/**",
+                "C:/msys64/opt/wonderful/thirdparty/blocksds/external/nflib/include/**",
+                "C:/msys64/opt/devkitpro/libnds/include/**",
+                "C:/msys64/opt/devkitpro/libnds/**"
+            ],
+            "defines": [
+                "ARM9"
+            ],
+            "compilerPath":"C:/msys64/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "gnu11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

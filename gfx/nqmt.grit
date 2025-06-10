@@ -1,0 +1,4 @@
+# 16 bit texture bitmap, force alpha bit to 1
+-gB8 -gt -m
+
+#-gB8 -gt -m -mLa

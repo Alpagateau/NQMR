@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "nqmt_fs.h": "c",
+        "nqmt_engine.h": "c",
+        "timers.h": "c"
+    }
+}
