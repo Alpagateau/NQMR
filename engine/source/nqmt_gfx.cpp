@@ -1,4 +1,4 @@
-#include "nqmt_gfx.h"
+#include "nqmt_gfx.hpp"
 
 int bg;
 

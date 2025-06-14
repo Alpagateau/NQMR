@@ -1,5 +1,7 @@
-#pragma once
-#include "nqmt_engine.h"
+#ifndef NOTQUITE_H
+#define NOTQUITE_H
+
+#include "nqmt_engine.hpp"
 
 #define DOWN  0
 #define RIGHT 1
@@ -17,7 +19,7 @@ typedef struct{
 typedef struct 
 {
     u8 type;
-    u32 start;
+    s32 start;
     u16 duration;
 }BMNote;
 #pragma pack(pop)
@@ -35,3 +37,5 @@ int updateBeatBuffer();
 void fromBeatmap(Arrow *arrows, int size);
 
 u16* getArrowOffset();
+
+#endif

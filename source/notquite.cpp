@@ -1,4 +1,4 @@
-#include "notquite.h"
+#include "notquite.hpp"
 
 u16 *arrow_sprite;
 

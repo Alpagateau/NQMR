@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <maxmod9.h>
 
-#include "nqmt_fs.h"
+#include "nqmt_fs.hpp"
 
 #define AUDIO_BUFFER_LEN 1216
 #define AUDIO_SAMPLE_RATE 22050

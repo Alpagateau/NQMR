@@ -1,4 +1,5 @@
-#include "nqmt_audio.h"
+#include "nqmt_audio.hpp"
+#include <irq.h>
 
 AudioStreamer audioStreamer;
 
@@ -37,7 +38,7 @@ int initAudio()
 mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format)
 {
     //REG_IME = 1;
-    s8 *target = dest;
+    s8 *target = (s8*)dest;
     if(audioStreamer.audioFile == NULL)
     {
         //printf("No File\n");

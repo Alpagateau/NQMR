@@ -30,7 +30,7 @@ SDIMAGE		:= image.bin
 # -----------------
 
 SOURCEDIRS	:= source engine/source
-INCLUDEDIRS	:= include engine/include
+INCLUDEDIRS	:= source engine/include
 GFXDIRS		:= gfx
 BINDIRS		:= data
 AUDIODIRS	:= 
@@ -47,8 +47,9 @@ DEFINES		:= -DSAMPLE_DEFINE -DSAMPLE_DEFINE_WITH_VALUE=123
 
 ARM7ELF		:= $(BLOCKSDS)/sys/arm7/main_core/arm7_dswifi_maxmod.elf
 
-LIBS		:= -lmm9 -lnds9 #-lfat
-LIBDIRS		:= $(BLOCKSDS)/libs/maxmod \
+LIBS		:= -lNE -lmm9 -lnds9 -lc #-lfat
+LIBDIRS		:=  $(BLOCKSDS)/libs/maxmod \
+                $(BLOCKSDSEXT)/nitro-engine \
 		   $(BLOCKSDS)/libs/libnds 
 		   
 

@@ -1,4 +1,4 @@
-#include "nqmt_math.h"
+#include "nqmt_math.hpp"
 
 int dot(Vector2i a, Vector2i b)
 {
