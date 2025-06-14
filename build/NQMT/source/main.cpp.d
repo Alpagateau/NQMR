@@ -1,4 +1,4 @@
-build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/nqmt.h \
+build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  build/NQMT/gfx/arrows.h source/notquite.hpp \
  engine/include/nqmt_engine.hpp engine/include/nqmt_fs.hpp \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h \
@@ -67,7 +67,7 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/nqmt.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
  engine/include/nqmt_gfx.hpp engine/include/nqmt_math.hpp
-build/NQMT/gfx/nqmt.h:
+build/NQMT/gfx/title.h:
 build/NQMT/gfx/arrows.h:
 source/notquite.hpp:
 engine/include/nqmt_engine.hpp:

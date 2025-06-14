@@ -24,7 +24,7 @@ typedef struct
 }BMNote;
 #pragma pack(pop)
 
-int SetArrowSprite(SpriteHeader sh);
+int SetArrowSprite(NQMT::SpriteHeader sh);
 
 int SetArrow(Arrow ar);
 

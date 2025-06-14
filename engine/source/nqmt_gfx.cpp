@@ -1,6 +1,9 @@
 #include "nqmt_gfx.hpp"
 
+
 int bg;
+namespace NQMT{
+
 
 int InitBG()
 {
@@ -26,4 +29,12 @@ int InitGfx()
     InitBG();
     InitSprites();
     return 0;
+}
+
+int SetPalette(void* source, u32 size)
+{
+    dmaCopy(source, BG_PALETTE, size);
+    return 0;
+}
+
 }

@@ -4,7 +4,7 @@ u16 *arrow_sprite;
 
 #define OFFSET 32
 
-int SetArrowSprite(SpriteHeader sh)
+int SetArrowSprite(NQMT::SpriteHeader sh)
 {
     arrow_sprite = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
     //Load the palette first 

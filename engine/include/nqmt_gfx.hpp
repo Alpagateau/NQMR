@@ -10,13 +10,16 @@
 
 /*
 
-- Sprite loading from grit integrated AND filesystem.
-- Sprites either bitmap or 
-- Make sprite rendering easier
-Same with backgrounds
+-> Top Screen    : 2D
+-> Bottom Screen : 2D
+
+
+
 */
+
+namespace NQMT{
+
 //Sprite types 
-/*
 #define SQ8_16      0
 #define SQ16_16     1
 #define SQ32_16     2
@@ -52,7 +55,7 @@ Same with backgrounds
 #define R64x32_256 33
 #define R32x8_256  34
 #define R16x8_256  35
-*/
+
 typedef struct 
 {
     void *tiles;
@@ -69,12 +72,14 @@ typedef struct
     u32 palSize;
 }SpriteHeader;
 
+//Initialize Backgrounds
 //Currently only allows for  BgType_Text8bpp, BgSize_T_256x256 settings
 int InitBG();
 int SetBackground(BGHeader header);
-
+int SetPalette(void* source, u32 size);
 int InitSprites();
 
 int InitGfx();
 
+}
 #endif

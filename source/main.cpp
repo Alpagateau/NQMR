@@ -1,5 +1,5 @@
 extern "C"{
-#include "nqmt.h"
+#include "title.h"
 #include "arrows.h"
 }
 #include "notquite.hpp"
@@ -15,9 +15,28 @@ typedef struct {
 } SceneData;
 
 int main( void ) {
-	NQMT::initFS();
+	videoSetMode(MODE_0_2D);
+	vramSetBankA(VRAM_A_MAIN_BG);
+
+	consoleDemoInit();
+
+	NQMT::initFS(); 
 	NQMT::listDir();
 	NQMT::initAudio();
+
+	NQMT::InitBG();
+
+	NQMT::BGHeader title_screen_bg 
+	{
+		.tiles = (void*)titleTiles,
+		.tileSize = titleTilesLen,
+		.map = (void*)titleMap,
+		.mapSize = titleMapLen,
+	};
+	
+	NQMT::SetBackground(title_screen_bg);
+	NQMT::SetPalette((void*)titlePal, titlePalLen);	
+	
 
 	NQMT::loadSong("songs/khali.raw");
 	NQMT::nqmt_playStream();
@@ -27,7 +46,6 @@ int main( void ) {
 	{
 		swiWaitForVBlank();
 		mmStreamUpdate();
-		frame++;
 		oamUpdate(&oamMain);
 	}
 	
