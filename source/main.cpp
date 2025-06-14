@@ -17,10 +17,10 @@ typedef struct {
 int main( void ) {
 	NQMT::initFS();
 	NQMT::listDir();
-	initAudio();
+	NQMT::initAudio();
 
-	loadSong("songs/khali.raw");
-	nqmt_playStream();
+	NQMT::loadSong("songs/khali.raw");
+	NQMT::nqmt_playStream();
 	
 	int frame = 0;
 	while(1)

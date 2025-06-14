@@ -90,7 +90,7 @@ int updateBeatBuffer()
     int min_delta = 64;
     for(int i = 0; i < BBM_BUFFER_SIZE; i++)
     {
-        int delta = getTime() - bmBuffer[i].start;
+        int delta = NQMT::getTime() - bmBuffer[i].start;
         if(delta >= min_delta)
         {
             printf("Updated arrow %d\n", i);
@@ -108,7 +108,7 @@ void fromBeatmap(Arrow *arrows, int size)
     
     for(int i = 0; i < m; i++)
     {
-        int delta = (bmBuffer[i].start - getTime());
+        int delta = (bmBuffer[i].start - NQMT::getTime());
         arrows[i].type = bmBuffer[i].type;
         arrows[i].position.x = 25 + bmBuffer[i].type * 50;
         arrows[i].position.y =  (delta / 8);

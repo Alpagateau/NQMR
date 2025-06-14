@@ -12,6 +12,8 @@
 
 /*This header is responsible for all audio, from streaming to simple sounds*/
 
+namespace NQMT{
+
 typedef struct {
     FILE* audioFile;
     long int SamplePosition;
@@ -28,9 +30,10 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
 
 int  loadSong(const char *path);
 int  nqmt_playStream();
-void nqmt_pauseStream();
-void nqmt_stopStream();
+void pauseStream();
+void stopStream();
 
 int getTime();
 
+}
 #endif

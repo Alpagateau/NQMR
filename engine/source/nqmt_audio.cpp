@@ -1,5 +1,8 @@
 #include "nqmt_audio.hpp"
 
+namespace NQMT
+{
+
 AudioStreamer audioStreamer;
 
 #define FIFO_MAXMOD_UNLINKED 3
@@ -49,12 +52,12 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
     if(feof(audioStreamer.audioFile))
     {
         //printf("goodbye\n");
-        nqmt_stopStream();
+        stopStream();
         return 0;
     }
     if(a == 0)
     {
-        nqmt_stopStream();
+        stopStream();
         return 0;
     }
     return a;
@@ -89,15 +92,15 @@ int nqmt_playStream()
     return 0;
 }
 
-void nqmt_pauseStream()
+void pauseStream()
 {
     audioStreamer.is_playing = false;
     mmStreamClose();
 }
 
-void nqmt_stopStream()
+void stopStream()
 {
-    nqmt_pauseStream();
+    pauseStream();
     rewind(audioStreamer.audioFile);
     audioStreamer.SamplePosition = 0;
 }
@@ -112,4 +115,6 @@ int loadSong(const char *path)
 int getTime()
 {
     return audioStreamer.time_ms;
+}
+
 }

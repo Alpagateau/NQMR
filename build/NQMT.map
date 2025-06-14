@@ -360,11 +360,11 @@ Discarded input sections
  .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
  .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
  .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
- .text._Z16nqmt_pauseStreamv
+ .text._ZN4NQMT11pauseStreamEv
                 0x00000000       0x14 build/NQMT/engine/source/nqmt_audio.cpp.o
- .text._Z15nqmt_stopStreamv
+ .text._ZN4NQMT10stopStreamEv
                 0x00000000       0x1c build/NQMT/engine/source/nqmt_audio.cpp.o
- .text._Z7getTimev
+ .text._ZN4NQMT7getTimeEv
                 0x00000000        0xc build/NQMT/engine/source/nqmt_audio.cpp.o
  .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.cpp.o
  .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.cpp.o
@@ -1715,21 +1715,21 @@ Linker script and memory map
  .text.startup.main
                 0x0200575c       0x34 build/NQMT/source/main.cpp.o
                 0x0200575c                main
- .text._Z16timer3_interruptv
+ .text._ZN4NQMT16timer3_interruptEv
                 0x02005790       0x28 build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x02005790                timer3_interrupt()
- .text._Z17on_stream_requestjPv17mm_stream_formats
+                0x02005790                NQMT::timer3_interrupt()
+ .text._ZN4NQMT17on_stream_requestEjPv17mm_stream_formats
                 0x020057b8       0x50 build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x020057b8                on_stream_request(unsigned int, void*, mm_stream_formats)
- .text._Z9initAudiov
+                0x020057b8                NQMT::on_stream_request(unsigned int, void*, mm_stream_formats)
+ .text._ZN4NQMT9initAudioEv
                 0x02005808       0x58 build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x02005808                initAudio()
- .text._Z15nqmt_playStreamv
+                0x02005808                NQMT::initAudio()
+ .text._ZN4NQMT15nqmt_playStreamEv
                 0x02005860       0x84 build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x02005860                nqmt_playStream()
- .text._Z8loadSongPKc
+                0x02005860                NQMT::nqmt_playStream()
+ .text._ZN4NQMT8loadSongEPKc
                 0x020058e4       0x1c build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x020058e4                loadSong(char const*)
+                0x020058e4                NQMT::loadSong(char const*)
  .text._ZN4NQMT6initFSEv
                 0x02005900       0x1c build/NQMT/engine/source/nqmt_fs.cpp.o
                 0x02005900                NQMT::initFS()
@@ -2564,9 +2564,9 @@ Linker script and memory map
  .rodata.main.str1.4
                 0x02011bfc      0x270 build/NQMT/source/main.cpp.o
                                  0x10 (size before relaxing)
- .rodata._Z15nqmt_playStreamv.str1.4
+ .rodata._ZN4NQMT15nqmt_playStreamEv.str1.4
                 0x02011e6c       0x4c build/NQMT/engine/source/nqmt_audio.cpp.o
- .rodata._Z8loadSongPKc.str1.4
+ .rodata._ZN4NQMT8loadSongEPKc.str1.4
                 0x02011e6c        0x3 build/NQMT/engine/source/nqmt_audio.cpp.o
  .rodata._ZN4NQMT6initFSEv.str1.4
                 0x02011e6c        0x7 build/NQMT/engine/source/nqmt_fs.cpp.o
@@ -2847,9 +2847,9 @@ ARM.exidx       0x020128ec        0x8
  *(EXCLUDE_FILE(*.twl*) .dynbss)
  *(EXCLUDE_FILE(*.twl*) .gnu.linkonce.b*)
  *(EXCLUDE_FILE(*.twl*) .bss*)
- .bss.audioStreamer
+ .bss._ZN4NQMT13audioStreamerE
                 0x02012dd8       0x3c build/NQMT/engine/source/nqmt_audio.cpp.o
-                0x02012dd8                audioStreamer
+                0x02012dd8                NQMT::audioStreamer
  .bss.mmsData   0x02012e14       0x24 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .bss.StreamCounter
                 0x02012e38        0x4 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
