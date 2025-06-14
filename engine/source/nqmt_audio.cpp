@@ -1,5 +1,4 @@
 #include "nqmt_audio.hpp"
-#include <irq.h>
 
 AudioStreamer audioStreamer;
 

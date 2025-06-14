@@ -13,15 +13,15 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(IntrW
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(mpu_setup.s.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/sys/crts/ds_arm9_crt0.o (__libnds_mpu_setup)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(dma.s.o)
-                              build/NQMT/engine/source/nqmt_gfx.c.o (dmaSetParams)
+                              build/NQMT/source/notquite.cpp.o (dmaSetParams)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(memcpy.s.o)
                               build/NQMT/source/notquite.cpp.o (memcpy)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(chdir.c.o)
-                              build/NQMT/engine/source/nqmt_fs.c.o (chdir)
+                              build/NQMT/engine/source/nqmt_fs.cpp.o (chdir)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(crt0_argv.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/sys/crts/ds_arm9_crt0.o (build_argv)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(dirent.c.o)
-                              build/NQMT/engine/source/nqmt_fs.c.o (opendir)
+                              build/NQMT/engine/source/nqmt_fs.cpp.o (opendir)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(fatfs.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(chdir.c.o) (fatfs_error_to_posix)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(filesystem.c.o)
@@ -29,7 +29,7 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(files
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(nitrofs.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(dirent.c.o) (nitrofs_use_for_path)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(sassert.c.o)
-                              build/NQMT/engine/source/nqmt_gfx.c.o (__sassert)
+                              build/NQMT/engine/source/nqmt_gfx.cpp.o (__sassert)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(card.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(nitrofs.c.o) (cardReadArm7)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(dldi.c.o)
@@ -45,9 +45,9 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(secur
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(system.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(initSystem.c.o) (systemValueHandler)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(background.c.o)
-                              build/NQMT/engine/source/nqmt_gfx.c.o (bgState)
+                              build/NQMT/engine/source/nqmt_gfx.cpp.o (bgState)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(sprite.c.o)
-                              build/NQMT/engine/source/nqmt_gfx.c.o (oamInit)
+                              build/NQMT/engine/source/nqmt_gfx.cpp.o (oamInit)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(sprite_alloc.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(sprite.c.o) (oamAllocReset)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(video.c.o)
@@ -59,7 +59,7 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(threa
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(fifosystem.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_comms9.c.o) (fifoSetValue32Handler)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(interrupts.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (irqSet)
+                              build/NQMT/engine/source/nqmt_audio.cpp.o (irqSet)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(exit.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/sys/crts/ds_arm9_crt0.o (__libnds_exit)
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(locks.c.o)
@@ -183,21 +183,21 @@ C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fileno.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(nitrofs.c.o) (fileno)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fopen.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (fopen)
+                              build/NQMT/source/notquite.cpp.o (fopen)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fread.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (fread)
+                              build/NQMT/source/notquite.cpp.o (fread)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fseek.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (fseek)
+                              build/NQMT/engine/source/nqmt_audio.cpp.o (fseek)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fseeko.c.o)
                               C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_fdopen.c.o) (fseeko)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_printf.c.o)
-                              build/NQMT/engine/source/nqmt_fs.c.o (printf)
+                              build/NQMT/source/notquite.cpp.o (printf)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_putchar.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(exceptions.c.o) (putchar)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_puts.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (puts)
+                              build/NQMT/source/notquite.cpp.o (puts)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_rewind.c.o)
-                              build/NQMT/engine/source/nqmt_audio.c.o (rewind)
+                              build/NQMT/engine/source/nqmt_audio.cpp.o (rewind)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_setvbuf.c.o)
                               C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(console.c.o) (setvbuf)
 C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/15.1.0/../../../../arm-none-eabi/lib/thumb/arm946e-s\libc.a(libc_tinystdio_sflags.c.o)
@@ -324,39 +324,6 @@ Discarded input sections
  .rodata.nqmtTiles
                 0x00000000     0x8300 build/NQMT/gfx/nqmt.png.o
  .comment       0x00000000       0x23 build/NQMT/gfx/nqmt.png.o
- .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.c.o
- .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.c.o
- .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.c.o
- .text.nqmt_pauseStream
-                0x00000000       0x14 build/NQMT/engine/source/nqmt_audio.c.o
- .text.nqmt_stopStream
-                0x00000000       0x1c build/NQMT/engine/source/nqmt_audio.c.o
- .text.getTime  0x00000000        0xc build/NQMT/engine/source/nqmt_audio.c.o
- .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.c.o
- .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.c.o
- .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.c.o
- .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_engine.c.o
- .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.c.o
- .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.c.o
- .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.c.o
- .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.c.o
- .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.c.o
- .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.c.o
- .rodata.InitBG.str1.4
-                0x00000000       0xaf build/NQMT/engine/source/nqmt_gfx.c.o
- .text.InitBG   0x00000000       0x48 build/NQMT/engine/source/nqmt_gfx.c.o
- .text.SetBackground
-                0x00000000       0xd8 build/NQMT/engine/source/nqmt_gfx.c.o
- .text.InitSprites
-                0x00000000       0x18 build/NQMT/engine/source/nqmt_gfx.c.o
- .text.InitGfx  0x00000000       0x1c build/NQMT/engine/source/nqmt_gfx.c.o
- .bss.bg        0x00000000        0x4 build/NQMT/engine/source/nqmt_gfx.c.o
- .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_gfx.c.o
- .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_math.c.o
- .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_math.c.o
- .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_math.c.o
- .text.dot      0x00000000        0xc build/NQMT/engine/source/nqmt_math.c.o
- .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_math.c.o
  .text          0x00000000        0x0 build/NQMT/source/main.cpp.o
  .data          0x00000000        0x0 build/NQMT/source/main.cpp.o
  .bss           0x00000000        0x0 build/NQMT/source/main.cpp.o
@@ -390,6 +357,43 @@ Discarded input sections
  .bss.arrow_sprite
                 0x00000000        0x4 build/NQMT/source/notquite.cpp.o
  .comment       0x00000000       0x23 build/NQMT/source/notquite.cpp.o
+ .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .text._Z16nqmt_pauseStreamv
+                0x00000000       0x14 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .text._Z15nqmt_stopStreamv
+                0x00000000       0x1c build/NQMT/engine/source/nqmt_audio.cpp.o
+ .text._Z7getTimev
+                0x00000000        0xc build/NQMT/engine/source/nqmt_audio.cpp.o
+ .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.cpp.o
+ .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.cpp.o
+ .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_engine.cpp.o
+ .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_engine.cpp.o
+ .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.cpp.o
+ .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.cpp.o
+ .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_fs.cpp.o
+ .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .rodata._Z6InitBGv.str1.4
+                0x00000000       0xaf build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .text._Z6InitBGv
+                0x00000000       0x48 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .text._Z13SetBackground8BGHeader
+                0x00000000       0xc4 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .text._Z11InitSpritesv
+                0x00000000       0x18 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .text._Z7InitGfxv
+                0x00000000       0x1c build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .bss.bg        0x00000000        0x4 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_gfx.cpp.o
+ .text          0x00000000        0x0 build/NQMT/engine/source/nqmt_math.cpp.o
+ .data          0x00000000        0x0 build/NQMT/engine/source/nqmt_math.cpp.o
+ .bss           0x00000000        0x0 build/NQMT/engine/source/nqmt_math.cpp.o
+ .text._Z3dot8Vector2iS_
+                0x00000000        0xc build/NQMT/engine/source/nqmt_math.cpp.o
+ .comment       0x00000000       0x23 build/NQMT/engine/source/nqmt_math.cpp.o
  .text          0x00000000        0x0 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .data          0x00000000        0x0 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .bss           0x00000000        0x0 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
@@ -1708,28 +1712,30 @@ Linker script and memory map
                 0x020055cc                __udivmoddi4
  *(EXCLUDE_FILE(*.twl* *.itcm*) .stub)
  *(EXCLUDE_FILE(*.twl* *.itcm*) .text.*)
- .text.timer3_interrupt
-                0x0200575c       0x28 build/NQMT/engine/source/nqmt_audio.c.o
-                0x0200575c                timer3_interrupt
- .text.on_stream_request
-                0x02005784       0x50 build/NQMT/engine/source/nqmt_audio.c.o
-                0x02005784                on_stream_request
- .text.initAudio
-                0x020057d4       0x58 build/NQMT/engine/source/nqmt_audio.c.o
-                0x020057d4                initAudio
- .text.nqmt_playStream
-                0x0200582c       0x84 build/NQMT/engine/source/nqmt_audio.c.o
-                0x0200582c                nqmt_playStream
- .text.loadSong
-                0x020058b0       0x1c build/NQMT/engine/source/nqmt_audio.c.o
-                0x020058b0                loadSong
- .text.initFS   0x020058cc       0x1c build/NQMT/engine/source/nqmt_fs.c.o
-                0x020058cc                initFS
- .text.listDir  0x020058e8       0x80 build/NQMT/engine/source/nqmt_fs.c.o
-                0x020058e8                listDir
  .text.startup.main
-                0x02005968       0x34 build/NQMT/source/main.cpp.o
-                0x02005968                main
+                0x0200575c       0x34 build/NQMT/source/main.cpp.o
+                0x0200575c                main
+ .text._Z16timer3_interruptv
+                0x02005790       0x28 build/NQMT/engine/source/nqmt_audio.cpp.o
+                0x02005790                timer3_interrupt()
+ .text._Z17on_stream_requestjPv17mm_stream_formats
+                0x020057b8       0x50 build/NQMT/engine/source/nqmt_audio.cpp.o
+                0x020057b8                on_stream_request(unsigned int, void*, mm_stream_formats)
+ .text._Z9initAudiov
+                0x02005808       0x58 build/NQMT/engine/source/nqmt_audio.cpp.o
+                0x02005808                initAudio()
+ .text._Z15nqmt_playStreamv
+                0x02005860       0x84 build/NQMT/engine/source/nqmt_audio.cpp.o
+                0x02005860                nqmt_playStream()
+ .text._Z8loadSongPKc
+                0x020058e4       0x1c build/NQMT/engine/source/nqmt_audio.cpp.o
+                0x020058e4                loadSong(char const*)
+ .text._ZN4NQMT6initFSEv
+                0x02005900       0x1c build/NQMT/engine/source/nqmt_fs.cpp.o
+                0x02005900                NQMT::initFS()
+ .text._ZN4NQMT7listDirEv
+                0x0200591c       0x80 build/NQMT/engine/source/nqmt_fs.cpp.o
+                0x0200591c                NQMT::listDir()
  .text.StreamExecuteUpdate
                 0x0200599c      0x22c C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .text.mmStreamUpdate
@@ -2555,17 +2561,17 @@ Linker script and memory map
  *all.rodata*(*)
  *(EXCLUDE_FILE(*.twl*) .roda)
  *(EXCLUDE_FILE(*.twl*) .rodata.*)
- .rodata.nqmt_playStream.str1.4
-                0x02011bfc      0x270 build/NQMT/engine/source/nqmt_audio.c.o
-                                 0x4c (size before relaxing)
- .rodata.loadSong.str1.4
-                0x02011e6c        0x3 build/NQMT/engine/source/nqmt_audio.c.o
- .rodata.initFS.str1.4
-                0x02011e6c        0x7 build/NQMT/engine/source/nqmt_fs.c.o
- .rodata.listDir.str1.4
-                0x02011e6c       0x2b build/NQMT/engine/source/nqmt_fs.c.o
  .rodata.main.str1.4
-                0x02011e6c       0x10 build/NQMT/source/main.cpp.o
+                0x02011bfc      0x270 build/NQMT/source/main.cpp.o
+                                 0x10 (size before relaxing)
+ .rodata._Z15nqmt_playStreamv.str1.4
+                0x02011e6c       0x4c build/NQMT/engine/source/nqmt_audio.cpp.o
+ .rodata._Z8loadSongPKc.str1.4
+                0x02011e6c        0x3 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .rodata._ZN4NQMT6initFSEv.str1.4
+                0x02011e6c        0x7 build/NQMT/engine/source/nqmt_fs.cpp.o
+ .rodata._ZN4NQMT7listDirEv.str1.4
+                0x02011e6c       0x2b build/NQMT/engine/source/nqmt_fs.cpp.o
  .rodata.chdir.str1.4
                 0x02011e6c        0xb C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/lib\libnds9.a(chdir.c.o)
  .rodata.fatGetDefaultCwd.str1.4
@@ -2842,7 +2848,7 @@ ARM.exidx       0x020128ec        0x8
  *(EXCLUDE_FILE(*.twl*) .gnu.linkonce.b*)
  *(EXCLUDE_FILE(*.twl*) .bss*)
  .bss.audioStreamer
-                0x02012dd8       0x3c build/NQMT/engine/source/nqmt_audio.c.o
+                0x02012dd8       0x3c build/NQMT/engine/source/nqmt_audio.cpp.o
                 0x02012dd8                audioStreamer
  .bss.mmsData   0x02012e14       0x24 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .bss.StreamCounter
@@ -3160,10 +3166,10 @@ ARM.exidx       0x020128ec        0x8
 
 .comment        0x00000000       0x22
  *(.comment)
- .comment       0x00000000       0x22 build/NQMT/engine/source/nqmt_audio.c.o
+ .comment       0x00000000       0x22 build/NQMT/source/main.cpp.o
                                  0x23 (size before relaxing)
- .comment       0x00000022       0x23 build/NQMT/engine/source/nqmt_fs.c.o
- .comment       0x00000022       0x23 build/NQMT/source/main.cpp.o
+ .comment       0x00000022       0x23 build/NQMT/engine/source/nqmt_audio.cpp.o
+ .comment       0x00000022       0x23 build/NQMT/engine/source/nqmt_fs.cpp.o
  .comment       0x00000022       0x23 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .comment       0x00000022       0x23 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_comms9.c.o)
  .comment       0x00000022       0x23 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_main9.c.o)
@@ -4774,19 +4780,19 @@ ARM.exidx       0x020128ec        0x8
  .ARM.attributes
                 0x0000004c       0x2b build/NQMT/gfx/nqmt.png.o
  .ARM.attributes
-                0x00000077       0x2b build/NQMT/engine/source/nqmt_audio.c.o
+                0x00000077       0x2b build/NQMT/source/main.cpp.o
  .ARM.attributes
-                0x000000a2       0x2b build/NQMT/engine/source/nqmt_engine.c.o
+                0x000000a2       0x2b build/NQMT/source/notquite.cpp.o
  .ARM.attributes
-                0x000000cd       0x2b build/NQMT/engine/source/nqmt_fs.c.o
+                0x000000cd       0x2b build/NQMT/engine/source/nqmt_audio.cpp.o
  .ARM.attributes
-                0x000000f8       0x2b build/NQMT/engine/source/nqmt_gfx.c.o
+                0x000000f8       0x2b build/NQMT/engine/source/nqmt_engine.cpp.o
  .ARM.attributes
-                0x00000123       0x2b build/NQMT/engine/source/nqmt_math.c.o
+                0x00000123       0x2b build/NQMT/engine/source/nqmt_fs.cpp.o
  .ARM.attributes
-                0x0000014e       0x2b build/NQMT/source/main.cpp.o
+                0x0000014e       0x2b build/NQMT/engine/source/nqmt_gfx.cpp.o
  .ARM.attributes
-                0x00000179       0x2b build/NQMT/source/notquite.cpp.o
+                0x00000179       0x2b build/NQMT/engine/source/nqmt_math.cpp.o
  .ARM.attributes
                 0x000001a4       0x2b C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a(mm_stream.c.o)
  .ARM.attributes
@@ -5104,13 +5110,13 @@ ARM.exidx       0x020128ec        0x8
 LOAD C:/msys64/opt/wonderful/thirdparty/blocksds/core/sys/crts/ds_arm9_crt0.o
 LOAD build/NQMT/gfx/arrows.png.o
 LOAD build/NQMT/gfx/nqmt.png.o
-LOAD build/NQMT/engine/source/nqmt_audio.c.o
-LOAD build/NQMT/engine/source/nqmt_engine.c.o
-LOAD build/NQMT/engine/source/nqmt_fs.c.o
-LOAD build/NQMT/engine/source/nqmt_gfx.c.o
-LOAD build/NQMT/engine/source/nqmt_math.c.o
 LOAD build/NQMT/source/main.cpp.o
 LOAD build/NQMT/source/notquite.cpp.o
+LOAD build/NQMT/engine/source/nqmt_audio.cpp.o
+LOAD build/NQMT/engine/source/nqmt_engine.cpp.o
+LOAD build/NQMT/engine/source/nqmt_fs.cpp.o
+LOAD build/NQMT/engine/source/nqmt_gfx.cpp.o
+LOAD build/NQMT/engine/source/nqmt_math.cpp.o
 START GROUP
 LOAD C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/lib\libNE.a
 LOAD C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/lib\libmm9.a

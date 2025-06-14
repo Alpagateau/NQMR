@@ -16,7 +16,7 @@
             ],
             "compilerPath": "C:/msys64/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc.exe",
             "cStandard": "gnu11",
-            "cppStandard": "c++17",
+            "cppStandard": "gnu++20",
             "intelliSenseMode": "gcc-arm"
         }
     ],

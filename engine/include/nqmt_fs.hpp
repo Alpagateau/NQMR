@@ -12,6 +12,8 @@
 
 #define NQMT_ROOT "/NQMT/" //Root folder of the game files
 
+namespace NQMT{
+
 /*
 *  Initialise the filesystem. Automatically opens the folder at NQMT_ROOT
 */
@@ -22,4 +24,5 @@ int initFS();
 */
 int listDir();
 
+}
 #endif

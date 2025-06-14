@@ -1,5 +1,7 @@
 #include "nqmt_fs.hpp"
 
+namespace NQMT{
+
 int initFS()
 {
     if(fatInitDefault())
@@ -35,4 +37,6 @@ int listDir()
         return 1;
 	}
     return 0;
+}
+
 }

@@ -1,5 +1,5 @@
-build/NQMT/source/notquite.cpp.o: source/notquite.cpp source/notquite.h \
- engine/include/nqmt_engine.h engine/include/nqmt_fs.h \
+build/NQMT/source/notquite.cpp.o: source/notquite.cpp source/notquite.hpp \
+ engine/include/nqmt_engine.hpp engine/include/nqmt_fs.hpp \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h \
@@ -62,13 +62,13 @@ build/NQMT/source/notquite.cpp.o: source/notquite.cpp source/notquite.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h \
- engine/include/nqmt_audio.h \
+ engine/include/nqmt_audio.hpp \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
- engine/include/nqmt_gfx.h engine/include/nqmt_math.h
-source/notquite.h:
-engine/include/nqmt_engine.h:
-engine/include/nqmt_fs.h:
+ engine/include/nqmt_gfx.hpp engine/include/nqmt_math.hpp
+source/notquite.hpp:
+engine/include/nqmt_engine.hpp:
+engine/include/nqmt_fs.hpp:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h:
@@ -131,8 +131,8 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/te
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h:
-engine/include/nqmt_audio.h:
+engine/include/nqmt_audio.hpp:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:
-engine/include/nqmt_gfx.h:
-engine/include/nqmt_math.h:
+engine/include/nqmt_gfx.hpp:
+engine/include/nqmt_math.hpp:
