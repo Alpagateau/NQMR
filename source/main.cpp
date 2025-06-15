@@ -41,12 +41,10 @@ int main( void ) {
 
 	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
 	NQMT::Sprite2D arrow1(0, ArrowHeader);
-	arrow1.position.x = 100;
-	arrow1.position.y = 100;
+	arrow1.SetPosition(100, 100);
 
 	NQMT::Sprite2D arrow2(2, ArrowHeader);
-	arrow2.position.x = 130;
-	arrow2.position.y = 100;
+	arrow2.SetPosition(132, 100);
 
 	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, SQ64_256);
 	NQMT::Sprite2D fatlugi(1, fat_luigiH);

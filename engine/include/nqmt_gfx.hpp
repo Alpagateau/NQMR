@@ -85,6 +85,7 @@ public:
     Sprite2D(u8 _id);
     Sprite2D(u8 _id,SpriteHeader &h);
     Sprite2D SetHeader(SpriteHeader &h);
+    void SetPosition(int x, int y);
     void Update();
     SpriteHeader* header;
     bool visible;

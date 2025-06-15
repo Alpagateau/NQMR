@@ -104,6 +104,12 @@ Sprite2D Sprite2D::SetHeader(SpriteHeader &h)
     return *this;
 }
 
+void Sprite2D::SetPosition(int x, int y)
+{
+    position.x = x;
+    position.y = y;
+}
+
 void Sprite2D::Update()
 {
     

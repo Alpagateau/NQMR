@@ -1,3 +1,6 @@
 build/
 sdfiles/NQMT.nds
 sdfiles/*.nds
+NQMT.nds
+build/NQMT.elf
+sdfiles/NQMT.nds
