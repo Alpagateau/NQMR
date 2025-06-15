@@ -22,9 +22,9 @@ int main( void ) {
 
 
 	consoleDemoInit();
-	printf("==== INITIALISATION ====\n");
+	printf("= INITIALISATION =\n");
 	NQMT::InitNQMT();
-	printf("========================\n");
+	printf("==================\n");
 
 	NQMT::BGHeader title_screen_bg 
 	{
@@ -70,6 +70,7 @@ int main( void ) {
 		}
 		fatlugi.Update();
 		arrow1.position.y--;
+		
 		if(arrow1.position.y <= -32)
 		{
 			printf("Changing position : %d\n", arrow1.position.y);
