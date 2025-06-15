@@ -4,12 +4,10 @@
             "name": "Nintendo DS",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/msys64/opt/devkitpro/**",
-                "C:/msys64/opt/devkitpro/calico/include/calico/gba/**",
                 "C:/msys64/opt/wonderful/thirdparty/blocksds/external/nflib/include/**",
                 "C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/**",
-                "C:/msys64/opt/devkitpro/libnds/include/**",
-                "C:/msys64/opt/devkitpro/libnds/**"
+                "C:/msys64/opt/wonderful/thirdparty/blocksds/**",
+                "C:/msys64/opt/wonderful/toolchain/gcc-arm-none-eabi/arm-none-eabi/include/**"
             ],
             "defines": [
                 "ARM9"

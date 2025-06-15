@@ -1,4 +1,3 @@
-#pragma once
 #ifndef NQMT_GFX_H 
 #define NQMT_GFX_H
 

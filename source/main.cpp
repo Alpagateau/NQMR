@@ -69,7 +69,6 @@ int main( void ) {
 		{
 			arrow2.offset++;
 			arrow2.offset %= 100;
-			//printf("Current offset : %d\n", arrow2.offset);
 		}
 		fatlugi.Update();
 		arrow1.position.y--;
