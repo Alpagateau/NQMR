@@ -28,8 +28,8 @@ int initAudio();
 
 mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format);
 
-int  loadSong(const char *path);
-int  nqmt_playStream();
+int  LoadSong(const char *path);
+int  PlayStream();
 void pauseStream();
 void stopStream();
 

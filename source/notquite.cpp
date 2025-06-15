@@ -8,7 +8,7 @@ int SetArrowSprite(NQMT::SpriteHeader sh)
 {
     arrow_sprite = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
     //Load the palette first 
-	dmaCopy(sh.pal, SPRITE_PALETTE, sh.palSize);
+	//dmaCopy(sh.pal, SPRITE_PALETTE, sh.palSize);
 	//Load the tile data 
 	dmaCopy(sh.tiles, arrow_sprite, sh.tileSize);
     return 0;

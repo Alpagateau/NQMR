@@ -6,4 +6,9 @@
 #include "nqmt_gfx.hpp"
 #include "nqmt_math.hpp"
 
+namespace NQMT
+{
+    void InitNQMT();
+}
+
 #endif

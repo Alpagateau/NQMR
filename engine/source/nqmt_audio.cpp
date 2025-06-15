@@ -63,7 +63,7 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
     return a;
 }
 
-int nqmt_playStream()
+int PlayStream()
 {
     printf("Requested\n");
     if(audioStreamer.is_playing)
@@ -105,7 +105,7 @@ void stopStream()
     audioStreamer.SamplePosition = 0;
 }
 
-int loadSong(const char *path)
+int LoadSong(const char *path)
 {
     audioStreamer.audioFile = fopen(path, "rb");
     //for(int i = 0; i < 20; i++){swiWaitForVBlank();

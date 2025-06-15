@@ -22,16 +22,9 @@ int main( void ) {
 
 
 	consoleDemoInit();
-
-	//NQMT::initFS(); 
-	//NQMT::listDir();
-	
-	printf("======================\n");
-
-	NQMT::initAudio();
-
-	NQMT::InitBG();
-	NQMT::InitSprites();
+	printf("==== INITIALISATION ====\n");
+	NQMT::InitNQMT();
+	printf("========================\n");
 
 	NQMT::BGHeader title_screen_bg 
 	{
@@ -42,23 +35,26 @@ int main( void ) {
 	};
 	
 	NQMT::SetBackground(title_screen_bg);
-	NQMT::SetPalette((void*)titlePal, titlePalLen);	
+	NQMT::SetBackgroundPalette((void*)titlePal, titlePalLen);	
 	
-	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, (void*)arrowsPal, arrowsPalLen, SQ32_256);
-	NQMT::Sprite2D test;
-	test.id = 0;
-	test.SetHeader(ArrowHeader);
-	test.position.x = 100;
-	test.position.y = 100;
+	NQMT::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
 
-	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, (void*)tiny_fat_luigiPal, tiny_fat_luigiPalLen, SQ64_256);
-	NQMT::Sprite2D fatlugi(fat_luigiH);
-	fatlugi.id = 1;
+	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
+	NQMT::Sprite2D arrow1(0, ArrowHeader);
+	arrow1.position.x = 100;
+	arrow1.position.y = 100;
+
+	NQMT::Sprite2D arrow2(2, ArrowHeader);
+	arrow2.position.x = 130;
+	arrow2.position.y = 100;
+
+	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, SQ64_256);
+	NQMT::Sprite2D fatlugi(1, fat_luigiH);
 	fatlugi.position.x = 10;
 	fatlugi.position.y = 10;
 
-	//NQMT::loadSong("songs/khali.raw");
-	//NQMT::nqmt_playStream();
+	NQMT::LoadSong("songs/khali.raw");
+	NQMT::PlayStream();
 	
 	int frame = 0;
 	while(1)
@@ -66,9 +62,22 @@ int main( void ) {
 		swiWaitForVBlank();
 		//consoleClear();
 		//printf("Frame : %d\n", frame);
-		test.Update();
+		arrow1.Update();
+		arrow2.Update();
+		frame++;
+		if(frame%60 == 0)
+		{
+			arrow2.offset++;
+			arrow2.offset %= 100;
+			//printf("Current offset : %d\n", arrow2.offset);
+		}
 		fatlugi.Update();
-		test.position.x = (test.position.x+1)%255;
+		arrow1.position.y--;
+		if(arrow1.position.y <= -32)
+		{
+			printf("Changing position : %d\n", arrow1.position.y);
+			arrow1.position.y = 256;
+		}
 		mmStreamUpdate();
 		oamUpdate(&oamMain);
 	}

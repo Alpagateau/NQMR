@@ -44,6 +44,9 @@ namespace NQMT{
 #define R32x8_256  23
 #define R16x8_256  24
 
+#define SCREEN_WIDTH 256
+#define SCREEN_HEIGHT 192
+
 struct BGHeader
 {
     void *tiles;
@@ -66,30 +69,29 @@ public:
     
     void *tiles;
     u32 tileSize;
-    void *pal;
-    u32 palSize;
     u16 *addr;
     u8 type;
     SpriteHeader(
         void *tiles,
-        u32 tileSize,
-        void *pal,
-        u32 palSize,
+        u32 tileSize, 
         u8 type);
     ~SpriteHeader();
+    u8 GetWidth();
+    u8 GetHeight();
 };
 
 class Sprite2D
 {
 public:
-    Sprite2D();
-    Sprite2D(SpriteHeader &h);
+    Sprite2D(u8 _id);
+    Sprite2D(u8 _id,SpriteHeader &h);
     Sprite2D SetHeader(SpriteHeader &h);
     void Update();
     SpriteHeader* header;
     bool visible;
     Vector2i position;
     u16 offset;
+    u16 palIndex;
     u8 id;
 private:
     bool needRedraw;
@@ -101,7 +103,8 @@ private:
 //Currently only allows for  BgType_Text8bpp, BgSize_T_256x256 settings
 int InitBG();
 int SetBackground(BGHeader header);
-int SetPalette(void* source, u32 size);
+int SetBackgroundPalette(void* source, u32 size);
+int SetSpritePalette(void* source, u32 size);
 int InitSprites();
 
 int InitGfx();

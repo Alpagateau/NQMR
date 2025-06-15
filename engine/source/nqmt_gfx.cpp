@@ -1,10 +1,7 @@
 #include "nqmt_gfx.hpp"
 
-
 int bg;
 namespace NQMT{
-
-
 
 SpriteSetting decodeSS(u8 spr)
 {
@@ -74,20 +71,30 @@ int InitGfx()
     return 0;
 }
 
-int SetPalette(void* source, u32 size)
+int SetBackgroundPalette(void* source, u32 size)
 {
     dmaCopy(source, BG_PALETTE, size);
     return 0;
 }
 
-Sprite2D::Sprite2D()
+int SetSpritePalette(void *source, u32 size)
 {
-    position = (Vector2i){0, 0};
+    dmaCopy(source, SPRITE_PALETTE, size);
+    return 0;
 }
 
-Sprite2D::Sprite2D(SpriteHeader &h)
+Sprite2D::Sprite2D(u8 _id)
+{
+    position = (Vector2i){0, 0};
+    id = _id;
+    offset = 0;
+}
+
+Sprite2D::Sprite2D(u8 _id,SpriteHeader &h)
 {
     header = &h;
+    id = _id;
+    offset = 0;
     position = (Vector2i){0, 0};
 }
 
@@ -101,16 +108,20 @@ void Sprite2D::Update()
 {
     
     SpriteSetting s = decodeSS(header->type);
+    u8 w = header->GetWidth();
+    u8 h = header->GetHeight();
+    bool visible = (position.x+w > 0) && (position.x < SCREEN_WIDTH)
+            && (position.y+h > 0) && (position.y < SCREEN_HEIGHT);
     oamSet(&oamMain,
             id, // Sprite ID (0 to 127)
             position.x , position.y, // X, Y
             0, // Priority
             0, // Palette index
             s.ss, s.scf, // Size, format
-            header->addr,  // Graphics offset
+            header->addr + ((int)offset * 64),  // Graphics offset
             -1, // Affine index (unused in this example)
             false, // Double size for affine sprites
-            false, // Hide
+            !visible, // Hide
             false, false, // H flip, V flip
             false
         ); // Mosaic
@@ -119,8 +130,6 @@ void Sprite2D::Update()
 SpriteHeader::SpriteHeader(  
     void *tiles,
     u32 tileSize,
-    void *pal,
-    u32 palSize,
     u8 _type
 )
 {
@@ -129,9 +138,6 @@ SpriteHeader::SpriteHeader(
     addr = oamAllocateGfx(&oamMain, s.ss, s.scf);
     // Copy tiles to the space assigned to this sprite
     dmaCopy(tiles, addr, tileSize);
-
-    // Copy palette to the palette RAM
-    dmaCopy(pal, SPRITE_PALETTE, palSize);
 }
 
 SpriteHeader::~SpriteHeader()
@@ -139,4 +145,80 @@ SpriteHeader::~SpriteHeader()
     oamFreeGfx(&oamMain, addr);
 }
 
+u8 SpriteHeader::GetWidth()
+{
+    u8 output;
+    switch(type) {
+        // 16-color sprites
+        case SQ8_16:        output = 8; break;
+        case SQ16_16:       output = 16; break;
+        case SQ32_16:       output = 32; break;
+        case SQ64_16:       output = 64; break;
+        case R8x16_16:      output = 8; break;
+        case R8x32_16:      output = 8; break;
+        case R16x32_16:     output = 16; break;
+        case R32x16_16:     output = 32; break;
+        case R32x64_16:     output = 32; break;
+        case R64x32_16:     output = 64; break;
+        case R32x8_16:      output = 32; break;
+        case R16x8_16:      output = 16; break;
+
+        // 256-color sprites
+        case SQ8_256:       output = 8; break;
+        case SQ16_256:      output = 16; break;
+        case SQ32_256:      output = 32; break;
+        case SQ64_256:      output = 64; break;
+        case R8x16_256:     output = 8; break;
+        case R8x32_256:     output = 8; break;
+        case R16x32_256:    output = 16; break;
+        case R32x16_256:    output = 32; break;
+        case R32x64_256:    output = 32; break;
+        case R64x32_256:    output = 64; break;
+        case R32x8_256:     output = 32; break;
+        case R16x8_256:     output = 16; break;
+
+        default:
+            output = 64;
+            break;
+    }
+    return output;
+}
+u8 SpriteHeader::GetHeight()
+{
+    u8 output;
+    switch(type) {
+        // 16-color sprites
+        case SQ8_16:        output = 8; break;
+        case SQ16_16:       output = 16; break;
+        case SQ32_16:       output = 32; break;
+        case SQ64_16:       output = 64; break;
+        case R8x16_16:      output = 16; break;
+        case R8x32_16:      output = 32; break;
+        case R16x32_16:     output = 32; break;
+        case R32x16_16:     output = 16; break;
+        case R32x64_16:     output = 64; break;
+        case R64x32_16:     output = 32; break;
+        case R32x8_16:      output = 8; break;
+        case R16x8_16:      output = 8; break;
+
+        // 256-color sprites
+        case SQ8_256:       output = 8; break;
+        case SQ16_256:      output = 16; break;
+        case SQ32_256:      output = 32; break;
+        case SQ64_256:      output = 64; break;
+        case R8x16_256:     output = 16; break;
+        case R8x32_256:     output = 32; break;
+        case R16x32_256:    output = 32; break;
+        case R32x16_256:    output = 16; break;
+        case R32x64_256:    output = 64; break;
+        case R64x32_256:    output = 32; break;
+        case R32x8_256:     output = 8; break;
+        case R16x8_256:     output = 8; break;
+
+        default:
+            output = 64;
+            break;
+    }
+    return output;
+}
 }
