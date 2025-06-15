@@ -8,7 +8,6 @@ namespace NQMT{
 
 SpriteSetting decodeSS(u8 spr)
 {
-    printf("Decoding : %d\n", spr);
     SpriteSize ss;
     SpriteColorFormat scf;
 
@@ -46,8 +45,6 @@ SpriteSetting decodeSS(u8 spr)
             scf = SpriteColorFormat_16Color; // default format
             break;
     }
-
-    printf("Returning %d, %d", ss, scf);
     return (SpriteSetting){ss, scf};
 }
 
@@ -102,6 +99,7 @@ Sprite2D Sprite2D::SetHeader(SpriteHeader &h)
 
 void Sprite2D::Update()
 {
+    
     SpriteSetting s = decodeSS(header->type);
     oamSet(&oamMain,
             id, // Sprite ID (0 to 127)
@@ -114,7 +112,8 @@ void Sprite2D::Update()
             false, // Double size for affine sprites
             false, // Hide
             false, false, // H flip, V flip
-            false); // Mosaic
+            false
+        ); // Mosaic
 }
 
 SpriteHeader::SpriteHeader(  

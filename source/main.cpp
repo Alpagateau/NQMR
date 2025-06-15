@@ -1,6 +1,7 @@
 extern "C"{
 #include "title.h"
 #include "arrows.h"
+#include "tiny_fat_luigi.h"
 }
 #include "notquite.hpp"
 #include "nqmt_engine.hpp"
@@ -17,14 +18,20 @@ typedef struct {
 int main( void ) {
 	videoSetMode(MODE_0_2D);
 	vramSetBankA(VRAM_A_MAIN_BG);
+	vramSetBankB(VRAM_B_MAIN_SPRITE);
+
 
 	consoleDemoInit();
 
-	NQMT::initFS(); 
-	NQMT::listDir();
+	//NQMT::initFS(); 
+	//NQMT::listDir();
+	
+	printf("======================\n");
+
 	NQMT::initAudio();
 
 	NQMT::InitBG();
+	NQMT::InitSprites();
 
 	NQMT::BGHeader title_screen_bg 
 	{
@@ -39,18 +46,29 @@ int main( void ) {
 	
 	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, (void*)arrowsPal, arrowsPalLen, SQ32_256);
 	NQMT::Sprite2D test;
+	test.id = 0;
+	test.SetHeader(ArrowHeader);
+	test.position.x = 100;
+	test.position.y = 100;
 
-	test.Update();
+	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, (void*)tiny_fat_luigiPal, tiny_fat_luigiPalLen, SQ64_256);
+	NQMT::Sprite2D fatlugi(fat_luigiH);
+	fatlugi.id = 1;
+	fatlugi.position.x = 10;
+	fatlugi.position.y = 10;
 
-	NQMT::loadSong("songs/khali.raw");
-	NQMT::nqmt_playStream();
+	//NQMT::loadSong("songs/khali.raw");
+	//NQMT::nqmt_playStream();
 	
 	int frame = 0;
 	while(1)
 	{
 		swiWaitForVBlank();
-		consoleClear();
-		printf("Frame : %d\n", frame);
+		//consoleClear();
+		//printf("Frame : %d\n", frame);
+		test.Update();
+		fatlugi.Update();
+		test.position.x = (test.position.x+1)%255;
 		mmStreamUpdate();
 		oamUpdate(&oamMain);
 	}
