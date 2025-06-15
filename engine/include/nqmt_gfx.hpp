@@ -3,6 +3,7 @@
 #define NQMT_GFX_H
 
 #include <nds.h>
+#include "nqmt_math.hpp"
 
 //===========
 //= G O A L =
@@ -12,8 +13,6 @@
 
 -> Top Screen    : 2D
 -> Bottom Screen : 2D
-
-
 
 */
 
@@ -44,33 +43,59 @@ namespace NQMT{
 #define R64x32_256 22
 #define R32x8_256  23
 #define R16x8_256  24
-#define SQ16_256   25
-#define SQ32_256   26
-#define SQ64_256   27
-#define R8x16_256  28
-#define R8x32_256  29
-#define R16x32_256 30
-#define R32x16_256 31
-#define R32x64_256 32
-#define R64x32_256 33
-#define R32x8_256  34
-#define R16x8_256  35
 
-typedef struct 
+struct BGHeader
 {
     void *tiles;
     u32 tileSize;
     void *map;
     u32 mapSize;
-}BGHeader;
+};
 
-typedef struct 
+struct SpriteSetting
 {
+    SpriteSize ss;
+    SpriteColorFormat scf;
+};
+
+SpriteSetting decodeSS(u8 spr);
+
+class SpriteHeader
+{
+public:
+    
     void *tiles;
     u32 tileSize;
     void *pal;
     u32 palSize;
-}SpriteHeader;
+    u16 *addr;
+    u8 type;
+    SpriteHeader(
+        void *tiles,
+        u32 tileSize,
+        void *pal,
+        u32 palSize,
+        u8 type);
+    ~SpriteHeader();
+};
+
+class Sprite2D
+{
+public:
+    Sprite2D();
+    Sprite2D(SpriteHeader &h);
+    Sprite2D SetHeader(SpriteHeader &h);
+    void Update();
+    SpriteHeader* header;
+    bool visible;
+    Vector2i position;
+    u16 offset;
+    u8 id;
+private:
+    bool needRedraw;
+    Vector2i oldPos;
+};
+
 
 //Initialize Backgrounds
 //Currently only allows for  BgType_Text8bpp, BgSize_T_256x256 settings

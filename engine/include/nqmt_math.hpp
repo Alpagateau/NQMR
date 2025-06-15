@@ -1,15 +1,15 @@
 #pragma once
 
-typedef struct 
+struct Vector2i
 {
     int x;
     int y;
-}Vector2i;
+};
 
-typedef struct 
+struct Vector2s
 {
     short x;
     short y;
-}Vector2s;
+};
 
 int dot(Vector2i a, Vector2i b);

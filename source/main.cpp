@@ -37,6 +37,10 @@ int main( void ) {
 	NQMT::SetBackground(title_screen_bg);
 	NQMT::SetPalette((void*)titlePal, titlePalLen);	
 	
+	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, (void*)arrowsPal, arrowsPalLen, SQ32_256);
+	NQMT::Sprite2D test;
+
+	test.Update();
 
 	NQMT::loadSong("songs/khali.raw");
 	NQMT::nqmt_playStream();
@@ -45,6 +49,8 @@ int main( void ) {
 	while(1)
 	{
 		swiWaitForVBlank();
+		consoleClear();
+		printf("Frame : %d\n", frame);
 		mmStreamUpdate();
 		oamUpdate(&oamMain);
 	}
