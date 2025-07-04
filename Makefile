@@ -30,7 +30,7 @@ SDIMAGE		:= image.bin
 # -----------------
 
 SOURCEDIRS	:= source engine/source
-INCLUDEDIRS	:= source engine/include
+INCLUDEDIRS	:= source engine/source
 GFXDIRS		:= gfx
 BINDIRS		:= data
 AUDIODIRS	:= 

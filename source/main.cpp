@@ -22,9 +22,16 @@ int main( void ) {
 
 
 	consoleDemoInit();
-	printf("= INITIALISATION =\n");
+	printf("==================\n");
+  printf("= INITIALISATION =\n");
 	NQMT::InitNQMT();
 	printf("==================\n");
+  printf("Size of event : %d", sizeof(NQMT::event));
+
+  for(int i = 0; i < 200; i++)
+  {
+    swiWaitForVBlank();
+  }
 
 	NQMT::BGHeader title_screen_bg 
 	{
@@ -53,14 +60,30 @@ int main( void ) {
 
 	NQMT::LoadSong("songs/khali.raw");
 	NQMT::PlayStream();
-	
+  
+  NQMT::event arrws[4] = {0};
+  for(int i = 0; i < 4; i++)
+  {
+    arrws[i] = (NQMT::event){0};
+  }
+  NQMT::EventHandler eh( "events/test.ev", 4, arrws);
+
 	int frame = 0;
 	while(1)
 	{
 		swiWaitForVBlank();
-		//consoleClear();
-		//printf("Frame : %d\n", frame);
-		arrow1.Update();
+		consoleClear();
+		printf("Frame : %d\n", frame);
+		for(int i = 0; i < 4; i ++)
+    {
+      printf("event type %u, start %ld, len %u\n",
+            (arrws[i].channel), 
+            (arrws[i].time_start),
+            (arrws[i].duration)
+            );
+    }
+
+    arrow1.Update();
 		arrow2.Update();
 		frame++;
 		if(frame%60 == 0)
@@ -70,12 +93,14 @@ int main( void ) {
 		}
 		fatlugi.Update();
 		arrow1.position.y--;
-		
+	  eh.Update(frame);	
 		if(arrow1.position.y <= -32)
 		{
-			printf("Changing position : %d\n", arrow1.position.y);
 			arrow1.position.y = 256;
 		}
+    
+    
+    
 		mmStreamUpdate();
 		oamUpdate(&oamMain);
 	}
