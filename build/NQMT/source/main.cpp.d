@@ -2,71 +2,71 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  build/NQMT/gfx/arrows.h build/NQMT/gfx/tiny_fat_luigi.h \
  source/notquite.hpp engine/source/nqmt_engine.hpp \
  engine/source/nqmt_fs.hpp \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/camera.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/card.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cothread.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu_asm.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/debug.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/decompress.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/dma.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/exceptions.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/fifocommon.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sassert.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/interrupts.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/input.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ipc.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/libversion.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/memory.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndma.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/nwram.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/system.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/rsa.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/sha1.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/timers.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/touch.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/utf.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/background.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/video.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/boxtest.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/videoGL.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cache.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15_asm.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/dynamicArray.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/math.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/trig_lut.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/camera.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/console.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/guitarGrip.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/image.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/input.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/keyboard.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/linkedlist.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/ndsmotion.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/paddle.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/grf.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/pcx.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/piano.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/rumble.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sdmmc.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sound.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sprite.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/window.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2gyro.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2solar.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2tilt.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/dsp.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/camera.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/card.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cothread.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu_asm.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/debug.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/decompress.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/dma.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/exceptions.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/fifocommon.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sassert.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/interrupts.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/input.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ipc.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/libversion.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/memory.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndma.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/nwram.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/system.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/rsa.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/sha1.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/timers.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/touch.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/utf.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/background.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/video.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/boxtest.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/videoGL.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cache.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15_asm.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/dynamicArray.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/math.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/trig_lut.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/camera.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/console.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/guitarGrip.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/image.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/input.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/keyboard.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/linkedlist.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/ndsmotion.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/paddle.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/grf.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/pcx.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/piano.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/rumble.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sdmmc.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sound.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sprite.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/window.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2gyro.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2solar.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2tilt.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/dsp.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h \
  engine/source/nqmt_audio.hpp \
- /opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
- /opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
  engine/source/nqmt_gfx.hpp engine/source/nqmt_math.hpp \
  engine/source/nqmt_event.hpp
 build/NQMT/gfx/title.h:
@@ -75,71 +75,71 @@ build/NQMT/gfx/tiny_fat_luigi.h:
 source/notquite.hpp:
 engine/source/nqmt_engine.hpp:
 engine/source/nqmt_fs.hpp:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/camera.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/card.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cothread.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu_asm.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/debug.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/decompress.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/dma.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/exceptions.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/fifocommon.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sassert.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/interrupts.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/input.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ipc.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/libversion.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/memory.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndma.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/nwram.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/system.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/rsa.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/sha1.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/timers.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/touch.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/utf.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/background.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/video.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/boxtest.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/videoGL.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cache.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15_asm.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/dynamicArray.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/math.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/trig_lut.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/camera.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/console.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/guitarGrip.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/image.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/input.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/keyboard.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/linkedlist.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/ndsmotion.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/paddle.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/grf.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/pcx.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/piano.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/rumble.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sdmmc.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sound.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sprite.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/window.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2gyro.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2solar.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2tilt.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/dsp.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/camera.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/card.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cothread.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/cpu_asm.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/debug.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/decompress.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/dma.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/exceptions.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/fifocommon.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sassert.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/interrupts.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/input.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ipc.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/libversion.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/memory.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndma.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/nwram.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/system.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/rsa.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/sha1.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/timers.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/touch.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/utf.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/background.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/video.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/boxtest.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/videoGL.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cache.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/cp15_asm.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/dynamicArray.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/math.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/trig_lut.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/camera.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/console.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/guitarGrip.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/image.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/input.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/keyboard.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/linkedlist.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/ndsmotion.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/paddle.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/grf.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/pcx.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/piano.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/rumble.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sdmmc.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sound.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/sprite.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/window.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2gyro.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2solar.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/peripherals/slot2tilt.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/dsp.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h:
 engine/source/nqmt_audio.hpp:
-/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h:
-/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:
 engine/source/nqmt_gfx.hpp:
 engine/source/nqmt_math.hpp:
 engine/source/nqmt_event.hpp:

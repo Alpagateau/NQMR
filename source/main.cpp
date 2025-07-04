@@ -98,9 +98,6 @@ int main( void ) {
 		{
 			arrow1.position.y = 256;
 		}
-    
-    
-    
 		mmStreamUpdate();
 		oamUpdate(&oamMain);
 	}
