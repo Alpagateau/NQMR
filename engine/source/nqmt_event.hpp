@@ -12,7 +12,7 @@ struct __attribute__((__packed__)) event {
     //event channel : used to select what to do
     u8 channel;
     //time the event starts in ticks. 
-    s32 time_start;
+    u32 time_start;
     //duration of the event, in ticks.
     u16 duration;
 };

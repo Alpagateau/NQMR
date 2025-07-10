@@ -16,12 +16,17 @@ EventHandler::EventHandler(
     time = 0;
     buffer = buf;
     size = capacity;
+    fread((void*) buffer, sizeof(event), size, source);
   }
+  
+  
+  // Update(-1);
 }
 
 void EventHandler::Update(u32 date)
 {
   time = date;
+  
   for(int i = 0; i < size; i++)
   {
     if(buffer[i].channel != 0)
@@ -33,6 +38,7 @@ void EventHandler::Update(u32 date)
       }
     }
   }
+
   for(int i = 0; i < size; i++)
   {
     if(buffer[i].channel == 0)
@@ -51,6 +57,8 @@ void EventHandler::Update(u32 date)
       }
     }
   }
+
+  
 }
 
 }

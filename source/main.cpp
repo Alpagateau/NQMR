@@ -8,6 +8,7 @@ extern "C"{
 #include <nds.h>
 
 #define NUM_ARROWS 32
+#define TEST_BUFFER_SIZE 3
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
@@ -61,12 +62,12 @@ int main( void ) {
 	NQMT::LoadSong("songs/khali.raw");
 	NQMT::PlayStream();
   
-  NQMT::event arrws[4] = {0};
-  for(int i = 0; i < 4; i++)
+  NQMT::event arrws[TEST_BUFFER_SIZE] = {0};
+  for(int i = 0; i < TEST_BUFFER_SIZE; i++)
   {
     arrws[i] = (NQMT::event){0};
   }
-  NQMT::EventHandler eh( "events/test.ev", 4, arrws);
+  NQMT::EventHandler eh( "events/events_small.bin", TEST_BUFFER_SIZE, arrws);
 
 	int frame = 0;
 	while(1)
@@ -74,16 +75,16 @@ int main( void ) {
 		swiWaitForVBlank();
 		consoleClear();
 		printf("Frame : %d\n", frame);
-		for(int i = 0; i < 4; i ++)
-    {
-      printf("event type %u, start %ld, len %u\n",
-            (arrws[i].channel), 
-            (arrws[i].time_start),
-            (arrws[i].duration)
+		for(int i = 0; i < TEST_BUFFER_SIZE; i ++)
+    	{
+      		printf("event type %u, start %lu, len %u\n",
+            	(arrws[i].channel), 
+            	(arrws[i].time_start),
+            	(arrws[i].duration)
             );
-    }
+    	}
 
-    arrow1.Update();
+    	arrow1.Update();
 		arrow2.Update();
 		frame++;
 		if(frame%60 == 0)
@@ -93,7 +94,7 @@ int main( void ) {
 		}
 		fatlugi.Update();
 		arrow1.position.y--;
-	  eh.Update(frame);	
+	  	eh.Update(frame);	
 		if(arrow1.position.y <= -32)
 		{
 			arrow1.position.y = 256;
