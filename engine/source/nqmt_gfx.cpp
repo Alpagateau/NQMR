@@ -83,6 +83,13 @@ int SetSpritePalette(void *source, u32 size)
     return 0;
 }
 
+Sprite2D::Sprite2D()
+{
+    position = (Vector2i){0, 0};
+    id = 0;
+    offset = 0;
+}
+
 Sprite2D::Sprite2D(u8 _id)
 {
     position = (Vector2i){0, 0};
@@ -104,10 +111,17 @@ Sprite2D Sprite2D::SetHeader(SpriteHeader &h)
     return *this;
 }
 
+void Sprite2D::_SetPosition(int x, int y)
+{
+    position.x = x;
+    position.y = y;
+}
+
 void Sprite2D::SetPosition(int x, int y)
 {
     position.x = x;
     position.y = y;
+    oamSetXY(&oamMain, id, x, y);
 }
 
 void Sprite2D::Update()

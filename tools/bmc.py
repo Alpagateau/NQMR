@@ -1,59 +1,50 @@
 import struct
 import argparse
-import os
 
-DIRECTION_TO_BYTE = {
-    "UP": 1,
-    "DOWN": 2,
-    "LEFT": 0,
-    "RIGHT": 3,
+# Mapping of directions to channel numbers
+direction_map = {
+    "LEFT": 1,
+    "UP": 2,
+    "DOWN": 3,
+    "RIGHT": 4
 }
 
-BYTE_TO_DIRECTION = {v: k for k, v in DIRECTION_TO_BYTE.items()}
-
-
-def text_to_binary(text_path, binary_path):
-    with open(text_path, 'r') as txt_file, open(binary_path, 'wb') as bin_file:
-        for line in txt_file:
+def convert_text_to_binary(input_file, output_file):
+    with open(input_file, "r") as fin, open(output_file, "wb") as fout:
+        for line_number, line in enumerate(fin, 1):
             line = line.strip()
-            if line.startswith("#") or not line:
+            if not line:
+                continue  # Skip empty lines
+
+            parts = line.split()
+            if len(parts) != 3:
+                print(f"Skipping malformed line {line_number}: {line}")
                 continue
-            direction, start, duration = line.split()
-            direction_byte = DIRECTION_TO_BYTE[direction.upper()]
-            bin_file.write(struct.pack('<B I H', direction_byte, int(start), int(duration)))
 
+            direction, start_str, duration_str = parts
+            if direction not in direction_map:
+                print(f"Unknown direction on line {line_number}: {direction}")
+                continue
 
-def binary_to_text(binary_path, text_path):
-    with open(binary_path, 'rb') as bin_file, open(text_path, 'w') as txt_file:
-        txt_file.write("#direction start(ms) duration(ms)\n")
-        while True:
-            chunk = bin_file.read(7)
-            if len(chunk) < 7:
-                break
-            direction_byte, start, duration = struct.unpack('<B I H', chunk)
-            direction = BYTE_TO_DIRECTION.get(direction_byte, f"UNKNOWN({direction_byte})")
-            txt_file.write(f"{direction} {start} {duration}\n")
+            try:
+                channel = direction_map[direction]
+                start = int(start_str)
+                duration = int(duration_str)
 
+                # < = little endian, B = uint8, I = uint32, H = uint16
+                packed_data = struct.pack('<BIH', channel, start, duration)
+                fout.write(packed_data)
+            except ValueError as e:
+                print(f"Error parsing line {line_number}: {line} -- {e}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Convert beat map between text and binary formats.")
-    parser.add_argument("mode", choices=["to-bin", "to-text"], help="Conversion mode.")
-    parser.add_argument("input", help="Input file path.")
-    parser.add_argument("output", help="Output file path.")
-
+    parser = argparse.ArgumentParser(description="Convert a text file to a binary format.")
+    parser.add_argument("input", help="Path to the input text file")
+    parser.add_argument("output", help="Path to the output binary file")
     args = parser.parse_args()
 
-    if not os.path.exists(args.input):
-        print(f"Input file '{args.input}' does not exist.")
-        return
-
-    if args.mode == "to-bin":
-        text_to_binary(args.input, args.output)
-        print(f"Converted text to binary: {args.output}")
-    elif args.mode == "to-text":
-        binary_to_text(args.input, args.output)
-        print(f"Converted binary to text: {args.output}")
-
+    convert_text_to_binary(args.input, args.output)
+    print(f"Conversion complete. Binary saved to: {args.output}")
 
 if __name__ == "__main__":
     main()

@@ -82,9 +82,11 @@ public:
 class Sprite2D
 {
 public:
+    Sprite2D();
     Sprite2D(u8 _id);
     Sprite2D(u8 _id,SpriteHeader &h);
     Sprite2D SetHeader(SpriteHeader &h);
+    void _SetPosition(int x, int y);
     void SetPosition(int x, int y);
     void Update();
     SpriteHeader* header;
