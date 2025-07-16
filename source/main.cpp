@@ -55,6 +55,17 @@ int main( void ) {
 	NQMT::Sprite2D arrow_sprites[TEST_BUFFER_SIZE];
 	NQMT::event arrws[TEST_BUFFER_SIZE] = {0};
 
+	NQMT::Sprite2D target_arrows[4] = {0};
+
+	for(int i = 0; i < 4; i++)
+	{
+		target_arrows[i].id = TEST_BUFFER_SIZE + i;
+		target_arrows[i].SetHeader(ArrowHeader);
+		target_arrows[i].offset = arrws_offsets[i+1];
+		target_arrows[i]._SetPosition(X_Positions[i+1],  0);
+		target_arrows[i].Update();
+	}
+
   	for(int i = 0; i < TEST_BUFFER_SIZE; i++)
  	{
    		arrws[i] = (NQMT::event){0};
@@ -64,7 +75,7 @@ int main( void ) {
   	}
 
 	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, SQ64_256);
-	NQMT::Sprite2D fatlugi(6, fat_luigiH);
+	NQMT::Sprite2D fatlugi(120, fat_luigiH);
 	fatlugi.position.x = 10;
 	fatlugi.position.y = 10;
 	fatlugi.Update();
