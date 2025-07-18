@@ -3,7 +3,7 @@ extern "C"{
 #include "arrows.h"
 #include "tiny_fat_luigi.h"
 }
-#include "notquite.hpp"
+//#include "notquite.hpp"
 #include "nqmt_engine.hpp"
 #include <nds.h>
 
