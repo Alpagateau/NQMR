@@ -93,6 +93,7 @@ Sprite2D::Sprite2D()
 Sprite2D::Sprite2D(u8 _id)
 {
     position = (Vector2i){0, 0};
+    anchor = (Vector2i){0, 0};
     id = _id;
     offset = 0;
 }
@@ -103,6 +104,7 @@ Sprite2D::Sprite2D(u8 _id,SpriteHeader &h)
     id = _id;
     offset = 0;
     position = (Vector2i){0, 0};
+    anchor = (Vector2i){0, 0};
 }
 
 Sprite2D Sprite2D::SetHeader(SpriteHeader &h)
@@ -121,7 +123,7 @@ void Sprite2D::SetPosition(int x, int y)
 {
     position.x = x;
     position.y = y;
-    oamSetXY(&oamMain, id, x, y);
+    oamSetXY(&oamMain, id, x - anchor.x, y - anchor.y);
 }
 
 void Sprite2D::Update()
@@ -134,7 +136,7 @@ void Sprite2D::Update()
             && (position.y+h > 0) && (position.y < SCREEN_HEIGHT);
     oamSet(&oamMain,
             id, // Sprite ID (0 to 127)
-            position.x , position.y, // X, Y
+            position.x - anchor.x, position.y - anchor.y, // X, Y
             0, // Priority
             0, // Palette index
             s.ss, s.scf, // Size, format

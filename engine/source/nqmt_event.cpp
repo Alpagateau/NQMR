@@ -18,9 +18,6 @@ EventHandler::EventHandler(
     size = capacity;
     fread((void*) buffer, sizeof(event), size, source);
   }
-  
-  
-  // Update(-1);
 }
 
 void EventHandler::Update(u32 date)

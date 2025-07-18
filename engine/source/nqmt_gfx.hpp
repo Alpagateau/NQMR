@@ -92,6 +92,7 @@ public:
     SpriteHeader* header;
     bool visible;
     Vector2i position;
+    Vector2i anchor;
     u16 offset;
     u16 palIndex;
     u8 id;

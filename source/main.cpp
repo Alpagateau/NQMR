@@ -18,7 +18,7 @@ typedef struct {
 
 int main( void ) {
 
-	int X_Positions[5] =   {-32, 10, 50, 100, 150};
+	int X_Positions[5] =   {-32, 32, 94, 168, 232};
 	int arrws_offsets[5] = {  0,  0,  8,  16, 24};
 
 	videoSetMode(MODE_0_2D);
@@ -62,7 +62,8 @@ int main( void ) {
 		target_arrows[i].id = TEST_BUFFER_SIZE + i;
 		target_arrows[i].SetHeader(ArrowHeader);
 		target_arrows[i].offset = arrws_offsets[i+1];
-		target_arrows[i]._SetPosition(X_Positions[i+1],  0);
+		target_arrows[i].anchor = (Vector2i){16, 16};
+		target_arrows[i]._SetPosition(X_Positions[i+1],  16);
 		target_arrows[i].Update();
 	}
 
@@ -71,7 +72,9 @@ int main( void ) {
    		arrws[i] = (NQMT::event){0};
 		arrow_sprites[i].id = i;
 		arrow_sprites[i].SetHeader(ArrowHeader);
+		arrow_sprites[i].anchor = (Vector2i){16, 16};
 		arrow_sprites[i].Update();
+		
   	}
 
 	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, SQ64_256);
@@ -102,7 +105,7 @@ int main( void ) {
 			arrow_sprites[i]._SetPosition(
 				
 				X_Positions[arrws[i].channel],
-				-1 * (frame - arrws[i].time_start)
+				(-1 * (frame - arrws[i].time_start)) + 16
 			);
 			arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
 			printf("Sprite %d is at [%d, %d]\n", i, arrow_sprites[i].position.x, arrow_sprites[i].position.y);
