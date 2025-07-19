@@ -1,7 +1,10 @@
 #include "nqmt_gfx.hpp"
 
-int bg;
+
 namespace NQMT{
+
+int bg;
+SpriteAllocater SA;
 
 SpriteSetting decodeSS(u8 spr)
 {
@@ -60,6 +63,7 @@ int SetBackground(BGHeader header)
 
 int InitSprites()
 {
+    SA = SpriteAllocater();
     oamInit(&oamMain, SpriteMapping_1D_128, false);
     return 0;
 }
@@ -86,7 +90,8 @@ int SetSpritePalette(void *source, u32 size)
 Sprite2D::Sprite2D()
 {
     position = (Vector2i){0, 0};
-    id = 0;
+    id = SA.regFirst();
+    printf("id : %u\n", id);
     offset = 0;
 }
 
@@ -95,6 +100,8 @@ Sprite2D::Sprite2D(u8 _id)
     position = (Vector2i){0, 0};
     anchor = (Vector2i){0, 0};
     id = _id;
+    SA.set(id, true);
+    sa = &SA;
     offset = 0;
 }
 
@@ -102,9 +109,15 @@ Sprite2D::Sprite2D(u8 _id,SpriteHeader &h)
 {
     header = &h;
     id = _id;
+    SA.set(id, true);
     offset = 0;
     position = (Vector2i){0, 0};
     anchor = (Vector2i){0, 0};
+}
+
+Sprite2D::~Sprite2D()
+{
+    SA.free(id);
 }
 
 Sprite2D Sprite2D::SetHeader(SpriteHeader &h)
@@ -243,4 +256,70 @@ u8 SpriteHeader::GetHeight()
     }
     return output;
 }
+
+SpriteAllocater::SpriteAllocater()
+{
+    //Sets the mask to 0
+    for(int i = 0; i < 32; i++)
+    {
+        mask[i] = 0;
+    }
+}
+
+bool SpriteAllocater::get(u8 n)
+{
+    //Get batch index
+    u8 idx = n % 8;
+    u8 batch = (n-idx)/8;
+
+    return ((1 << idx) & mask[batch]) != 0;
+}
+
+bool SpriteAllocater::set(u8 n, bool v)
+{
+    u8 idx = n % 8;
+    u8 batch = (n-idx)>>3;
+    if(v)
+    {
+        mask[batch] |= (1 << idx);
+    }
+    else 
+    {
+        mask[batch] = ~( ~(mask[batch]) | (1 << idx) );
+    }
+    return true;
+}
+
+u8 SpriteAllocater::getFirst()
+{
+    u8 batch = 0;
+    while(mask[batch] == 0xFF)
+    {
+        batch++;
+    }
+    u8 idx = 0;
+    while((mask[batch] & (1 << idx) ) != 0)
+    {
+        idx ++;
+        if(idx >= 8)
+        {
+            printf("Error in the get first value");
+        }
+    }
+    //printf("batch : %u | idx : %u\n", batch, idx);
+    return (batch << 3) + idx;
+}
+
+u8 SpriteAllocater::regFirst()
+{
+    u8 idx = getFirst();
+    set(idx, true);
+    return idx;
+}
+
+bool SpriteAllocater::free(u8 n)
+{
+    return set(n, false);
+}
+
 }

@@ -5,3 +5,5 @@ NQMT.nds
 build/NQMT.elf
 sdfiles/NQMT.nds
 build/NQMT.elf
+*.nds
+*.o

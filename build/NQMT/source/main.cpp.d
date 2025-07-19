@@ -1,7 +1,6 @@
 build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  build/NQMT/gfx/arrows.h build/NQMT/gfx/tiny_fat_luigi.h \
- source/notquite.hpp engine/source/nqmt_engine.hpp \
- engine/source/nqmt_fs.hpp \
+ engine/source/nqmt_engine.hpp engine/source/nqmt_fs.hpp \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/bios.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/ndstypes.h \
@@ -72,7 +71,6 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
 build/NQMT/gfx/title.h:
 build/NQMT/gfx/arrows.h:
 build/NQMT/gfx/tiny_fat_luigi.h:
-source/notquite.hpp:
 engine/source/nqmt_engine.hpp:
 engine/source/nqmt_fs.hpp:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds.h:

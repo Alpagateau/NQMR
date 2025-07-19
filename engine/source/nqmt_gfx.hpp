@@ -79,12 +79,28 @@ public:
     u8 GetHeight();
 };
 
+class SpriteAllocater
+{
+private:
+    
+    u8 getFirst();
+public:
+    SpriteAllocater();
+    u8 regFirst();
+    u8 mask[32]; //256 bits bitmask TO MOVE TO PRIVATE
+    bool free(u8 n);
+    bool get(u8 n);
+    bool set(u8 n, bool v);
+};
+
+
 class Sprite2D
 {
 public:
     Sprite2D();
     Sprite2D(u8 _id);
     Sprite2D(u8 _id,SpriteHeader &h);
+    ~Sprite2D();
     Sprite2D SetHeader(SpriteHeader &h);
     void _SetPosition(int x, int y);
     void SetPosition(int x, int y);
@@ -96,6 +112,7 @@ public:
     u16 offset;
     u16 palIndex;
     u8 id;
+    SpriteAllocater* sa;
 private:
     bool needRedraw;
     Vector2i oldPos;
