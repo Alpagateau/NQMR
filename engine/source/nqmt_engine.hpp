@@ -6,6 +6,7 @@
 #include "nqmt_gfx.hpp"
 #include "nqmt_math.hpp"
 #include "nqmt_event.hpp"
+#include "nqmt_input.hpp"
 
 namespace NQMT
 {

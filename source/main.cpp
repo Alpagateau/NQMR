@@ -80,8 +80,6 @@ int main( void ) {
 		arrow_sprites[i].anchor = (Vector2i){16, 16};
 		arrow_sprites[i].Update();
   	}
-
-	
 	
 	NQMT::SpriteHeader fat_luigiH((void*)tiny_fat_luigiTiles, (u32)tiny_fat_luigiTilesLen, SQ64_256);
 	NQMT::Sprite2D fatlugi(120, fat_luigiH);
@@ -95,7 +93,6 @@ int main( void ) {
   	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
-
 	int bg_colour = 13 << 10;
 	
 	// red cpu usage
@@ -104,6 +101,7 @@ int main( void ) {
 	{
 		BG_PALETTE_SUB[0] = bg_colour;
 		swiWaitForVBlank();
+		NQMT::UpdateInputs();
 		BG_PALETTE_SUB[0] = cpu_colour;
 		consoleClear();
 		printf("Frame : %d\n", frame);
@@ -121,7 +119,11 @@ int main( void ) {
 		
 		printf("\n");
 		frame++;
-		fatlugi.SetPosition(frame % 10, frame % 15);
+		if(NQMT::isButtonJustPressed( KEY_A ))
+		{
+			fatlugi.position.x += 10;
+		}
+		fatlugi.Update();
 	  	
 		eh.Update(frame);
 		mmStreamUpdate();

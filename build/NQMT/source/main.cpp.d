@@ -67,7 +67,7 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
  engine/source/nqmt_gfx.hpp engine/source/nqmt_math.hpp \
- engine/source/nqmt_event.hpp
+ engine/source/nqmt_event.hpp engine/source/nqmt_input.hpp
 build/NQMT/gfx/title.h:
 build/NQMT/gfx/arrows.h:
 build/NQMT/gfx/tiny_fat_luigi.h:
@@ -141,3 +141,4 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:
 engine/source/nqmt_gfx.hpp:
 engine/source/nqmt_math.hpp:
 engine/source/nqmt_event.hpp:
+engine/source/nqmt_input.hpp:

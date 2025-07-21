@@ -7,3 +7,6 @@ sdfiles/NQMT.nds
 build/NQMT.elf
 *.nds
 *.o
+NQMT.nds
+build/NQMT.elf
+build/NQMT.map

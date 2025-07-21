@@ -1,6 +1,5 @@
 #include "nqmt_gfx.hpp"
 
-
 namespace NQMT{
 
 int bg;
