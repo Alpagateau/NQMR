@@ -8,6 +8,7 @@
 #include "nqmt_event.hpp"
 #include "nqmt_input.hpp"
 
+
 namespace NQMT
 {
     void InitNQMT();

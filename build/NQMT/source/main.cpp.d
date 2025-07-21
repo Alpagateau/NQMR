@@ -63,7 +63,7 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h \
- engine/source/nqmt_audio.hpp \
+ engine/source/nqmt_debug.hpp engine/source/nqmt_audio.hpp \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
  engine/source/nqmt_gfx.hpp engine/source/nqmt_math.hpp \
@@ -135,6 +135,7 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/te
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/fifo.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/nds/arm9/teak/tlf.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/fat.h:
+engine/source/nqmt_debug.hpp:
 engine/source/nqmt_audio.hpp:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:

@@ -5,6 +5,7 @@ extern "C"{
 }
 
 #include "nqmt_engine.hpp"
+#define printf(args...) fprintf(stderr, ##args)
 #include <nds.h>
 
 #define NUM_ARROWS 32
@@ -18,15 +19,16 @@ typedef struct {
 
 int main( void ) {
 
-	int X_Positions[5] =   {-32, 32, 94, 168, 232};
-	int arrws_offsets[5] = {  0,  0,  8,  16, 24};
+	int X_Positions[5]   = {-32, 32, 94, 168, 232};
+	int arrws_offsets[5] = {  0,  0,  8,  16,  24};
 
 	videoSetMode(MODE_0_2D);
 	vramSetBankA(VRAM_A_MAIN_BG);
 	vramSetBankB(VRAM_B_MAIN_SPRITE);
 
 
-	consoleDemoInit();
+	//consoleDemoInit();
+	consoleDebugInit(DebugDevice_NOCASH);
 	printf("==================\n");
   	printf("= INITIALISATION =\n");
 	NQMT::InitNQMT();
@@ -97,6 +99,8 @@ int main( void ) {
 	
 	// red cpu usage
 	int cpu_colour = 31;
+
+	bool is_playing = true;
 	while(1)
 	{
 		BG_PALETTE_SUB[0] = bg_colour;
@@ -121,7 +125,12 @@ int main( void ) {
 		frame++;
 		if(NQMT::isButtonJustPressed( KEY_A ))
 		{
-			fatlugi.position.x += 10;
+			//fatlugi.position.x += 10;
+			is_playing = !is_playing;
+			if(is_playing)
+				NQMT::PlayStream();
+			else 
+				NQMT::stopStream();
 		}
 		fatlugi.Update();
 	  	

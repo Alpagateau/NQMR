@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <unistd.h> 
 //#include "nf_fat.h"
+#include "nqmt_debug.hpp"
 
 #define NQMT_ROOT "/NQMT/" //Root folder of the game files
 

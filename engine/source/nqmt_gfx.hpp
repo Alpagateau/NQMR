@@ -3,6 +3,7 @@
 
 #include <nds.h>
 #include "nqmt_math.hpp"
+#include "nqmt_debug.hpp"
 
 //===========
 //= G O A L =
