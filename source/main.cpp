@@ -22,10 +22,14 @@ int main( void ) {
 	int X_Positions[5]   = {-32, 32, 94, 168, 232};
 	int arrws_offsets[5] = {  0,  0,  8,  16,  24};
 
-	videoSetMode(MODE_0_2D);
-	vramSetBankA(VRAM_A_MAIN_BG);
-	vramSetBankB(VRAM_B_MAIN_SPRITE);
+	videoSetMode(MODE_0_3D);
+	videoSetModeSub(MODE_0_2D);
 
+	vramSetPrimaryBanks(
+		VRAM_A_MAIN_BG, 
+		VRAM_B_MAIN_SPRITE, 
+		VRAM_C_SUB_BG,
+		VRAM_D_SUB_SPRITE);
 
 	//consoleDemoInit();
 	consoleDebugInit(DebugDevice_NOCASH);
@@ -103,12 +107,10 @@ int main( void ) {
 	bool is_playing = true;
 	while(1)
 	{
-		BG_PALETTE_SUB[0] = bg_colour;
 		swiWaitForVBlank();
 		NQMT::UpdateInputs();
-		BG_PALETTE_SUB[0] = cpu_colour;
 		consoleClear();
-		printf("Frame : %d\n", frame);
+		//printf("Frame : %d\n", frame);
 		
 		for(int i = 0; i < TEST_BUFFER_SIZE; i ++)
     	{
@@ -120,8 +122,7 @@ int main( void ) {
 			arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
 			arrow_sprites[i].Update();
     	}
-		
-		printf("\n");
+
 		frame++;
 		if(NQMT::isButtonJustPressed( KEY_A ))
 		{
@@ -136,7 +137,7 @@ int main( void ) {
 	  	
 		eh.Update(frame);
 		mmStreamUpdate();
-		oamUpdate(&oamMain);
+		oamUpdate(&oamSub);
 	}
 	
 	return 0;

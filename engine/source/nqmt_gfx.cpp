@@ -49,7 +49,7 @@ SpriteSetting decodeSS(u8 spr)
 
 int InitBG()
 {
-    bg = bgInit(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
+    bg = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
     return 0;
 }
 
@@ -63,7 +63,8 @@ int SetBackground(BGHeader header)
 int InitSprites()
 {
     SA = SpriteAllocater();
-    oamInit(&oamMain, SpriteMapping_1D_128, false);
+    //oamInit(&oamMain, SpriteMapping_1D_128, false);
+    oamInit(&oamSub, SpriteMapping_1D_128, false);
     return 0;
 }
 
@@ -76,13 +77,14 @@ int InitGfx()
 
 int SetBackgroundPalette(void* source, u32 size)
 {
-    dmaCopy(source, BG_PALETTE, size);
+    //dmaCopy(source, BG_PALETTE, size);
+    dmaCopy(source, BG_PALETTE_SUB, size);
     return 0;
 }
 
 int SetSpritePalette(void *source, u32 size)
 {
-    dmaCopy(source, SPRITE_PALETTE, size);
+    dmaCopy(source, SPRITE_PALETTE_SUB, size);
     return 0;
 }
 
@@ -90,7 +92,6 @@ Sprite2D::Sprite2D()
 {
     position = (Vector2i){0, 0};
     id = SA.regFirst();
-    printf("id : %u\n", id);
     offset = 0;
 }
 
@@ -135,7 +136,8 @@ void Sprite2D::SetPosition(int x, int y)
 {
     position.x = x;
     position.y = y;
-    oamSetXY(&oamMain, id, x - anchor.x, y - anchor.y);
+    oamSetXY(&oamSub, id, x - anchor.x, y - anchor.y);
+    //oamSetXY(&oamMain, id, x - anchor.x, y - anchor.y);
 }
 
 void Sprite2D::Update()
@@ -146,7 +148,8 @@ void Sprite2D::Update()
     u8 h = header->GetHeight();
     bool visible = (position.x+w > 0) && (position.x < SCREEN_WIDTH)
             && (position.y+h > 0) && (position.y < SCREEN_HEIGHT);
-    oamSet(&oamMain,
+    //oamSet(&oamMain,
+    oamSet(&oamSub,
             id, // Sprite ID (0 to 127)
             position.x - anchor.x, position.y - anchor.y, // X, Y
             0, // Priority
@@ -169,14 +172,14 @@ SpriteHeader::SpriteHeader(
 {
     SpriteSetting s = decodeSS(_type);
     type = _type;
-    addr = oamAllocateGfx(&oamMain, s.ss, s.scf);
+    addr = oamAllocateGfx(&oamSub, s.ss, s.scf);
     // Copy tiles to the space assigned to this sprite
     dmaCopy(tiles, addr, tileSize);
 }
 
 SpriteHeader::~SpriteHeader()
 {
-    oamFreeGfx(&oamMain, addr);
+    oamFreeGfx(&oamSub, addr);
 }
 
 u8 SpriteHeader::GetWidth()
