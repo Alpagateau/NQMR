@@ -13,9 +13,61 @@ extern "C"{
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
+#define NUM_QUADS 40
+
 typedef struct {
-    int placeholder;
-} SceneData;
+   bool enabled;
+   int x1, y1,  x2, y2;
+   int alpha, id;
+   int color;
+} quad_t;
+
+quad_t Quad[NUM_QUADS];
+
+bool enable_alpha = false;
+
+void UpdateQuads(void)
+{
+    for (int i = 0; i < NUM_QUADS; i++)
+    {
+        if (!Quad[i].enabled)
+        {
+            // Always recreate quads if not enabled
+            Quad[i].enabled = true;
+            Quad[i].x1 = rand() & 255;
+            Quad[i].x2 = rand() & 255;
+            Quad[i].y1 = rand() % 192;
+            Quad[i].y2 = rand() % 192;
+            Quad[i].alpha = (rand() % 30) + 1;
+            Quad[i].id = rand() & 63;
+            Quad[i].color = rand() & 0xFFFF;
+        }
+        else
+        {
+            // Disable quads randomly
+            if ((rand() & 31) == 31)
+                Quad[i].enabled = false;
+        }
+    }
+}
+
+void Draw3DScene(void)
+{
+    NE_2DViewInit();
+    NE_PolyFormat(31, 0, NE_LIGHT_0 ,NE_CULL_BACK, (NE_OtherFormatEnum)0);
+
+    for (int i = 0; i < NUM_QUADS; i++)
+    {
+        if (!Quad[i].enabled)
+            continue;
+
+        if (enable_alpha)
+            NE_PolyFormat(Quad[i].alpha, Quad[i].id, NE_LIGHT_0, NE_CULL_NONE, (NE_OtherFormatEnum)0);
+
+        NE_2DDrawQuad(Quad[i].x1, Quad[i].y1, Quad[i].x2, Quad[i].y2, i,
+                      Quad[i].color);
+    }
+}
 
 int main( void ) {
 
@@ -30,7 +82,7 @@ int main( void ) {
 		VRAM_B_MAIN_SPRITE, 
 		VRAM_C_SUB_BG,
 		VRAM_D_SUB_SPRITE);
-
+	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
 	//consoleDemoInit();
 	consoleDebugInit(DebugDevice_NOCASH);
 	printf("==================\n");
@@ -99,17 +151,15 @@ int main( void ) {
   	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
-	int bg_colour = 13 << 10;
-	
-	// red cpu usage
-	int cpu_colour = 31;
 
 	bool is_playing = true;
 	while(1)
 	{
 		swiWaitForVBlank();
 		NQMT::UpdateInputs();
-		consoleClear();
+
+		UpdateQuads();
+        NE_Process(Draw3DScene);
 		//printf("Frame : %d\n", frame);
 		
 		for(int i = 0; i < TEST_BUFFER_SIZE; i ++)

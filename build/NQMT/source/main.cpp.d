@@ -67,6 +67,23 @@ build/NQMT/source/main.cpp.o: source/main.cpp build/NQMT/gfx/title.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h \
  C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h \
  engine/source/nqmt_gfx.hpp engine/source/nqmt_math.hpp \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEMain.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NE2D.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NETexture.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPalette.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPolygon.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEMain.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEAnimation.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NECamera.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEDisplayList.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEFAT.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEFormats.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEGeneral.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEGUI.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEModel.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPhysics.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NERichText.h \
+ C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEText.h \
  engine/source/nqmt_event.hpp engine/source/nqmt_input.hpp
 build/NQMT/gfx/title.h:
 build/NQMT/gfx/arrows.h:
@@ -141,5 +158,22 @@ C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/maxmod9.h:
 C:/msys64/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include/mm_types.h:
 engine/source/nqmt_gfx.hpp:
 engine/source/nqmt_math.hpp:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEMain.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NE2D.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NETexture.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPalette.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPolygon.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEMain.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEAnimation.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NECamera.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEDisplayList.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEFAT.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEFormats.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEGeneral.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEGUI.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEModel.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEPhysics.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NERichText.h:
+C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include/NEText.h:
 engine/source/nqmt_event.hpp:
 engine/source/nqmt_input.hpp:

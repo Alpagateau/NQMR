@@ -70,8 +70,13 @@ int InitSprites()
 
 int InitGfx()
 {
+    irqEnable(IRQ_HBLANK);
+    irqSet(IRQ_VBLANK, NE_VBLFunc);
+    irqSet(IRQ_HBLANK, NE_HBLFunc);
+
     InitBG();
     InitSprites();
+    NE_Init3D();
     return 0;
 }
 
