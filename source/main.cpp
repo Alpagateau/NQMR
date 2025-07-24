@@ -82,6 +82,7 @@ int main( void ) {
 		VRAM_B_MAIN_SPRITE, 
 		VRAM_C_SUB_BG,
 		VRAM_D_SUB_SPRITE);
+	
 	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
 	//consoleDemoInit();
 	consoleDebugInit(DebugDevice_NOCASH);
