@@ -4,14 +4,14 @@
 #include <nds.h>
 #include <stdio.h>
 #include <fat.h>
-//#include <filesystem.h>
+#include <filesystem.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <unistd.h> 
 //#include "nf_fat.h"
 #include "nqmt_debug.hpp"
 
-#define NQMT_ROOT "/NQMT/" //Root folder of the game files
+#define NQMT_ROOT "nitro:/" //"/NQMT/" //Root folder of the game files
 
 namespace NQMT{
 

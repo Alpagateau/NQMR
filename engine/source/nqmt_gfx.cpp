@@ -4,6 +4,7 @@ namespace NQMT{
 
 int bg;
 SpriteAllocater SA;
+DrawStack DS;
 
 SpriteSetting decodeSS(u8 spr)
 {
@@ -327,6 +328,67 @@ u8 SpriteAllocater::regFirst()
 bool SpriteAllocater::free(u8 n)
 {
     return set(n, false);
+}
+
+StaticModel::StaticModel()
+{
+  mesh = NE_ModelCreate(NE_Static); 
+}
+
+StaticModel::StaticModel(const char *path)
+{
+  mesh = NE_ModelCreate(NE_Static);
+  NE_ModelLoadStaticMeshFAT(mesh, path);
+}
+
+void StaticModel::Draw()
+{
+  if(DS.count < MODEL_STACK_SIZE)
+  {
+    NE_ModelSetCoord(
+      mesh, 
+      transform.position.x,
+      transform.position.y,
+      transform.position.z
+    );
+    NE_ModelScale(
+      mesh,
+      transform.scale.x,
+      transform.scale.y,
+      transform.scale.z
+    );
+    NE_ModelSetRot(
+      mesh,
+      transform.rotation.x,
+      transform.rotation.y,
+      transform.rotation.z
+    );
+    
+    DS.data[DS.count] = mesh;
+    DS.count++;
+  }
+}
+
+void UseCamera(NE_Camera *cam)
+{
+  DS.camera = cam;
+}
+
+void UpdateGraphics()
+{
+  oamUpdate(&oamSub);
+  NE_ProcessArg(Draw3DScene, &DS);
+}
+
+void Draw3DScene(void *args)
+{
+  DrawStack *ds = (DrawStack*)args;
+  NE_CameraUse(ds->camera);
+  for(int i = 0; i < ds->count; i++)
+  {
+    NE_ModelDraw(ds->data[i]); 
+  }
+  ds->count = 0;
 }
 
 }

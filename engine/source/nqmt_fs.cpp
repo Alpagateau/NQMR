@@ -4,14 +4,14 @@ namespace NQMT{
 
 int initFS()
 {
-    if(fatInitDefault())
-    {
-        return chdir(NQMT_ROOT);
-    }
-    else 
-    {
-        return 1;
-    }
+    if(!fatInitDefault())
+      return 1;
+    //chdir(NQMT_ROOT);
+    
+    if(!nitroFSInit(NULL))
+      printf("Couldnt load nitrofs");
+    chdir(NQMT_ROOT); 
+    return 0;
 }
 
 int listDir()
@@ -38,5 +38,9 @@ int listDir()
 	}
     return 0;
 }
+    //NE_ModelRotate(model, 0, 1, 0);
+    // Render
+    //NE_ProcessInput();  // Updates camera, etc.
+		
 
 }

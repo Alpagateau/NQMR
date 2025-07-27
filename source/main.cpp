@@ -13,62 +13,6 @@ extern "C"{
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
-#define NUM_QUADS 40
-
-typedef struct {
-   bool enabled;
-   int x1, y1,  x2, y2;
-   int alpha, id;
-   int color;
-} quad_t;
-
-quad_t Quad[NUM_QUADS];
-
-bool enable_alpha = false;
-
-void UpdateQuads(void)
-{
-    for (int i = 0; i < NUM_QUADS; i++)
-    {
-        if (!Quad[i].enabled)
-        {
-            // Always recreate quads if not enabled
-            Quad[i].enabled = true;
-            Quad[i].x1 = rand() & 255;
-            Quad[i].x2 = rand() & 255;
-            Quad[i].y1 = rand() % 192;
-            Quad[i].y2 = rand() % 192;
-            Quad[i].alpha = (rand() % 30) + 1;
-            Quad[i].id = rand() & 63;
-            Quad[i].color = rand() & 0xFFFF;
-        }
-        else
-        {
-            // Disable quads randomly
-            if ((rand() & 31) == 31)
-                Quad[i].enabled = false;
-        }
-    }
-}
-
-void Draw3DScene(void)
-{
-    NE_2DViewInit();
-    NE_PolyFormat(31, 0, NE_LIGHT_0 ,NE_CULL_BACK, (NE_OtherFormatEnum)0);
-
-    for (int i = 0; i < NUM_QUADS; i++)
-    {
-        if (!Quad[i].enabled)
-            continue;
-
-        if (enable_alpha)
-            NE_PolyFormat(Quad[i].alpha, Quad[i].id, NE_LIGHT_0, NE_CULL_NONE, (NE_OtherFormatEnum)0);
-
-        NE_2DDrawQuad(Quad[i].x1, Quad[i].y1, Quad[i].x2, Quad[i].y2, i,
-                      Quad[i].color);
-    }
-}
-
 int main( void ) {
 
 	int X_Positions[5]   = {-32, 32, 94, 168, 232};
@@ -86,10 +30,10 @@ int main( void ) {
 	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
 	//consoleDemoInit();
 	consoleDebugInit(DebugDevice_NOCASH);
-	printf("==================\n");
-  	printf("= INITIALISATION =\n");
+	printf("\n==================\n");
+  	printf("\n= INITIALISATION =\n");
 	NQMT::InitNQMT();
-	printf("==================\n");
+	printf("\n==================\n");
   	printf("Size of event : %d", sizeof(NQMT::event));
 	NQMT::listDir();
 
@@ -97,7 +41,7 @@ int main( void ) {
   	{
     	swiWaitForVBlank();
   	}
-
+  
 	NQMT::BGHeader title_screen_bg 
 	{
 		.tiles = (void*)titleTiles,
@@ -149,21 +93,39 @@ int main( void ) {
 	NQMT::LoadSong("songs/khali.raw");
 	NQMT::PlayStream();
   	
-  	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
+  NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
+  
+  //SceneData scene = {0}; 
+  //scene.model = NE_ModelCreate(NE_Static);
+  //scene.cam   = NE_CameraCreate();
+  NE_Material *mat = NE_MaterialCreate();
 
-	bool is_playing = true;
+  // Set coordinates for the camera
+  NE_Camera *camera = NE_CameraCreate();
+  NE_CameraSet(camera,
+               -8, 3, 0,  // Position
+                0, 3, 0,  // Look at
+                0, 1, 0); // Up direction
+  //NE_ModelLoadStaticMeshFAT(
+  //  scene.model,
+  //  "models/teapot.bin"
+  //);
+  NQMT::UseCamera(camera);
+  NQMT::StaticModel teapot("models/teapot.bin");
+
+  NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
+  NE_ModelSetMaterial(teapot.mesh, mat);
+   
+  bool is_playing = true;
 	while(1)
 	{
-		swiWaitForVBlank();
-		NQMT::UpdateInputs();
-
-		UpdateQuads();
-        NE_Process(Draw3DScene);
-		//printf("Frame : %d\n", frame);
+    //printf("This is frame number : %d\n\n", frame);
 		
-		for(int i = 0; i < TEST_BUFFER_SIZE; i ++)
+		NE_WaitForVBL((NE_UpdateFlags)0);
+    NQMT::UpdateInputs(); 
+    for(int i = 0; i < TEST_BUFFER_SIZE; i++)
     	{
 			arrow_sprites[i]._SetPosition(
 				
@@ -184,11 +146,23 @@ int main( void ) {
 			else 
 				NQMT::stopStream();
 		}
-		fatlugi.Update();
-	  	
-		eh.Update(frame);
+		
+    if(NQMT::isButtonPressed(KEY_UP))
+      //NE_ModelRotate(teapot.mesh, 0,  0, -2);
+	    teapot.transform.rotation.z -= 2;
+    if(NQMT::isButtonPressed(KEY_DOWN))
+      NE_ModelRotate(teapot.mesh, 0,  0,  2);	
+		if(NQMT::isButtonPressed(KEY_RIGHT))
+      NE_ModelRotate(teapot.mesh, 0,  2,  0);
+    if(NQMT::isButtonPressed(KEY_LEFT))
+      NE_ModelRotate(teapot.mesh, 0, -2,  0);
+
+    eh.Update(frame);
 		mmStreamUpdate();
-		oamUpdate(&oamSub);
+    teapot.Draw();
+    NQMT::UpdateGraphics();
+    //oamUpdate(&oamSub);
+    //NE_ProcessArg(Draw3DScene, &scene);	
 	}
 	
 	return 0;

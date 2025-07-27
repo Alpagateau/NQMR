@@ -18,7 +18,7 @@
 */
 
 namespace NQMT{
-
+#define MODEL_STACK_SIZE 10
 //Sprite types 
 #define SQ8_16      0
 #define SQ16_16     1
@@ -48,10 +48,7 @@ namespace NQMT{
 #define SCREEN_WIDTH 256
 #define SCREEN_HEIGHT 192
 
-//Sprite Screen placement
-
-#define SUB_SCREEN  0
-#define MAIN_SCREEN 1
+// 2D Rendering
 
 struct BGHeader
 {
@@ -121,11 +118,38 @@ public:
     u8 id;
     SpriteAllocater* sa;
 private:
-    u8 screen = SUB_SCREEN;
+//    u8 screen = SUB_SCREEN;
     bool needRedraw;
     Vector2i oldPos;
 };
 
+//3D Engine
+
+struct Transform 
+{
+  Vector3f position = (Vector3f){0.0f, 0.0f, 0.0f};
+  Vector3f rotation = (Vector3f){0.0f, 0.0f, 0.0f};
+  Vector3f scale    = (Vector3f){1.0f, 1.0f, 1.0f};
+};
+
+class StaticModel 
+{
+public:
+  Transform transform;
+  NE_Model *mesh;
+  StaticModel();
+  StaticModel(const char *path);
+  void Draw();
+};
+
+struct DrawStack 
+{
+  NE_Camera *camera; 
+  NE_Model *data[MODEL_STACK_SIZE];
+  int count;
+};
+
+void Draw3DScene(void* args);
 
 //Initialize Backgrounds
 //Currently only allows for  BgType_Text8bpp, BgSize_T_256x256 settings
@@ -136,6 +160,9 @@ int SetSpritePalette(void* source, u32 size);
 int InitSprites();
 
 int InitGfx();
+void UseCamera(NE_Camera *cam);
+void UpdateGraphics();
+void Draw3DScene(void *args);
 
 }
 #endif

@@ -6,6 +6,7 @@ export BLOCKSDS			?= /opt/blocksds/core
 export BLOCKSDSEXT		?= /opt/blocksds/external
 
 export WONDERFUL_TOOLCHAIN	?= /opt/wonderful
+export NE_TOOLS ?= /opt/wonderful/thirdparty/blocksds/external/nitro-engine/tools
 ARM_NONE_EABI_PATH	?= $(WONDERFUL_TOOLCHAIN)/toolchain/gcc-arm-none-eabi/bin/
 
 # User config
@@ -108,16 +109,19 @@ ifneq ($(AUDIODIRS),)
     endif
 endif
 
-SOURCES_S	:= $(shell find -L $(SOURCEDIRS) -name "*.s")
-SOURCES_C	:= $(shell find -L $(SOURCEDIRS) -name "*.c")
+SOURCES_S	  := $(shell find -L $(SOURCEDIRS) -name "*.s")
+SOURCES_C	  := $(shell find -L $(SOURCEDIRS) -name "*.c")
 SOURCES_CPP	:= $(shell find -L $(SOURCEDIRS) -name "*.cpp")
+
+OBJ_MODELS  := $(wildcard models/*.obj)
+BIN_MODELS  := $(patsubst models/%.obj,$(NITROFSDIR)/models/%.bin,$(OBJ_MODELS))
 
 # Compiler and linker flags
 # -------------------------
 
-ARCH		:= -mthumb -mcpu=arm946e-s+nofp
+ARCH		  := -mthumb -mcpu=arm946e-s+nofp
 
-SPECS		:= $(BLOCKSDS)/sys/crts/ds_arm9.specs
+SPECS		  := $(BLOCKSDS)/sys/crts/ds_arm9.specs
 
 WARNFLAGS	:= -Wall
 
@@ -188,7 +192,7 @@ ifneq ($(SOURCES_AUDIO),)
 endif
 
 # Make the NDS ROM depend on the filesystem only if it is needed
-$(ROM): $(NITROFSDIR)
+$(ROM): $(BIN_MODELS) $(NITROFSDIR) 
 endif
 
 # Combine the title strings
@@ -268,6 +272,11 @@ $(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
 	$(V)$(BLOCKSDS)/tools/grit/grit $< -ftc -W1 -o$(BUILDDIR)/$*
 	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.png.o $(BUILDDIR)/$*.c
 	$(V)touch $(BUILDDIR)/$*.png.o $(BUILDDIR)/$*.h
+
+$(NITROFSDIR)/models/%.bin: models/%.obj
+	@echo "Converting $< -> $@"
+	python $(NE_TOOLS)/obj2dl/obj2dl.py \
+		--input $< --output $@ --texture 256 256 --scale 0.1
 
 ifneq ($(SOURCES_AUDIO),)
 
