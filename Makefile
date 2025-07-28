@@ -118,6 +118,8 @@ BIN_MODELS   := $(patsubst models/%.obj,$(NITROFSDIR)/models/%.bin,$(OBJ_MODELS)
 PNG_TEXTURES := $(wildcard models/*.png)
 TEX_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_tex.bin,$(PNG_TEXTURES))
 #PAL_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_pal.bin,$(PNG_TEXTURES))
+WAV_FILES    := $(wildcard songs/*.wav)
+RAW_AUDIO    := $(patsubst songs/%.wav,$(NITROFSDIR)/songs/%.raw, $(WAV_FILES))
 
 # Compiler and linker flags
 # -------------------------
@@ -195,7 +197,7 @@ ifneq ($(SOURCES_AUDIO),)
 endif
 
 # Make the NDS ROM depend on the filesystem only if it is needed
-$(ROM): $(TEX_TEXTURES) $(BIN_MODELS) $(NITROFSDIR) 
+$(ROM): $(RAW_AUDIO) $(TEX_TEXTURES) $(BIN_MODELS) $(NITROFSDIR) 
 endif
 
 # Combine the title strings
@@ -279,12 +281,18 @@ $(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
 $(NITROFSDIR)/models/%.bin: models/%.obj
 	@echo "Converting $< -> $@"
 	python $(NE_TOOLS)/obj2dl/obj2dl.py \
-		--input $< --output $@ --texture 128 128 
+		--input $< --output $@ --texture 256 256 
 
 $(NITROFSDIR)/models/%_tex.bin: models/%.png 
 	@echo "Loading Textures"
 	python $(NE_TOOLS)/img2ds/img2ds.py \
-		--input $< --output $(NITROFSDIR)/models/ --name $(basename $(notdir $<)) --format PAL16
+		--input $< --output $(NITROFSDIR)/models/ --name $(basename $(notdir $<)) --format PAL256
+
+$(NITROFSDIR)/songs/%.raw: songs/%.wav 
+	@echo "Converting song"
+	ffmpeg -i $< -ar 11025 -ac 1 -f u8 -map_metadata -1 $@ 
+	# ffmpeg -i $< -ar 11025 -ac 1 -f u8 -acodec pcm_s16le $@ 
+
 
 ifneq ($(SOURCES_AUDIO),)
 

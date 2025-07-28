@@ -55,12 +55,12 @@ int main( void ) {
 	
 	NQMT::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
 
-	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
-	NQMT::Sprite2D arrow_sprites[TEST_BUFFER_SIZE];
-	NQMT::event arrws[TEST_BUFFER_SIZE];
+	//NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
+	//NQMT::Sprite2D arrow_sprites[TEST_BUFFER_SIZE];
+	//NQMT::event arrws[TEST_BUFFER_SIZE];
 
-	NQMT::Sprite2D target_arrows[4];
-
+	//NQMT::Sprite2D target_arrows[4];
+	/*
 	for(int i = 0; i < 4; i++)
 	{
 		printf("ta %d, %u\n", i,target_arrows[i].id);
@@ -89,28 +89,29 @@ int main( void ) {
 	fatlugi.position.x = 10;
 	fatlugi.position.y = 10;
 	fatlugi.Update();
-	
-	NQMT::LoadSong("songs/khali.raw");
+	*/
+	NQMT::LoadSong("songs/freebird.raw");
 	NQMT::PlayStream();
   	
-  	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
-	eh.grace = 64;
+  	//NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
+	//eh.grace = 64;
+	
 	int frame = 0;
   
   	NE_Material *mat = NE_MaterialCreate();
 	NE_Palette *pal = NE_PaletteCreate();
-	NE_MaterialTexLoadFAT(mat, NE_PAL16, 128, 128, (NE_TextureFlags)0, "models/texture1_tex.bin");
-	NE_PaletteLoadFAT(pal, "models/texture1_pal.bin" ,NE_PAL16);
+	NE_MaterialTexLoadFAT(mat, NE_PAL256, 256, 256, (NE_TextureFlags)0, "models/rat_tex.bin");
+	NE_PaletteLoadFAT(pal, "models/rat_pal.bin" ,NE_PAL256);
 
   	// Set coordinates for the camera
   	NE_Camera *camera = NE_CameraCreate();
   	NE_CameraSet(camera,
-               -8, 3, 0,  // Position
+               -8, 0, 0,  // Position
                 0, 3, 0,  // Look at
                 0, 1, 0); // Up direction
 
   	NQMT::UseCamera(camera);
-  	NQMT::StaticModel teapot("models/triangle.bin");
+  	NQMT::StaticModel teapot("models/rat.bin");
 
   	NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
 	NE_MaterialSetPalette(mat, pal);
@@ -121,7 +122,8 @@ int main( void ) {
 	{
 		NE_WaitForVBL((NE_UpdateFlags)0);
     	NQMT::UpdateInputs(); 
-    	for(int i = 0; i < TEST_BUFFER_SIZE; i++)
+    	/*
+		for(int i = 0; i < TEST_BUFFER_SIZE; i++)
     	{
 			arrow_sprites[i]._SetPosition(
 				
@@ -131,7 +133,7 @@ int main( void ) {
 			arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
 			arrow_sprites[i].Update();
     	}
-
+		*/
 		frame++;
 		if(NQMT::isButtonJustPressed( KEY_A ))
 		{
@@ -156,6 +158,9 @@ int main( void ) {
 			teapot.transform.scale.z *= 1.1;
 		}
 
+		teapot.transform.rotation.y += 2;
+		teapot.transform.rotation.z -= 1;
+
     	if(NQMT::Pressed(KEY_UP))
 			teapot.transform.rotation.z -= 2;
     	if(NQMT::Pressed(KEY_DOWN))
@@ -165,7 +170,7 @@ int main( void ) {
     	if(NQMT::Pressed(KEY_LEFT))
       		teapot.transform.rotation.y -= 2;
 
-   		eh.Update(frame);
+   		//eh.Update(frame);
 		mmStreamUpdate();
     	teapot.Draw();
     	NQMT::UpdateGraphics();

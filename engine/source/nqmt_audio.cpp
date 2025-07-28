@@ -26,7 +26,7 @@ int initAudio()
     audioStreamer.stream.sampling_rate	= AUDIO_SAMPLE_RATE;
 	audioStreamer.stream.buffer_length	= AUDIO_BUFFER_LEN;
 	audioStreamer.stream.callback		= on_stream_request;
-	audioStreamer.stream.format			= MM_STREAM_8BIT_MONO;
+	audioStreamer.stream.format			= MM_STREAM_8BIT_MONO; //MM_STREAM_8BIT_MONO;
 	audioStreamer.stream.timer			= MM_TIMER0;
 	audioStreamer.stream.manual			= true;
 
