@@ -1,4 +1,5 @@
 build/
+build\
 sdfiles/NQMT.nds
 sdfiles/*.nds
 NQMT.nds

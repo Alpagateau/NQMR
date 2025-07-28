@@ -3,7 +3,7 @@
 
 #include <nds.h>
 
-#define printf(args...) fprintf(stderr, ##args)
+//#define printf(args...) fprintf(stderr, ##args)
 
 namespace NQMT 
 {

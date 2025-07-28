@@ -8,7 +8,7 @@ void UpdateInputs()
     scanKeys();
 }
 
-bool isButtonPressed(u16 button)
+bool Pressed(u16 button)
 {
     return (keysHeld() & button);
 }

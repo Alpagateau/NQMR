@@ -40,11 +40,19 @@ void EventHandler::Update(u32 date)
   {
     if(buffer[i].channel == 0)
     {
-      if (fread(&buffer[i], sizeof(event), 1, source) != 1)
+      if (eof || fread(&buffer[i], sizeof(event), 1, source) != 1 )
       {
         buffer[i] = (event){0};
-        printf("Event stream end\n");
-        if (feof(source)) break; // End of file
+        if(!eof)
+        {
+          printf("Event stream end\n");
+        }
+        eof = true;
+        if (feof(source))
+        {
+          
+          break;
+        } // End of file
         else perror("File read error");
       }
 

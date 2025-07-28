@@ -28,6 +28,7 @@ public:
   u8 size;
   event* buffer;
   u32 time;
+  bool eof = false;
   void Update(u32 date);
 };
 

@@ -113,8 +113,11 @@ SOURCES_S	  := $(shell find -L $(SOURCEDIRS) -name "*.s")
 SOURCES_C	  := $(shell find -L $(SOURCEDIRS) -name "*.c")
 SOURCES_CPP	:= $(shell find -L $(SOURCEDIRS) -name "*.cpp")
 
-OBJ_MODELS  := $(wildcard models/*.obj)
-BIN_MODELS  := $(patsubst models/%.obj,$(NITROFSDIR)/models/%.bin,$(OBJ_MODELS))
+OBJ_MODELS   := $(wildcard models/*.obj)
+BIN_MODELS   := $(patsubst models/%.obj,$(NITROFSDIR)/models/%.bin,$(OBJ_MODELS))
+PNG_TEXTURES := $(wildcard models/*.png)
+TEX_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_tex.bin,$(PNG_TEXTURES))
+#PAL_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_pal.bin,$(PNG_TEXTURES))
 
 # Compiler and linker flags
 # -------------------------
@@ -192,7 +195,7 @@ ifneq ($(SOURCES_AUDIO),)
 endif
 
 # Make the NDS ROM depend on the filesystem only if it is needed
-$(ROM): $(BIN_MODELS) $(NITROFSDIR) 
+$(ROM): $(TEX_TEXTURES) $(BIN_MODELS) $(NITROFSDIR) 
 endif
 
 # Combine the title strings
@@ -276,7 +279,12 @@ $(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
 $(NITROFSDIR)/models/%.bin: models/%.obj
 	@echo "Converting $< -> $@"
 	python $(NE_TOOLS)/obj2dl/obj2dl.py \
-		--input $< --output $@ --texture 256 256 --scale 0.1
+		--input $< --output $@ --texture 128 128 
+
+$(NITROFSDIR)/models/%_tex.bin: models/%.png 
+	@echo "Loading Textures"
+	python $(NE_TOOLS)/img2ds/img2ds.py \
+		--input $< --output $(NITROFSDIR)/models/ --name $(basename $(notdir $<)) --format PAL16
 
 ifneq ($(SOURCES_AUDIO),)
 

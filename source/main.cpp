@@ -5,7 +5,7 @@ extern "C"{
 }
 
 #include "nqmt_engine.hpp"
-#define printf(args...) fprintf(stderr, ##args)
+//#define printf(args...) fprintf(stderr, ##args)
 #include <nds.h>
 
 #define NUM_ARROWS 32
@@ -30,11 +30,11 @@ int main( void ) {
 	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
 	//consoleDemoInit();
 	consoleDebugInit(DebugDevice_NOCASH);
-	printf("\n==================\n");
-  	printf("\n= INITIALISATION =\n");
+	printf("==================\n");
+  	printf("= INITIALISATION =\n");
 	NQMT::InitNQMT();
-	printf("\n==================\n");
-  	printf("Size of event : %d", sizeof(NQMT::event));
+	printf("==================\n");
+  	printf("Size of event : %d\n", sizeof(NQMT::event));
 	NQMT::listDir();
 
   	for(int i = 0; i < 100; i++)
@@ -93,39 +93,35 @@ int main( void ) {
 	NQMT::LoadSong("songs/khali.raw");
 	NQMT::PlayStream();
   	
-  NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
+  	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
   
-  //SceneData scene = {0}; 
-  //scene.model = NE_ModelCreate(NE_Static);
-  //scene.cam   = NE_CameraCreate();
-  NE_Material *mat = NE_MaterialCreate();
+  	NE_Material *mat = NE_MaterialCreate();
+	NE_Palette *pal = NE_PaletteCreate();
+	NE_MaterialTexLoadFAT(mat, NE_PAL16, 128, 128, (NE_TextureFlags)0, "models/texture1_tex.bin");
+	NE_PaletteLoadFAT(pal, "models/texture1_pal.bin" ,NE_PAL16);
 
-  // Set coordinates for the camera
-  NE_Camera *camera = NE_CameraCreate();
-  NE_CameraSet(camera,
+  	// Set coordinates for the camera
+  	NE_Camera *camera = NE_CameraCreate();
+  	NE_CameraSet(camera,
                -8, 3, 0,  // Position
                 0, 3, 0,  // Look at
                 0, 1, 0); // Up direction
-  //NE_ModelLoadStaticMeshFAT(
-  //  scene.model,
-  //  "models/teapot.bin"
-  //);
-  NQMT::UseCamera(camera);
-  NQMT::StaticModel teapot("models/teapot.bin");
 
-  NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
-  NE_ModelSetMaterial(teapot.mesh, mat);
-   
-  bool is_playing = true;
+  	NQMT::UseCamera(camera);
+  	NQMT::StaticModel teapot("models/triangle.bin");
+
+  	NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
+	NE_MaterialSetPalette(mat, pal);
+  	NE_ModelSetMaterial(teapot.mesh, mat);
+
+  	bool is_playing = true;
 	while(1)
 	{
-    //printf("This is frame number : %d\n\n", frame);
-		
 		NE_WaitForVBL((NE_UpdateFlags)0);
-    NQMT::UpdateInputs(); 
-    for(int i = 0; i < TEST_BUFFER_SIZE; i++)
+    	NQMT::UpdateInputs(); 
+    	for(int i = 0; i < TEST_BUFFER_SIZE; i++)
     	{
 			arrow_sprites[i]._SetPosition(
 				
@@ -147,22 +143,32 @@ int main( void ) {
 				NQMT::stopStream();
 		}
 		
-    if(NQMT::isButtonPressed(KEY_UP))
-      //NE_ModelRotate(teapot.mesh, 0,  0, -2);
-	    teapot.transform.rotation.z -= 2;
-    if(NQMT::isButtonPressed(KEY_DOWN))
-      NE_ModelRotate(teapot.mesh, 0,  0,  2);	
-		if(NQMT::isButtonPressed(KEY_RIGHT))
-      NE_ModelRotate(teapot.mesh, 0,  2,  0);
-    if(NQMT::isButtonPressed(KEY_LEFT))
-      NE_ModelRotate(teapot.mesh, 0, -2,  0);
+		if(NQMT::Pressed(KEY_L))
+		{
+			teapot.transform.scale.x /= 1.1;
+			teapot.transform.scale.y /= 1.1;
+			teapot.transform.scale.z /= 1.1;
+		}
+		if(NQMT::Pressed(KEY_R))
+		{
+			teapot.transform.scale.x *= 1.1;
+			teapot.transform.scale.y *= 1.1;
+			teapot.transform.scale.z *= 1.1;
+		}
 
-    eh.Update(frame);
+    	if(NQMT::Pressed(KEY_UP))
+			teapot.transform.rotation.z -= 2;
+    	if(NQMT::Pressed(KEY_DOWN))
+      		teapot.transform.rotation.z += 2;	
+		if(NQMT::Pressed(KEY_RIGHT))
+      		teapot.transform.rotation.y += 2;
+    	if(NQMT::Pressed(KEY_LEFT))
+      		teapot.transform.rotation.y -= 2;
+
+   		eh.Update(frame);
 		mmStreamUpdate();
-    teapot.Draw();
-    NQMT::UpdateGraphics();
-    //oamUpdate(&oamSub);
-    //NE_ProcessArg(Draw3DScene, &scene);	
+    	teapot.Draw();
+    	NQMT::UpdateGraphics();
 	}
 	
 	return 0;
