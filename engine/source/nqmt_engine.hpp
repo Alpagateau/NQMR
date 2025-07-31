@@ -7,7 +7,7 @@
 #include "nqmt_math.hpp"
 #include "nqmt_event.hpp"
 #include "nqmt_input.hpp"
-
+#include "nqmt_anim.hpp"
 
 namespace NQMT
 {

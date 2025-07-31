@@ -284,10 +284,11 @@ $(NITROFSDIR)/models/%.bin: models/%.obj
 	python $(NE_TOOLS)/obj2dl/obj2dl.py \
 		--input $< --output $@ --texture 128 128
 
-$(NITROFSDIR)/models/%_tex.bin: models/%.png 
+$(NITROFSDIR)/models/%_tex.bin: models/%.png models/%.txt
 	@echo "Loading Textures"
-	python $(NE_TOOLS)/img2ds/img2ds.py \
-		--input $< --output $(NITROFSDIR)/models/ --name $(basename $(notdir $<)) --format PAL256
+	python ./tools/img_conv.py $< $(NITROFSDIR)/models/
+	#python $(NE_TOOLS)/img2ds/img2ds.py \
+	#	--input $< --output $(NITROFSDIR)/models/ --name $(basename $(notdir $<)) --format PAL256
 
 $(NITROFSDIR)/songs/%.raw: songs/%.wav 
 	@echo "Converting song"

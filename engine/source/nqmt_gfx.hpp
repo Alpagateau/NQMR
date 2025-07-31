@@ -19,7 +19,7 @@
 
 namespace NQMT{
 #define MODEL_STACK_SIZE 10
-#define SPRITE_STACK_SIZE 10
+#define SPRITE_STACK_SIZE 20
 //Sprite types 
 #define SQ8_16      0
 #define SQ16_16     1
@@ -135,11 +135,18 @@ struct Transform
   Vector3f scale    = (Vector3f){1.0f, 1.0f, 1.0f};
 };
 
+struct Transform2D 
+{
+  Vector2i position = (Vector2i){0, 0};
+  float scale = 1.0f;
+  float angle = 0.0f;
+};
+
 class StaticModel 
 {
 public:
   Transform transform;
-  NE_Model *mesh;
+  NE_Model *mesh; 
   StaticModel();
   StaticModel(const char *path);
   void Draw();
@@ -148,9 +155,15 @@ public:
 class NitroSprite 
 {
 public:
-  Transform transform;
+  Vector2i dimensions = {64, 64};
+  Transform2D transform;
+  Vector2i uv_position = (Vector2i){0, 0};   
+  Vector2i uv_dimensions = (Vector2i){0,0};
+  Vector2i anchor = (Vector2i){0,0};
+  u8 index = 0;
   NE_Sprite *sprite;
   NitroSprite();
+  NitroSprite(int w, int h);
   void Draw();
 };
 

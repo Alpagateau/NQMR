@@ -340,6 +340,13 @@ NitroSprite::NitroSprite()
   sprite = NE_SpriteCreate();
 }
 
+NitroSprite::NitroSprite(int w, int h)
+{
+  sprite = NE_SpriteCreate();
+  dimensions = (Vector2i){w, h};
+  NE_SpriteSetSize(sprite, w, h);
+}
+
 StaticModel::StaticModel(const char *path)
 {
   mesh = NE_ModelCreate(NE_Static);
@@ -348,6 +355,40 @@ StaticModel::StaticModel(const char *path)
 
 void NitroSprite::Draw()
 {
+    if(DS.sprite_count >= SPRITE_STACK_SIZE)
+        return;
+    NE_SpriteSetPriority(sprite, (int)index);
+    NE_SpriteSetPos(
+        sprite, 
+        transform.position.x - anchor.x, 
+        transform.position.y - anchor.y
+    );
+    NE_SpriteSetRot(
+      sprite,
+      floattof32(transform.angle)
+    );
+
+    NE_SpriteSetScaleI(
+      sprite,
+      floattof32(transform.scale)
+    );
+
+    int u = (uv_dimensions.x == 0) ? dimensions.x : uv_dimensions.x; 
+    int v = (uv_dimensions.y == 0) ? dimensions.y : uv_dimensions.y;
+
+    NE_SpriteSetMaterialCanvas(
+        sprite,
+        uv_position.x,
+        uv_position.y,
+        uv_position.x + u,
+        uv_position.y + v
+    );
+
+    NE_SpriteSetSize(
+      sprite,
+      dimensions.x,
+      dimensions.y
+    );
     DS.sprites[DS.sprite_count] = sprite;
     DS.sprite_count ++;
 }
