@@ -111,9 +111,10 @@ endif
 
 SOURCES_S	  := $(shell find -L $(SOURCEDIRS) -name "*.s")
 SOURCES_C	  := $(shell find -L $(SOURCEDIRS) -name "*.c")
-SOURCES_CPP	:= $(shell find -L $(SOURCEDIRS) -name "*.cpp")
+SOURCES_CPP	  := $(shell find -L $(SOURCEDIRS) -name "*.cpp")
 
 OBJ_MODELS   := $(wildcard models/*.obj)
+DAE_MODELS   := 
 BIN_MODELS   := $(patsubst models/%.obj,$(NITROFSDIR)/models/%.bin,$(OBJ_MODELS))
 PNG_TEXTURES := $(wildcard models/*.png)
 TEX_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_tex.bin,$(PNG_TEXTURES))
@@ -281,7 +282,7 @@ $(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
 $(NITROFSDIR)/models/%.bin: models/%.obj
 	@echo "Converting $< -> $@"
 	python $(NE_TOOLS)/obj2dl/obj2dl.py \
-		--input $< --output $@ --texture 256 256 
+		--input $< --output $@ --texture 128 128
 
 $(NITROFSDIR)/models/%_tex.bin: models/%.png 
 	@echo "Loading Textures"
@@ -292,7 +293,6 @@ $(NITROFSDIR)/songs/%.raw: songs/%.wav
 	@echo "Converting song"
 	ffmpeg -i $< -ar 11025 -ac 1 -f u8 -map_metadata -1 $@ 
 	# ffmpeg -i $< -ar 11025 -ac 1 -f u8 -acodec pcm_s16le $@ 
-
 
 ifneq ($(SOURCES_AUDIO),)
 

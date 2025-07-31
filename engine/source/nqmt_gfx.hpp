@@ -19,6 +19,7 @@
 
 namespace NQMT{
 #define MODEL_STACK_SIZE 10
+#define SPRITE_STACK_SIZE 10
 //Sprite types 
 #define SQ8_16      0
 #define SQ16_16     1
@@ -123,6 +124,8 @@ private:
     Vector2i oldPos;
 };
 
+
+
 //3D Engine
 
 struct Transform 
@@ -142,11 +145,22 @@ public:
   void Draw();
 };
 
+class NitroSprite 
+{
+public:
+  Transform transform;
+  NE_Sprite *sprite;
+  NitroSprite();
+  void Draw();
+};
+
 struct DrawStack 
 {
   NE_Camera *camera; 
-  NE_Model *data[MODEL_STACK_SIZE];
-  int count;
+  NE_Model *models[MODEL_STACK_SIZE];
+  NE_Sprite *sprites[SPRITE_STACK_SIZE];
+  int model_count;
+  int sprite_count;
 };
 
 void Draw3DScene(void* args);
@@ -165,4 +179,5 @@ void UpdateGraphics();
 void Draw3DScene(void *args);
 
 }
+
 #endif

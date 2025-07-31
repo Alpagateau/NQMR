@@ -96,25 +96,36 @@ int main( void ) {
   	NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
-  
-  	NE_Material *mat = NE_MaterialCreate();
-	NE_Palette *pal = NE_PaletteCreate();
-	NE_MaterialTexLoadFAT(mat, NE_PAL16, 128, 128, (NE_TextureFlags)0, "models/texture1_tex.bin");
-	NE_PaletteLoadFAT(pal, "models/texture1_pal.bin" ,NE_PAL16);
+	
+	//NQMT::StaticModel tube("models/cylinder.bin");
+	//NQMT::StaticModel guy("models/Version1.bin");
+  	NE_Material *tube_mat = NE_MaterialCreate();
+	NE_Palette *tube_pal = NE_PaletteCreate();
+	//NE_Material *guy_mat = NE_MaterialCreate();
+	//NE_Palette *guy_pal = NE_PaletteCreate();
+
+	NE_MaterialTexLoadFAT(tube_mat, NE_PAL256, 128, 128, (NE_TextureFlags)0, "models/8ball_tex.bin");
+	NE_PaletteLoadFAT(tube_pal, "models/8ball_pal.bin", NE_PAL256);
+
+	//NE_MaterialTexLoadFAT(guy_mat, NE_PAL256, 128, 128, (NE_TextureFlags)0, "models/texture1_tex.bin");
+	//NE_PaletteLoadFAT(guy_pal, "models/texture1_pal.bin", NE_PAL256);
 
   	// Set coordinates for the camera
   	NE_Camera *camera = NE_CameraCreate();
   	NE_CameraSet(camera,
-               -8, 3, 0,  // Position
-                0, 3, 0,  // Look at
+               -8, 0, 0,  // Position
+                0, 0, 0,  // Look at
                 0, 1, 0); // Up direction
-
+	
   	NQMT::UseCamera(camera);
-  	NQMT::StaticModel teapot("models/triangle.bin");
-
   	NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
-	NE_MaterialSetPalette(mat, pal);
-  	NE_ModelSetMaterial(teapot.mesh, mat);
+	NQMT::NitroSprite player;
+	NE_SpriteSetMaterial(player.sprite, tube_mat);
+
+	//NE_MaterialSetPalette(tube_mat, tube_pal);
+	//NE_MaterialSetPalette(guy_mat, guy_pal);
+  	//NE_ModelSetMaterial(tube.mesh, tube_mat);
+	//NE_ModelSetMaterial(guy.mesh, guy_mat);
 
   	bool is_playing = true;
 	while(1)
@@ -142,32 +153,36 @@ int main( void ) {
 			else 
 				NQMT::stopStream();
 		}
-		
+
+
+		/*
 		if(NQMT::Pressed(KEY_L))
 		{
-			teapot.transform.scale.x /= 1.1;
-			teapot.transform.scale.y /= 1.1;
-			teapot.transform.scale.z /= 1.1;
+			guy.transform.scale.x /= 1.1;
+			guy.transform.scale.y /= 1.1;
+			guy.transform.scale.z /= 1.1;
 		}
 		if(NQMT::Pressed(KEY_R))
 		{
-			teapot.transform.scale.x *= 1.1;
-			teapot.transform.scale.y *= 1.1;
-			teapot.transform.scale.z *= 1.1;
+			guy.transform.scale.x *= 1.1;
+			guy.transform.scale.y *= 1.1;
+			guy.transform.scale.z *= 1.1;
 		}
 
     	if(NQMT::Pressed(KEY_UP))
-			teapot.transform.rotation.z -= 2;
+			guy.transform.rotation.z -= 2;
     	if(NQMT::Pressed(KEY_DOWN))
-      		teapot.transform.rotation.z += 2;	
+      		guy.transform.rotation.z += 2;	
 		if(NQMT::Pressed(KEY_RIGHT))
-      		teapot.transform.rotation.y += 2;
+      		guy.transform.rotation.y += 2;
     	if(NQMT::Pressed(KEY_LEFT))
-      		teapot.transform.rotation.y -= 2;
-
+      		guy.transform.rotation.y -= 2;
+		*/
    		eh.Update(frame);
 		mmStreamUpdate();
-    	teapot.Draw();
+    	//tube.Draw();
+		//guy.Draw();
+		player.Draw();
     	NQMT::UpdateGraphics();
 	}
 	

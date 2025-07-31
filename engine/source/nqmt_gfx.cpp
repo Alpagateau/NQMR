@@ -335,15 +335,26 @@ StaticModel::StaticModel()
   mesh = NE_ModelCreate(NE_Static); 
 }
 
+NitroSprite::NitroSprite()
+{
+  sprite = NE_SpriteCreate();
+}
+
 StaticModel::StaticModel(const char *path)
 {
   mesh = NE_ModelCreate(NE_Static);
   NE_ModelLoadStaticMeshFAT(mesh, path);
 }
 
+void NitroSprite::Draw()
+{
+    DS.sprites[DS.sprite_count] = sprite;
+    DS.sprite_count ++;
+}
+
 void StaticModel::Draw()
 {
-  if(DS.count < MODEL_STACK_SIZE)
+  if(DS.model_count < MODEL_STACK_SIZE)
   {
     NE_ModelSetCoord(
       mesh, 
@@ -364,8 +375,8 @@ void StaticModel::Draw()
       transform.rotation.z
     );
     
-    DS.data[DS.count] = mesh;
-    DS.count++;
+    DS.models[DS.model_count] = mesh;
+    DS.model_count++;
   }
 }
 
@@ -384,11 +395,18 @@ void Draw3DScene(void *args)
 {
   DrawStack *ds = (DrawStack*)args;
   NE_CameraUse(ds->camera);
-  for(int i = 0; i < ds->count; i++)
+  for(int i = 0; i < ds->model_count; i++)
   {
-    NE_ModelDraw(ds->data[i]); 
+    NE_ModelDraw(ds->models[i]); 
   }
-  ds->count = 0;
+  ds->model_count = 0;
+
+  NE_2DViewInit();
+  for(int i = 0; i < ds->sprite_count; i++)
+  {
+    NE_SpriteDraw(ds->sprites[i]); 
+  }
+  ds->sprite_count = 0;
 }
 
 }
