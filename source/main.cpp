@@ -4,15 +4,20 @@ extern "C"{
 #include "tiny_fat_luigi.h"
 }
 #include <nds.h>
-#include "nqmt_engine.hpp"
+#include "nqme_engine.hpp"
 #include "nqmt.hpp"
 
 #define NUM_ARROWS 32
-#define TEST_BUFFER_SIZE 6
+#define EVENT_BUFFER_SIZE 6
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
+#define STATE_MAIN_MENU 1
+#define STATE_GAMEPLAY  3
+
 int main( void ) {
+
+	u8 state = STATE_MAIN_MENU;
 
 	int X_Positions[5]       = {-32, 32, 94, 168, 232};
 	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
@@ -32,10 +37,10 @@ int main( void ) {
 	consoleDebugInit(DebugDevice_NOCASH);
 	printf("==================\n");
   printf("= INITIALISATION =\n");
-	NQMT::InitNQMT();
+	NQME::InitNQME();
 	printf("==================\n");
  
-	NQMT::BGHeader title_screen_bg 
+	NQME::BGHeader title_screen_bg 
 	{
 		.tiles = (void*)titleTiles,
 		.tileSize = titleTilesLen,
@@ -43,17 +48,17 @@ int main( void ) {
 		.mapSize = titleMapLen,
 	};
 	
-	NQMT::SetBackground(title_screen_bg);
-	NQMT::SetBackgroundPalette((void*)titlePal, titlePalLen);	
-	
-	NQMT::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
+	NQME::SetBackgroundSub(title_screen_bg);
+	NQME::SetBackgroundPaletteSub((void*)titlePal, titlePalLen);
 
-	NQMT::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
-	NQMT::Sprite2D arrow_sprites[TEST_BUFFER_SIZE];
-  NQMT::NitroSprite top_arrows[TEST_BUFFER_SIZE];
-	NQMT::event arrws[TEST_BUFFER_SIZE];
+	NQME::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
+
+	NQME::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
+	NQME::Sprite2D arrow_sprites[EVENT_BUFFER_SIZE];
+  NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
+	NQME::event arrws[EVENT_BUFFER_SIZE];
   
-	NQMT::NitroSprite target_arrows[4];
+	NQME::NitroSprite target_arrows[4];
   NE_Material *arrows_mat = NE_MaterialCreate();
 	NE_Palette *arrows_pal = NE_PaletteCreate();
  
@@ -75,9 +80,9 @@ int main( void ) {
 		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
 	}
 
-  for(int i = 0; i < TEST_BUFFER_SIZE; i++)
+  for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
  	{
-   	arrws[i] = (NQMT::event){0};
+   	arrws[i] = (NQME::event){0};
 		arrow_sprites[i].SetHeader(ArrowHeader);
 		arrow_sprites[i].anchor = (Vector2i){16, 16};
 		arrow_sprites[i].Update();
@@ -88,10 +93,10 @@ int main( void ) {
     NE_SpriteSetMaterial(top_arrows[i].sprite, arrows_mat);
   }	
 	
-  NQMT::LoadSong("songs/khali.raw");
-	NQMT::PlayStream();
+  NQME::LoadSong("songs/khali.raw");
+	NQME::PlayStream();
   	
-  NQMT::EventHandler eh( "bms/khali.bbm", TEST_BUFFER_SIZE, arrws);
+  NQME::EventHandler eh( "bms/khali.bbm", EVENT_BUFFER_SIZE, arrws);
 	eh.grace = 64;
 	int frame = 0;
 	
@@ -113,16 +118,16 @@ int main( void ) {
              0, 0, 0,  // Look at
              0, 1, 0); // Up direction
 	
-  NQMT::UseCamera(camera);
+  NQME::UseCamera(camera);
   NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
-	NQMT::NitroSprite player(64, 128);
+	NQME::NitroSprite player(64, 128);
   
 	NE_SpriteSetMaterial(player.sprite, player_mat);
 
   player.transform.position = (Vector2i){-10, 0};
   Vector2i idle_frames[] = {{0, 0}, {64, 0}, {128, 0}, {192, 0} };
 
-	NQMT::NSAnimation idle = (NQMT::NSAnimation)
+	NQME::NSAnimation idle = (NQME::NSAnimation)
                             {
                                 .size = 4,
                                 .fpf = 8,
@@ -130,7 +135,7 @@ int main( void ) {
                             };
     
   Vector2i ollie_frames[] = {{0, 128}, {64, 128}, {128, 128}, {192, 128} };
-	NQMT::NSAnimation ollie = (NQMT::NSAnimation)
+	NQME::NSAnimation ollie = (NQME::NSAnimation)
                             {
                                 .size = 4,
                                 .fpf = 8,
@@ -138,7 +143,7 @@ int main( void ) {
                             }; 
     
   Vector2i kick_frames[] = {{256, 0}, {256 + 64, 0}, {256 + 128, 0}, {256 + 192, 0} };
-	NQMT::NSAnimation kick = (NQMT::NSAnimation)
+	NQME::NSAnimation kick = (NQME::NSAnimation)
                             {
                                 .size = 4,
                                 .fpf = 8,
@@ -146,57 +151,71 @@ int main( void ) {
                             };
     
   Vector2i shove_frames[] = {{256, 128}, {256 + 64, 128}, {256 + 128, 128}, {256 + 192, 128} };
-	NQMT::NSAnimation shove = (NQMT::NSAnimation)
+	NQME::NSAnimation shove = (NQME::NSAnimation)
                         	{
                             	.size = 4,
                               .fpf = 8,
                               .frames = shove_frames 
                           };
 	
-  NQMT::AnimatedSprite player_anim(&player);
+  NQME::AnimatedSprite player_anim(&player);
   player_anim.Play(&idle);
   player.index = 1;
 
-  bool is_playing = true;
+	NE_MainScreenSetOnBottom();
+
 	while(1)
 	{
 	  NE_WaitForVBL((NE_UpdateFlags)0);
-    NQMT::UpdateInputs(); 
-    for(int i = 0; i < TEST_BUFFER_SIZE; i++)
-    {
-		  arrow_sprites[i]._SetPosition(	
-			  X_Positions[arrws[i].channel],
-				(-1 * (frame - arrws[i].time_start)) + 16
-			);
-      top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
-      top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
-      top_arrows[i].uv_position = {0, 32 * (arrws[i].channel - 1)};
-      top_arrows[i].Draw();
-		  arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
-			arrow_sprites[i].Update();
-    }
-		frame++;
-		
-		for(int i = 0; i < 4; i++)
+
+		//Main Menu
+		if(state == STATE_MAIN_MENU)
 		{
-			if(NQMT::Pressed(controls[i]))
-			{
-				if(pointsForKey(i+1, eh) == 0)
-				{
-					target_arrows[i].transform.scale = 0.8;
-				}
-			}
-			else 
-			{
-				target_arrows[i].transform.scale = 1.0;
-			}
-			target_arrows[i].Draw();
+			//NE_MainScreenSetOnBottom();
 		}
 
-   	eh.Update(frame);
+		//Main Gameplay
+		if(state == STATE_GAMEPLAY){
+			frame++;
+
+    	NQME::UpdateInputs(); 
+    	for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
+   	 	{
+		  	arrow_sprites[i]._SetPosition(	
+			  	X_Positions[arrws[i].channel],
+					(-1 * (frame - arrws[i].time_start)) + 16
+				);
+      	top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
+      	top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
+      	top_arrows[i].uv_position = {0, 32 * (arrws[i].channel - 1)};
+      	top_arrows[i].Draw();
+		  	arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
+				arrow_sprites[i].Update();
+    	}
+		
+		
+			for(int i = 0; i < 4; i++)
+			{
+				if(NQME::JustPressed(controls[i]))
+				{
+					if(pointsForKey(i+1, eh) == 0)
+					{
+						target_arrows[i].transform.scale = 0.8;
+					}
+				}
+				else 
+				{
+					target_arrows[i].transform.scale = 1.0;
+				}
+				target_arrows[i].Draw();
+			}
+
+   		eh.Update(frame);
+    	player_anim.Update();
+    	
+		}
+		NQME::UpdateGraphics();
 		mmStreamUpdate();
-    player_anim.Update();
-    NQMT::UpdateGraphics();
 	}
 	
 	return 0;

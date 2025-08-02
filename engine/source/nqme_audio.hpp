@@ -1,18 +1,18 @@
-#ifndef NQMT_AUDIO_H 
-#define NQMT_AUDIO_H
+#ifndef NQME_AUDIO_H 
+#define NQME_AUDIO_H
 
 #include <nds.h>
 #include <stdio.h>
 #include <maxmod9.h>
 
-#include "nqmt_fs.hpp"
+#include "nqme_fs.hpp"
 
 #define AUDIO_BUFFER_LEN 1216
 #define AUDIO_SAMPLE_RATE 11025 //22050
 
 /*This header is responsible for all audio, from streaming to simple sounds*/
 
-namespace NQMT{
+namespace NQME{
 
 typedef struct {
     FILE* audioFile;

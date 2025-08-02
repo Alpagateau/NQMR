@@ -1,6 +1,6 @@
-#include "nqmt_audio.hpp"
+#include "nqme_audio.hpp"
 
-namespace NQMT
+namespace NQME
 {
 
 AudioStreamer audioStreamer;

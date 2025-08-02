@@ -1,8 +1,8 @@
-#include "nqmt_gfx.hpp"
+#include "nqme_gfx.hpp"
 
-namespace NQMT{
+namespace NQME{
 
-int bg;
+int bg_sub, bg_main;
 SpriteAllocater SA;
 DrawStack DS;
 
@@ -50,16 +50,42 @@ SpriteSetting decodeSS(u8 spr)
 
 int InitBG()
 {
-    bg = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
+    bg_sub  = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
+    //bg_main = bgInit   (0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
     return 0;
 }
 
-int SetBackground(BGHeader header)
+int SetBackgroundSub(BGHeader header)
 {
-	dmaCopy(header.tiles, bgGetGfxPtr(bg), header.tileSize);
-	dmaCopy(header.map, bgGetMapPtr(bg), header.mapSize);
+	dmaCopy(header.tiles, bgGetGfxPtr(bg_sub), header.tileSize);
+	dmaCopy(header.map, bgGetMapPtr(bg_sub), header.mapSize);
     return 0;
 }
+
+
+int SetBackgroundPaletteSub(void* source, u32 size)
+{
+    //dmaCopy(source, BG_PALETTE, size);
+    dmaCopy(source, BG_PALETTE_SUB, size);
+    return 0;
+}
+
+int SetBackgroundMain(BGHeader header)
+{
+	dmaCopy(header.tiles, bgGetGfxPtr(bg_sub), header.tileSize);
+	dmaCopy(header.map, bgGetMapPtr(bg_sub), header.mapSize);
+    return 0;
+}
+
+
+int SetBackgroundPaletteMain(void* source, u32 size)
+{
+    //dmaCopy(source, BG_PALETTE, size);
+    dmaCopy(source, BG_PALETTE_SUB, size);
+    return 0;
+}
+
+
 
 int InitSprites()
 {
@@ -78,13 +104,6 @@ int InitGfx()
     InitBG();
     InitSprites();
     NE_Init3D();
-    return 0;
-}
-
-int SetBackgroundPalette(void* source, u32 size)
-{
-    //dmaCopy(source, BG_PALETTE, size);
-    dmaCopy(source, BG_PALETTE_SUB, size);
     return 0;
 }
 

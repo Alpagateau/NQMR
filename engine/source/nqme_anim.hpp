@@ -1,10 +1,10 @@
-#ifndef HPP_NQMT_ANIM 
-#define HPP_NQMT_ANIM 
+#ifndef HPP_NQME_ANIM 
+#define HPP_NQME_ANIM 
 
-#include "nqmt_math.hpp"
-#include "nqmt_gfx.hpp"
+#include "nqme_math.hpp"
+#include "nqme_gfx.hpp"
 
-namespace NQMT
+namespace NQME
 {
 
 struct NSAnimation 

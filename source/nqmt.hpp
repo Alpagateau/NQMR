@@ -1,4 +1,4 @@
 #include <nds.h>
-#include "nqmt_engine.hpp"
+#include "nqme_engine.hpp"
 
-int pointsForKey(u8 channel, NQMT::EventHandler &handler);
+int pointsForKey(u8 channel, NQME::EventHandler &handler);

@@ -1,6 +1,6 @@
-#include "nqmt_event.hpp"
+#include "nqme_event.hpp"
 
-namespace NQMT 
+namespace NQME 
 {
 
 //template class CircularBuffer<event>;

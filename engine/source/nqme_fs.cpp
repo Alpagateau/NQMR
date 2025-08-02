@@ -1,16 +1,16 @@
-#include "nqmt_fs.hpp"
+#include "nqme_fs.hpp"
 
-namespace NQMT{
+namespace NQME{
 
 int initFS()
 {
     if(!fatInitDefault())
       return 1;
-    //chdir(NQMT_ROOT);
+    //chdir(NQME_ROOT);
     
     if(!nitroFSInit(NULL))
       printf("Couldnt load nitrofs");
-    chdir(NQMT_ROOT); 
+    chdir(NQME_ROOT); 
     return 0;
 }
 

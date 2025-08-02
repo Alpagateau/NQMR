@@ -1,5 +1,5 @@
-#ifndef NQMT_FS_H 
-#define NQMT_FS_H
+#ifndef NQME_FS_H 
+#define NQME_FS_H
 
 #include <nds.h>
 #include <stdio.h>
@@ -9,14 +9,14 @@
 #include <dirent.h>
 #include <unistd.h> 
 //#include "nf_fat.h"
-#include "nqmt_debug.hpp"
+#include "nqme_debug.hpp"
 
-#define NQMT_ROOT "nitro:/" //"/NQMT/" //Root folder of the game files
+#define NQME_ROOT "nitro:/" //"/NQME/" //Root folder of the game files
 
-namespace NQMT{
+namespace NQME{
 
 /*
-*  Initialise the filesystem. Automatically opens the folder at NQMT_ROOT
+*  Initialise the filesystem. Automatically opens the folder at NQME_ROOT
 */
 int initFS();
 

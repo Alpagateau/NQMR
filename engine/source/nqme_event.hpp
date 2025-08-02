@@ -1,10 +1,10 @@
 #pragma once
-#ifndef NQMT_EVENT_HPP
-#define NQMT_EVENT_HPP 
+#ifndef NQME_EVENT_HPP
+#define NQME_EVENT_HPP 
 
 #include <nds.h>
 
-namespace NQMT
+namespace NQME
 {
 // ticks are calculated by physical timers 
 #pragma pack(push, 1)

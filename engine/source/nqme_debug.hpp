@@ -1,11 +1,11 @@
-#ifndef NQMT_DEBUG_HPP 
-#define NQMT_DEBUG_HPP
+#ifndef NQME_DEBUG_HPP 
+#define NQME_DEBUG_HPP
 
 #include <nds.h>
 
 //#define printf(args...) fprintf(stderr, ##args)
 
-namespace NQMT 
+namespace NQME 
 {
 
 namespace DEBUG

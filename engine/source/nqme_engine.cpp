@@ -1,9 +1,9 @@
-#include "nqmt_engine.hpp"
+#include "nqme_engine.hpp"
 
-namespace NQMT
+namespace NQME
 {
 
-void InitNQMT()
+void InitNQME()
 {
     initAudio();
     initFS();

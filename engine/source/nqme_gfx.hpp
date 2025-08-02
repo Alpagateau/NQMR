@@ -1,9 +1,9 @@
-#ifndef NQMT_GFX_H 
-#define NQMT_GFX_H
+#ifndef NQME_GFX_H 
+#define NQME_GFX_H
 
 #include <nds.h>
-#include "nqmt_math.hpp"
-#include "nqmt_debug.hpp"
+#include "nqme_math.hpp"
+#include "nqme_debug.hpp"
 #include <NEMain.h>
 
 //===========
@@ -17,7 +17,7 @@
 
 */
 
-namespace NQMT{
+namespace NQME{
 #define MODEL_STACK_SIZE 10
 #define SPRITE_STACK_SIZE 20
 //Sprite types 
@@ -181,8 +181,10 @@ void Draw3DScene(void* args);
 //Initialize Backgrounds
 //Currently only allows for  BgType_Text8bpp, BgSize_T_256x256 settings
 int InitBG();
-int SetBackground(BGHeader header);
-int SetBackgroundPalette(void* source, u32 size);
+int SetBackgroundSub(BGHeader header);
+int SetBackgroundPaletteSub(void* source, u32 size);
+int SetBackgroundMain(BGHeader header);
+int SetBackgroundPaletteMain(void* source, u32 size);
 int SetSpritePalette(void* source, u32 size);
 int InitSprites();
 

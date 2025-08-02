@@ -1,6 +1,6 @@
-#include "nqmt_anim.hpp"
+#include "nqme_anim.hpp"
 
-namespace NQMT 
+namespace NQME
 {
 
 AnimatedSprite::AnimatedSprite(NitroSprite *ssprite)

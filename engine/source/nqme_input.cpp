@@ -1,6 +1,6 @@
-#include "nqmt_input.hpp"
+#include "nqme_input.hpp"
 
-namespace NQMT
+namespace NQME
 {
 
 void UpdateInputs()

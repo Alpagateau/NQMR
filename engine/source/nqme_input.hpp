@@ -1,10 +1,10 @@
-#ifndef NQMT_INPUT_H 
-#define NQMT_INPUT_H
+#ifndef NQME_INPUT_H 
+#define NQME_INPUT_H
 
 #include <nds.h>
-#include "nqmt_math.hpp"
+#include "nqme_math.hpp"
 
-namespace NQMT
+namespace NQME
 {
 
 void UpdateInputs();
