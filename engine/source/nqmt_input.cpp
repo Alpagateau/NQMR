@@ -13,7 +13,7 @@ bool Pressed(u16 button)
     return (keysHeld() & button);
 }
 
-bool isButtonJustPressed(u16 button)
+bool JustPressed(u16 button)
 {
     return (keysDown() & button)!=0;
 }

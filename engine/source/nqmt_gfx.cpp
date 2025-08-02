@@ -357,22 +357,23 @@ void NitroSprite::Draw()
 {
     if(DS.sprite_count >= SPRITE_STACK_SIZE)
         return;
+    NE_SpriteSetParams(sprite, 0xFF, DS.sprite_count, 0xffffff);
     NE_SpriteSetPriority(sprite, (int)index);
     NE_SpriteSetPos(
         sprite, 
-        transform.position.x - anchor.x, 
-        transform.position.y - anchor.y
+        transform.position.x - (int)(anchor.x * transform.scale), 
+        transform.position.y - (int)(anchor.y * transform.scale)
     );
     NE_SpriteSetRot(
       sprite,
       floattof32(transform.angle)
     );
-
-    NE_SpriteSetScaleI(
+    /*
+    NE_SpriteSetScale(
       sprite,
-      floattof32(transform.scale)
+      transform.scale
     );
-
+    */
     int u = (uv_dimensions.x == 0) ? dimensions.x : uv_dimensions.x; 
     int v = (uv_dimensions.y == 0) ? dimensions.y : uv_dimensions.y;
 
@@ -386,8 +387,8 @@ void NitroSprite::Draw()
 
     NE_SpriteSetSize(
       sprite,
-      dimensions.x,
-      dimensions.y
+      (int)(dimensions.x * transform.scale),
+      (int)(dimensions.y * transform.scale)
     );
     DS.sprites[DS.sprite_count] = sprite;
     DS.sprite_count ++;
@@ -445,7 +446,7 @@ void Draw3DScene(void *args)
   NE_2DViewInit();
   for(int i = 0; i < ds->sprite_count; i++)
   {
-    NE_SpriteDraw(ds->sprites[i]); 
+    NE_SpriteDraw(ds->sprites[i]);
   }
   ds->sprite_count = 0;
 }

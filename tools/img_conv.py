@@ -32,7 +32,7 @@ def main():
     # Ensure img2ds is available in PATH
     img2ds_cmd = [
         "python", 
-        "/opt/wonderful/thirdparty/blocksds/external/nitro-engine/tools/img2ds/img2ds.py", 
+        "C:/msys64/opt/wonderful/thirdparty/blocksds/external/nitro-engine/tools/img2ds/img2ds.py", 
         "--input", image_file, 
         "--output", output_dir, 
         "--name", base_name, "--f"]
@@ -42,7 +42,8 @@ def main():
     print(f"Running command: {' '.join(img2ds_cmd)}")
 
     try:
-        subprocess.run(img2ds_cmd, check=True)
+        # subprocess.run(img2ds_cmd, check=True)
+        os.system( ' '.join(img2ds_cmd) )
         print("Conversion successful.")
     except subprocess.CalledProcessError as e:
         print(f"Error during conversion: {e}")

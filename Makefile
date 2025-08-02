@@ -120,7 +120,7 @@ PNG_TEXTURES := $(wildcard models/*.png)
 TEX_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_tex.bin,$(PNG_TEXTURES))
 #PAL_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_pal.bin,$(PNG_TEXTURES))
 WAV_FILES    := $(wildcard songs/*.wav)
-RAW_AUDIO    := $(patsubst songs/%.wav,$(NITROFSDIR)/songs/%.raw, $(WAV_FILES))
+RAW_AUDIO    := $(patsubst songs/%.wav, $(NITROFSDIR)/songs/%.raw, $(WAV_FILES))
 
 # Compiler and linker flags
 # -------------------------
@@ -292,7 +292,7 @@ $(NITROFSDIR)/models/%_tex.bin: models/%.png models/%.txt
 
 $(NITROFSDIR)/songs/%.raw: songs/%.wav 
 	@echo "Converting song"
-	ffmpeg -i $< -ar 11025 -ac 1 -f u8 -map_metadata -1 $@ 
+	yes | ffmpeg -i $< -ar 11025 -ac 1 -f s8 -map_metadata -1 $@
 	# ffmpeg -i $< -ar 11025 -ac 1 -f u8 -acodec pcm_s16le $@ 
 
 ifneq ($(SOURCES_AUDIO),)

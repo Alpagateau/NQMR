@@ -8,7 +8,7 @@
 #include "nqmt_fs.hpp"
 
 #define AUDIO_BUFFER_LEN 1216
-#define AUDIO_SAMPLE_RATE 22050
+#define AUDIO_SAMPLE_RATE 11025 //22050
 
 /*This header is responsible for all audio, from streaming to simple sounds*/
 

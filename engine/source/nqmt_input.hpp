@@ -10,7 +10,7 @@ namespace NQMT
 void UpdateInputs();
 
 bool Pressed(u16 button);
-bool isButtonJustPressed(u16 button);
+bool JustPressed(u16 button);
 bool isButtonReleased(u16 button);
 bool isButtonJustReleased(u16 button);
 
