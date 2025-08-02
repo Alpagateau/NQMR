@@ -21,8 +21,9 @@ struct __attribute__((__packed__)) event {
 class EventHandler
 {
 public:
-  //EventHandler();
+  EventHandler();
   EventHandler(const char* path, u8 capacity, event* buf);
+  void Init(const char* path, u8 capacity, event* buf);
   FILE* source;
   u16 grace;
   u8 size;

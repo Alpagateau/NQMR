@@ -1,14 +1,7 @@
-extern "C"{
-#include "title.h"
-#include "arrows.h"
-#include "tiny_fat_luigi.h"
-}
 #include <nds.h>
 #include "nqme_engine.hpp"
 #include "nqmt.hpp"
-
-#define NUM_ARROWS 32
-#define EVENT_BUFFER_SIZE 6
+#include "gameplay.hpp"
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
@@ -17,11 +10,7 @@ extern "C"{
 
 int main( void ) {
 
-	u8 state = STATE_MAIN_MENU;
-
-	int X_Positions[5]       = {-32, 32, 94, 168, 232};
-	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
-	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
+	u8 state = STATE_GAMEPLAY;
 
 	videoSetMode(MODE_0_3D);
 	videoSetModeSub(MODE_0_2D);
@@ -39,130 +28,12 @@ int main( void ) {
   printf("= INITIALISATION =\n");
 	NQME::InitNQME();
 	printf("==================\n");
- 
-	NQME::BGHeader title_screen_bg 
-	{
-		.tiles = (void*)titleTiles,
-		.tileSize = titleTilesLen,
-		.map = (void*)titleMap,
-		.mapSize = titleMapLen,
-	};
-	
-	NQME::SetBackgroundSub(title_screen_bg);
-	NQME::SetBackgroundPaletteSub((void*)titlePal, titlePalLen);
 
-	NQME::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
+	//TODO Sprite Pools
+	//TODO Material Pools (or preload a handful)
 
-	NQME::SpriteHeader ArrowHeader((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
-	NQME::Sprite2D arrow_sprites[EVENT_BUFFER_SIZE];
-  NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
-	NQME::event arrws[EVENT_BUFFER_SIZE];
-  
-	NQME::NitroSprite target_arrows[4];
-  NE_Material *arrows_mat = NE_MaterialCreate();
-	NE_Palette *arrows_pal = NE_PaletteCreate();
- 
-  NE_MaterialTexLoadFAT(
-    arrows_mat, 
-    NE_PAL16, 
-    32, 32*4, 
-    NE_TEXTURE_COLOR0_TRANSPARENT, 
-    "models/arrows_tex.bin");	
-
-  NE_PaletteLoadFAT(arrows_pal, "models/arrows_pal.bin", NE_PAL16);
-  NE_MaterialSetPalette(arrows_mat, arrows_pal);
-	for(int i = 0; i < 4; i++)
-	{
-		target_arrows[i].uv_position.y = 32 * i;
-		target_arrows[i].anchor = (Vector2i){16, 16};
-		target_arrows[i].transform.position = {X_Positions[i+1],  16};
-		target_arrows[i].dimensions = {32, 32};
-		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
-	}
-
-  for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
- 	{
-   	arrws[i] = (NQME::event){0};
-		arrow_sprites[i].SetHeader(ArrowHeader);
-		arrow_sprites[i].anchor = (Vector2i){16, 16};
-		arrow_sprites[i].Update();
-
-    top_arrows[i].dimensions = {32, 32};
-    top_arrows[i].anchor.x = 16;
-    top_arrows[i].anchor.y =  16;
-    NE_SpriteSetMaterial(top_arrows[i].sprite, arrows_mat);
-  }	
-	
-  NQME::LoadSong("songs/khali.raw");
-	NQME::PlayStream();
-  	
-  NQME::EventHandler eh( "bms/khali.bbm", EVENT_BUFFER_SIZE, arrws);
-	eh.grace = 64;
-	int frame = 0;
-	
- 	NE_Material *player_mat = NE_MaterialCreate();
-	NE_Palette *player_pal  = NE_PaletteCreate();
-	NE_MaterialTexLoadFAT(
-    player_mat, 
-    NE_PAL256, 
-    512, 256, 
-    NE_TEXTURE_COLOR0_TRANSPARENT, 
-    "models/spritesheet_small_tex.bin"
-  );
-  NE_PaletteLoadFAT(player_pal, "models/spritesheet_small_pal.bin", NE_PAL256);
-  NE_MaterialSetPalette(player_mat, player_pal);
-
-  NE_Camera *camera = NE_CameraCreate();
-  NE_CameraSet(camera,
-            -8, 0, 0,  // Position
-             0, 0, 0,  // Look at
-             0, 1, 0); // Up direction
-	
-  NQME::UseCamera(camera);
-  NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
-	NQME::NitroSprite player(64, 128);
-  
-	NE_SpriteSetMaterial(player.sprite, player_mat);
-
-  player.transform.position = (Vector2i){-10, 0};
-  Vector2i idle_frames[] = {{0, 0}, {64, 0}, {128, 0}, {192, 0} };
-
-	NQME::NSAnimation idle = (NQME::NSAnimation)
-                            {
-                                .size = 4,
-                                .fpf = 8,
-                                .frames = idle_frames 
-                            };
-    
-  Vector2i ollie_frames[] = {{0, 128}, {64, 128}, {128, 128}, {192, 128} };
-	NQME::NSAnimation ollie = (NQME::NSAnimation)
-                            {
-                                .size = 4,
-                                .fpf = 8,
-                                .frames = ollie_frames 
-                            }; 
-    
-  Vector2i kick_frames[] = {{256, 0}, {256 + 64, 0}, {256 + 128, 0}, {256 + 192, 0} };
-	NQME::NSAnimation kick = (NQME::NSAnimation)
-                            {
-                                .size = 4,
-                                .fpf = 8,
-                                .frames = kick_frames 
-                            };
-    
-  Vector2i shove_frames[] = {{256, 128}, {256 + 64, 128}, {256 + 128, 128}, {256 + 192, 128} };
-	NQME::NSAnimation shove = (NQME::NSAnimation)
-                        	{
-                            	.size = 4,
-                              .fpf = 8,
-                              .frames = shove_frames 
-                          };
-	
-  NQME::AnimatedSprite player_anim(&player);
-  player_anim.Play(&idle);
-  player.index = 1;
-
-	NE_MainScreenSetOnBottom();
+	Gameplay gameplay;
+	gameplay.Start();
 
 	while(1)
 	{
@@ -176,47 +47,12 @@ int main( void ) {
 
 		//Main Gameplay
 		if(state == STATE_GAMEPLAY){
-			frame++;
-
-    	NQME::UpdateInputs(); 
-    	for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
-   	 	{
-		  	arrow_sprites[i]._SetPosition(	
-			  	X_Positions[arrws[i].channel],
-					(-1 * (frame - arrws[i].time_start)) + 16
-				);
-      	top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
-      	top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
-      	top_arrows[i].uv_position = {0, 32 * (arrws[i].channel - 1)};
-      	top_arrows[i].Draw();
-		  	arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
-				arrow_sprites[i].Update();
-    	}
-		
-		
-			for(int i = 0; i < 4; i++)
-			{
-				if(NQME::JustPressed(controls[i]))
-				{
-					if(pointsForKey(i+1, eh) == 0)
-					{
-						target_arrows[i].transform.scale = 0.8;
-					}
-				}
-				else 
-				{
-					target_arrows[i].transform.scale = 1.0;
-				}
-				target_arrows[i].Draw();
-			}
-
-   		eh.Update(frame);
-    	player_anim.Update();
-    	
+			gameplay.Update();
 		}
 		NQME::UpdateGraphics();
 		mmStreamUpdate();
 	}
-	
+
+	gameplay.Cleanup();
 	return 0;
 }

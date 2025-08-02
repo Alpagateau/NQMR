@@ -18,6 +18,7 @@ struct NSAnimation
 class AnimatedSprite
 {
 public:
+  AnimatedSprite();
   AnimatedSprite(NitroSprite *ssprite);
   NitroSprite *sprite;
   u8 framecount = 0;

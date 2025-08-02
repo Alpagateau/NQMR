@@ -189,6 +189,10 @@ void Sprite2D::Update()
         ); // Mosaic
 }
 
+SpriteHeader::SpriteHeader()
+{
+}
+
 SpriteHeader::SpriteHeader(  
     void *tiles,
     u32 tileSize,
@@ -283,6 +287,19 @@ u8 SpriteHeader::GetHeight()
     }
     return output;
 }
+
+void SpriteHeader::Load(
+    void *tiles,
+    u32 tileSize, 
+    u8 _type)
+{
+    SpriteSetting s = decodeSS(_type);
+    type = _type;
+    addr = oamAllocateGfx(&oamSub, s.ss, s.scf);
+    // Copy tiles to the space assigned to this sprite
+    dmaCopy(tiles, addr, tileSize);
+}
+
 
 SpriteAllocater::SpriteAllocater()
 {

@@ -75,6 +75,7 @@ public:
     u32 tileSize;
     u16 *addr;
     u8 type;
+    SpriteHeader();
     SpriteHeader(
         void *tiles,
         u32 tileSize, 
@@ -82,6 +83,10 @@ public:
     ~SpriteHeader();
     u8 GetWidth();
     u8 GetHeight();
+    void Load(
+        void *tiles,
+        u32 tileSize, 
+        u8 type);
 };
 
 class SpriteAllocater

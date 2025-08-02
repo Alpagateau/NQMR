@@ -3,6 +3,8 @@
 namespace NQME
 {
 
+AnimatedSprite::AnimatedSprite(){}
+
 AnimatedSprite::AnimatedSprite(NitroSprite *ssprite)
 {
   sprite = ssprite;

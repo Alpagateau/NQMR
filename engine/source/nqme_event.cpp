@@ -3,9 +3,26 @@
 namespace NQME 
 {
 
-//template class CircularBuffer<event>;
+EventHandler::EventHandler()
+{
+}
 
 EventHandler::EventHandler(
+  const char *path, 
+  u8 capacity, 
+  event* buf
+)
+{
+  source = fopen(path, "rb");
+  if(source != NULL){ 
+    time = 0;
+    buffer = buf;
+    size = capacity;
+    fread((void*) buffer, sizeof(event), size, source);
+  }
+}
+
+void EventHandler::Init(
   const char *path, 
   u8 capacity, 
   event* buf
