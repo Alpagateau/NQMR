@@ -16,9 +16,7 @@ int main( void ) {
 
 	int X_Positions[5]       = {-32, 32, 94, 168, 232};
 	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
-  int ns_arrw_positions[5] = {  0,  0, 32,  64,  96};
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
-
 
 	videoSetMode(MODE_0_3D);
 	videoSetModeSub(MODE_0_2D);
@@ -27,22 +25,16 @@ int main( void ) {
 		VRAM_A_MAIN_BG, 
 		VRAM_B_MAIN_SPRITE, 
 		VRAM_C_SUB_BG,
-		VRAM_D_SUB_SPRITE);
+		VRAM_D_SUB_SPRITE
+  );
 	
 	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
 	consoleDebugInit(DebugDevice_NOCASH);
 	printf("==================\n");
-  	printf("= INITIALISATION =\n");
+  printf("= INITIALISATION =\n");
 	NQMT::InitNQMT();
 	printf("==================\n");
-  	printf("Size of event : %d\n", sizeof(NQMT::event));
-	NQMT::listDir();
-
-  	for(int i = 0; i < 100; i++)
-  	{
-    	swiWaitForVBlank();
-  	}
-  
+ 
 	NQMT::BGHeader title_screen_bg 
 	{
 		.tiles = (void*)titleTiles,
@@ -64,7 +56,6 @@ int main( void ) {
 	NQMT::NitroSprite target_arrows[4];
   NE_Material *arrows_mat = NE_MaterialCreate();
 	NE_Palette *arrows_pal = NE_PaletteCreate();
-
  
   NE_MaterialTexLoadFAT(
     arrows_mat, 
@@ -190,7 +181,7 @@ int main( void ) {
 		{
 			if(NQMT::Pressed(controls[i]))
 			{
-				if(pointsForKey(i+1, frame) == 0)
+				if(pointsForKey(i+1, eh) == 0)
 				{
 					target_arrows[i].transform.scale = 0.8;
 				}
