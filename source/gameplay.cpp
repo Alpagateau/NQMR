@@ -41,7 +41,7 @@ void Gameplay::Start()
   
   NQME::UseCamera(camera);
   NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
-      
+  
 	for(int i = 0; i < 4; i++)
 	{
 		target_arrows[i].uv_position.y = 32 * i;
@@ -51,11 +51,14 @@ void Gameplay::Start()
 		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
 	}
 
+  arrow_sprites = sprite_pool;
+
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
  	{
    	arrws[i] = (NQME::event){0};
 		arrow_sprites[i].SetHeader(ArrowHeader);
 		arrow_sprites[i].anchor = (Vector2i){16, 16};
+    arrow_sprites[i].visible = true;
 		arrow_sprites[i].Update();
 
     top_arrows[i].dimensions = {32, 32};
@@ -128,4 +131,10 @@ void Gameplay::Cleanup()
   NE_MaterialDelete(player_mat);
   NE_PaletteDelete(arrows_pal);
   NE_PaletteDelete(player_pal);
+
+  for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
+ 	{
+    arrow_sprites[i].visible = false;
+		arrow_sprites[i].Update();
+  }
 }

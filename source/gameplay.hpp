@@ -17,7 +17,7 @@ public:
 	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
 
-   NQME::Sprite2D arrow_sprites[EVENT_BUFFER_SIZE];
+   NQME::Sprite2D *arrow_sprites;
    NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
    NQME::NitroSprite player;
    NQME::AnimatedSprite player_animation;
@@ -79,6 +79,7 @@ public:
                           };
    int frame = 0;
 
+   explicit Gameplay(NQME::Sprite2D *pool) : Scene(pool) {};
    void Start() override;
    void Update() override;
    void Cleanup() override;

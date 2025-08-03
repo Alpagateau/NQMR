@@ -8,6 +8,8 @@
 #define STATE_MAIN_MENU 1
 #define STATE_GAMEPLAY  3
 
+NQME::Sprite2D sprite_pool[SPRITE_POOL_SIZE];
+
 int main( void ) {
 
 	u8 state = STATE_GAMEPLAY;
@@ -29,26 +31,19 @@ int main( void ) {
 	NQME::InitNQME();
 	printf("==================\n");
 
-	//TODO Sprite Pools
 	//TODO Material Pools (or preload a handful)
+	NQME::SceneManager scene_manager;
+	Gameplay gameplay(sprite_pool);
+	
+	NQME::Scene *scene_pool[] = {&gameplay};
 
-	Gameplay gameplay;
+	scene_manager.scenes = scene_pool;
 	gameplay.Start();
 
 	while(1)
 	{
 	  NE_WaitForVBL((NE_UpdateFlags)0);
-
-		//Main Menu
-		if(state == STATE_MAIN_MENU)
-		{
-			//NE_MainScreenSetOnBottom();
-		}
-
-		//Main Gameplay
-		if(state == STATE_GAMEPLAY){
-			gameplay.Update();
-		}
+		scene_manager.Update();
 		NQME::UpdateGraphics();
 		mmStreamUpdate();
 	}
