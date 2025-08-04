@@ -174,7 +174,7 @@ public:
 
 struct DrawStack 
 {
-  NE_Camera *camera; 
+  NE_Camera *camera = nullptr; 
   NE_Model *models[MODEL_STACK_SIZE];
   NE_Sprite *sprites[SPRITE_STACK_SIZE];
   int model_count;

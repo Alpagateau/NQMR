@@ -23,12 +23,14 @@ namespace NQME
   {
   public:
     SceneManager();
-    Scene **scenes;
     u8 current = 0;
     u8 next = 0;
-    void SwitchTo(u8 scene_id);
+    Scene **scenes = nullptr;
+    void SwitchTo(u8 next_scene);
+    void Start();
     void Update();
   };
+
 }
 
 #endif

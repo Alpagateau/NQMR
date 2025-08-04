@@ -1,6 +1,9 @@
 #include <nds.h>
 #include "nqme_engine.hpp"
 
-#define SPRITE_POOL_SIZE 32
+#define SPRITE_POOL_SIZE 16
+
+#define MAIN_MENU 0
+#define GAMEPLAY  1
 
 int pointsForKey(u8 channel, NQME::EventHandler &handler);

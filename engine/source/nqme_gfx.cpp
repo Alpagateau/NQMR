@@ -77,15 +77,12 @@ int SetBackgroundMain(BGHeader header)
     return 0;
 }
 
-
 int SetBackgroundPaletteMain(void* source, u32 size)
 {
     //dmaCopy(source, BG_PALETTE, size);
     dmaCopy(source, BG_PALETTE_SUB, size);
     return 0;
 }
-
-
 
 int InitSprites()
 {
@@ -472,7 +469,8 @@ void UpdateGraphics()
 void Draw3DScene(void *args)
 {
   DrawStack *ds = (DrawStack*)args;
-  NE_CameraUse(ds->camera);
+  if(ds->camera != nullptr)
+    NE_CameraUse(ds->camera);
   for(int i = 0; i < ds->model_count; i++)
   {
     NE_ModelDraw(ds->models[i]); 

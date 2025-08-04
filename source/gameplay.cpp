@@ -1,5 +1,6 @@
 #include "gameplay.hpp"
 
+
 void Gameplay::Start()
 {
   NQME::SetBackgroundSub(title_screen_bg);

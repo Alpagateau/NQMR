@@ -2,6 +2,7 @@
 
 namespace NQME
 {
+  
   Scene::Scene(NQME::Sprite2D *pool, NQME::SceneManager *scene_manager)
   {
     sprite_pool = pool;
@@ -26,20 +27,29 @@ namespace NQME
 
   SceneManager::SceneManager()
   {
+    printf("Scene System Enabled\n");
   }
   
-  void SceneManager::SwitchTo(u8 scene_id)
+  void SceneManager::SwitchTo(u8 next_scene)
   {
-    next = scene_id;
+    next = next_scene;
+    printf("Going to scene #%d\n", next);
+  }
+
+  void SceneManager::Start()
+  {
+    next = current;
+    scenes[current]->Start();
   }
 
   void SceneManager::Update()
   {
     scenes[current]->Update();
-    if(current == next)
+    if(next == current)
       return;
     scenes[current]->Cleanup();
     scenes[next]->Start();
     current = next;
   }
+  
 }

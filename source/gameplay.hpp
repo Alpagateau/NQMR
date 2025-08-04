@@ -10,6 +10,7 @@ extern "C"{
 #define EVENT_BUFFER_SIZE 6
 #define NUM_ARROWS 32
 
+
 class Gameplay: public NQME::Scene
 {
 public:
@@ -79,7 +80,7 @@ public:
                           };
    int frame = 0;
 
-   explicit Gameplay(NQME::Sprite2D *pool) : Scene(pool) {};
+   explicit Gameplay(NQME::Sprite2D *pool, NQME::SceneManager *scm) : Scene(pool, scm) {};
    void Start() override;
    void Update() override;
    void Cleanup() override;
