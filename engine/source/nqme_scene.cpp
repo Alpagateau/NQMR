@@ -3,9 +3,10 @@
 namespace NQME
 {
   
-  Scene::Scene(NQME::Sprite2D *pool, NQME::SceneManager *scene_manager)
+  Scene::Scene(Sprite2D *pool, NitroSprite *pool2 ,SceneManager *scene_manager)
   {
     sprite_pool = pool;
+    nitro_pool = pool2;
     sm = scene_manager;
   }
 

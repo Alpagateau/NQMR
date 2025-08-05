@@ -7,7 +7,7 @@ extern "C"{
 #include "nqme_engine.hpp"
 #include "nqmt.hpp"
 
-#define EVENT_BUFFER_SIZE 6
+#define EVENT_BUFFER_SIZE 10
 #define NUM_ARROWS 32
 
 
@@ -26,15 +26,7 @@ public:
 	NQME::event arrws[EVENT_BUFFER_SIZE];
   
 	NQME::NitroSprite target_arrows[4];
-
-   NQME::BGHeader title_screen_bg 
-	   {
-		   .tiles = (void*)titleTiles,
-		   .tileSize = titleTilesLen,
-		   .map = (void*)titleMap,
-		   .mapSize = titleMapLen,
-	   };
-
+   
    NQME::SpriteHeader ArrowHeader;
 
    NE_Material *arrows_mat;
@@ -80,7 +72,10 @@ public:
                           };
    int frame = 0;
 
-   explicit Gameplay(NQME::Sprite2D *pool, NQME::SceneManager *scm) : Scene(pool, scm) {};
+   explicit Gameplay(
+      NQME::Sprite2D     *pool,
+      NQME::NitroSprite  *pool2,
+      NQME::SceneManager *scm) : Scene(pool ,pool2 , scm) {};
    void Start() override;
    void Update() override;
    void Cleanup() override;

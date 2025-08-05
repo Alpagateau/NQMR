@@ -1,19 +1,27 @@
 #include "gameplay.hpp"
 
+extern NQME::BGHeader title_screen_bg;
 
 void Gameplay::Start()
 {
+
+  printf("Gameplay settup \n");
+  NQME::stopStream();
+  printf("Setting up background\n");
   NQME::SetBackgroundSub(title_screen_bg);
 	NQME::SetBackgroundPaletteSub((void*)titlePal, titlePalLen);
   NQME::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
-
+  
+  printf("Loading ArrowHeader\n");
   ArrowHeader.Load((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
 
+  printf("Creating materials\n");
   arrows_mat = NE_MaterialCreate();
 	arrows_pal = NE_PaletteCreate();
   player_mat = NE_MaterialCreate();
 	player_pal  = NE_PaletteCreate();
 
+  printf("Loading arrow material\n");
   NE_MaterialTexLoadFAT(
     arrows_mat, 
     NE_PAL16, 
@@ -23,6 +31,7 @@ void Gameplay::Start()
   NE_PaletteLoadFAT(arrows_pal, "models/arrows_pal.bin", NE_PAL16);
   NE_MaterialSetPalette(arrows_mat, arrows_pal);
   
+  printf("Loading player spritesheet\n");
   NE_MaterialTexLoadFAT(
     player_mat, 
     NE_PAL256, 
@@ -30,19 +39,26 @@ void Gameplay::Start()
     NE_TEXTURE_COLOR0_TRANSPARENT, 
     "models/spritesheet_small_tex.bin"
   );
+
   NE_PaletteLoadFAT(player_pal, "models/spritesheet_small_pal.bin", NE_PAL256);
   NE_MaterialSetPalette(player_mat, player_pal);
 
+  printf("Creating camera\n");
   camera = NE_CameraCreate();
 
   NE_CameraSet(camera,
             -8, 0, 0,  // Position
              0, 0, 0,  // Look at
              0, 1, 0); // Up direction
-  
   NQME::UseCamera(camera);
   NE_LightSet(0, NE_White, -0.5, -0.5, -0.5);
   
+  printf("Seeting some pointers\n");
+  arrow_sprites = sprite_pool;
+  //top_arrows = nitro_pool;
+  //target_arrows = &(nitro_pool[EVENT_BUFFER_SIZE]);
+
+  printf("Setting target arrows \n");
 	for(int i = 0; i < 4; i++)
 	{
 		target_arrows[i].uv_position.y = 32 * i;
@@ -52,7 +68,7 @@ void Gameplay::Start()
 		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
 	}
 
-  arrow_sprites = sprite_pool;
+  printf("Setting up movement arrows\n");
 
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
  	{
@@ -68,6 +84,7 @@ void Gameplay::Start()
     NE_SpriteSetMaterial(top_arrows[i].sprite, arrows_mat);
   }
 
+  printf("Setting up Player Chatacter\n");
   player.dimensions = {64, 128};
   NE_SpriteSetMaterial(player.sprite, player_mat);
   player.transform.position = (Vector2i){-10, 0};

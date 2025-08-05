@@ -109,8 +109,8 @@ ifneq ($(AUDIODIRS),)
     endif
 endif
 
-SOURCES_S	  := $(shell find -L $(SOURCEDIRS) -name "*.s")
-SOURCES_C	  := $(shell find -L $(SOURCEDIRS) -name "*.c")
+SOURCES_S	    := $(shell find -L $(SOURCEDIRS) -name "*.s")
+SOURCES_C	    := $(shell find -L $(SOURCEDIRS) -name "*.c")
 SOURCES_CPP	  := $(shell find -L $(SOURCEDIRS) -name "*.cpp")
 
 OBJ_MODELS   := $(wildcard models/*.obj)
@@ -121,6 +121,10 @@ TEX_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_tex.bin,$(PNG_TEX
 #PAL_TEXTURES := $(patsubst models/%.png,$(NITROFSDIR)/models/%_pal.bin,$(PNG_TEXTURES))
 WAV_FILES    := $(wildcard songs/*.wav)
 RAW_AUDIO    := $(patsubst songs/%.wav, $(NITROFSDIR)/songs/%.raw, $(WAV_FILES))
+
+FONT_IMG     := $(wildcard fonts/*.png)
+FONT_GRF     := $(patsubst fonts/%.png, $(NITROFSDIR)/fonts/%.grf, $(FONT_IMG))
+
 
 # Compiler and linker flags
 # -------------------------
@@ -198,7 +202,7 @@ ifneq ($(SOURCES_AUDIO),)
 endif
 
 # Make the NDS ROM depend on the filesystem only if it is needed
-$(ROM): $(RAW_AUDIO) $(TEX_TEXTURES) $(BIN_MODELS) $(NITROFSDIR) 
+$(ROM): $(FONT_GRF) $(RAW_AUDIO) $(TEX_TEXTURES) $(BIN_MODELS) $(NITROFSDIR) 
 endif
 
 # Combine the title strings
@@ -294,6 +298,10 @@ $(NITROFSDIR)/songs/%.raw: songs/%.wav
 	@echo "Converting song"
 	yes | ffmpeg -i $< -ar 11025 -ac 1 -f s8 -map_metadata -1 $@
 	# ffmpeg -i $< -ar 11025 -ac 1 -f u8 -acodec pcm_s16le $@ 
+
+$(NITROFSDIR)/fonts/%.grf: fonts/%.png 
+	@echo "Converting font"
+	grit $< -gx -gb -gB4 -gT000000 -o $@
 
 ifneq ($(SOURCES_AUDIO),)
 
