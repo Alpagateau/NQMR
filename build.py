@@ -1,4 +1,69 @@
 from architectds import *
+import os 
+from os.path import isfile, join, splitext
+from pathlib import Path
+
+class AudioBinary(GenericBinary):
+  ASSET_BARRIER_AUDIO = 'assets_audio_flag'
+
+  def __init__(self):
+    super().__init__(self.ASSET_BARRIER_AUDIO)
+    self.out_assets_path = 'build/nitrofs/songs'
+    self.add_dir_target(self.out_assets_path)
+    self.target_files = []
+  
+  def add_ffmpeg_conversion(self, in_dirs, out_dir='', extensions=('.mp3', '.wav', '.ogg')):
+    full_out_dir = os.path.join(self.out_assets_path, out_dir)
+        
+    in_out_files = []
+    
+    for in_dir in in_dirs:
+      in_files = gen_input_file_list(in_dir, extensions)
+      in_out_files.extend(gen_out_file_list(in_files, in_dir, full_out_dir, '', '.raw'))
+
+    for in_out_file in in_out_files:
+      out_path_dir = get_parent_dir(in_out_file.out_path)
+      self.add_dir_target(out_path_dir)
+            
+      in_path = in_out_file.in_path
+      out_path = in_out_file.out_path
+      self.target_files.append(out_path)
+      # yes | ffmpeg -i $< -ar 11025 -ac 1 -f s8 -map_metadata -1 $@
+      self.print(
+        f'build {out_path}: ffmpeg_convert {in_path} || {out_path_dir}\n'
+        f'  command = yes | ffmpeg -i {in_path} -ar 11025 -ac 1 -f s8 -map_metadata -1 {out_path}\n'
+        '\n'
+      )
+  
+  def _gen_rule_assets_barrier(self):
+    '''
+        This generates a common phony target to all the files inside the
+        filesystem. This phony target can be used instead of all the files when
+        another target depends on the filesystem as a whole, like the NDS ROM.
+    '''
+    flag_path = self.flag_assets_name
+    file_paths_str = ' '.join(self.target_files)
+    self.print(
+        f'build {flag_path}: phony {file_paths_str}\n'
+        '\n'
+    )
+
+  def _gen_rules_tools(self):
+    self.print(
+      'rule ffmpeg_convert\n'
+      '  command = yes | ffmpeg -i $in -ar 11025 -ac 1 -f s8 -map_metadata -1 $out\n'
+      '\n'
+    )
+    
+  def generate_image(self):
+    self._gen_rule_assets_barrier()
+
+
+audio_bin = AudioBinary()
+audio_bin._gen_rules_tools()
+audio_bin.add_ffmpeg_conversion(['songs'])
+print("Added audio binary")
+audio_bin.generate_image()
 
 nitrofs = NitroFS()
 nitrofs.add_grit(['models'], "models")
@@ -16,11 +81,12 @@ arm9.generate_elf()
 
 nds = NdsRom(
   nitrofsdirs=["nitrofiles"],
-  binaries=[arm9, nitrofs],
+  binaries=[arm9, audio_bin, nitrofs],
   game_title="NQMT",
   game_subtitle="Not Quite My Tempo",
   game_author="Martin Nadaud",
   game_icon="icon.bmp",
 )
+
 nds.generate_nds()
 nds.run_command_line_arguments()

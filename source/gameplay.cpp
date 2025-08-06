@@ -79,7 +79,7 @@ void Gameplay::Start()
 
   player.index = 1;
 
-  NQME::LoadSong("songs/khali.raw");
+  NQME::LoadSong("songs/khali.wav.raw");
 	NQME::PlayStream();
 
   eh.Init( "bms/khali.bbm", EVENT_BUFFER_SIZE, arrws);

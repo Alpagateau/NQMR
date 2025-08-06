@@ -26,7 +26,7 @@ void MainMenu::Start()
   background_sprite.dimensions = {256, 236};
   background_sprite.transform.position = {0,0};
 
-  NQME::LoadSong("songs/ouverture.raw");
+  NQME::LoadSong("songs/ouverture.wav.raw");
 	NQME::PlayStream();
 }
 
