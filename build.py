@@ -1,7 +1,9 @@
 from architectds import *
 import os 
+from mason import GenericConversion
 from os.path import isfile, join, splitext
 from pathlib import Path
+import sys
 
 class AudioBinary(GenericBinary):
   ASSET_BARRIER_AUDIO = 'assets_audio_flag'
@@ -58,7 +60,6 @@ class AudioBinary(GenericBinary):
   def generate_image(self):
     self._gen_rule_assets_barrier()
 
-
 audio_bin = AudioBinary()
 audio_bin._gen_rules_tools()
 audio_bin.add_ffmpeg_conversion(['songs'])
@@ -67,21 +68,29 @@ audio_bin.generate_image()
 
 nitrofs = NitroFS()
 nitrofs.add_grit(['models'], "models")
+nitrofs.add_grit(["fonts"], "fonts")
+nitrofs.add_bmfont_fnt(["fonts"], "fonts")
 nitrofs.generate_image()
 
 arm9 = Arm9Binary(
   sourcedirs=['source', 'engine/source'],
   includedirs=['source', 'engine/source'],
-  libs=['nds9', 'mm9', 'NE', 'c'],
-  libdirs=['${BLOCKSDS}/libs/libnds', '${BLOCKSDS}/libs/maxmod', '${BLOCKSDSEXT}/nitro-engine']
+  libs=['nds9', 'mm9', 'dsf','NE', 'c'],
+  libdirs=[
+    '${BLOCKSDS}/libs/libnds', 
+    '${BLOCKSDS}/libs/maxmod', 
+    '${BLOCKSDSEXT}/nitro-engine',
+    '${BLOCKSDSEXT}/libdsf'
+    ]
   )
 
 arm9.add_grit(["gfx"], "gfx")
+
 arm9.generate_elf()
 
 nds = NdsRom(
   nitrofsdirs=["nitrofiles"],
-  binaries=[arm9, audio_bin, nitrofs],
+  binaries=[arm9,audio_bin, nitrofs],
   game_title="NQMT",
   game_subtitle="Not Quite My Tempo",
   game_author="Martin Nadaud",

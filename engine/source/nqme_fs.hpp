@@ -24,6 +24,6 @@ int initFS();
 * List files dans directories
 */
 int listDir();
-
+int listDir(const char *path);
 }
 #endif

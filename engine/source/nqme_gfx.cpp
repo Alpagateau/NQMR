@@ -483,6 +483,8 @@ void Draw3DScene(void *args)
     NE_SpriteDraw(ds->sprites[i]);
   }
   ds->sprite_count = 0;
+
+  NE_RichTextRender3D(0, "Hello World", 10, 10);
 }
 
 }
