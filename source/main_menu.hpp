@@ -1,7 +1,7 @@
 extern "C"{
-#include "title.h"
-#include "arrows.h"
-#include "tiny_fat_luigi.h"
+#include "gfx/title_png.h"
+#include "gfx/arrows_png.h"
+#include "gfx/tiny_fat_luigi_png.h"
 }
 #include "nqmt.hpp"
 

@@ -9,11 +9,11 @@ void Gameplay::Start()
   NQME::stopStream();
   printf("Setting up background\n");
   NQME::SetBackgroundSub(title_screen_bg);
-	NQME::SetBackgroundPaletteSub((void*)titlePal, titlePalLen);
-  NQME::SetSpritePalette((void*)arrowsPal, arrowsPalLen);
+	NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
+  NQME::SetSpritePalette((void*)arrows_pngPal, arrows_pngPalLen);
   
   printf("Loading ArrowHeader\n");
-  ArrowHeader.Load((void*)arrowsTiles, arrowsTilesLen, SQ32_256);
+  ArrowHeader.Load((void*)arrows_pngTiles, arrows_pngTilesLen, SQ32_256);
 
   printf("Creating materials\n");
   arrows_mat = NE_MaterialCreate();
@@ -22,26 +22,10 @@ void Gameplay::Start()
 	player_pal  = NE_PaletteCreate();
 
   printf("Loading arrow material\n");
-  NE_MaterialTexLoadFAT(
-    arrows_mat, 
-    NE_PAL16, 
-    32, 32*4, 
-    NE_TEXTURE_COLOR0_TRANSPARENT, 
-    "models/arrows_tex.bin");
-  NE_PaletteLoadFAT(arrows_pal, "models/arrows_pal.bin", NE_PAL16);
-  NE_MaterialSetPalette(arrows_mat, arrows_pal);
+  NE_MaterialTexLoadGRF(arrows_mat, arrows_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/arrows_png.grf");
   
   printf("Loading player spritesheet\n");
-  NE_MaterialTexLoadFAT(
-    player_mat, 
-    NE_PAL256, 
-    512, 256, 
-    NE_TEXTURE_COLOR0_TRANSPARENT, 
-    "models/spritesheet_small_tex.bin"
-  );
-
-  NE_PaletteLoadFAT(player_pal, "models/spritesheet_small_pal.bin", NE_PAL256);
-  NE_MaterialSetPalette(player_mat, player_pal);
+  NE_MaterialTexLoadGRF(player_mat, player_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/spritesheet_small_png.grf");
 
   printf("Creating camera\n");
   camera = NE_CameraCreate();

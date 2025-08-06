@@ -13,10 +13,10 @@ NQME::NitroSprite nitro_pool[SPRITE_POOL_SIZE];
 
 NQME::BGHeader title_screen_bg 
 	   {
-		   .tiles = (void*)titleTiles,
-		   .tileSize = titleTilesLen,
-		   .map = (void*)titleMap,
-		   .mapSize = titleMapLen,
+		   .tiles = (void*)title_pngTiles,
+		   .tileSize = title_pngTilesLen,
+		   .map = (void*)title_pngMap,
+		   .mapSize = title_pngMapLen,
 	   };
 
 int main( void ) {
@@ -37,6 +37,7 @@ int main( void ) {
   printf("= INITIALISATION =\n");
 	NQME::InitNQME();
 	printf("==================\n");
+	NQME::listDir();
 
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;
