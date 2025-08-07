@@ -6,10 +6,6 @@ void MainMenu::Start()
 {
   NE_MainScreenSetOnBottom();
 
-  NE_RichTextInit(0);
-  NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
-  NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
-
   NQME::SetBackgroundSub(title_screen_bg);
   NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
 

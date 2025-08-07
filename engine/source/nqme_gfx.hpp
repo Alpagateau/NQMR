@@ -129,8 +129,6 @@ private:
     Vector2i oldPos;
 };
 
-
-
 //3D Engine
 
 struct Transform 
@@ -170,6 +168,13 @@ public:
   NitroSprite();
   NitroSprite(int w, int h);
   void Draw();
+};
+
+struct Text
+{
+  u8 channel;
+  Vector2i pos;
+  char **text;
 };
 
 struct DrawStack 
