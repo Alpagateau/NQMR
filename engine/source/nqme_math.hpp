@@ -4,6 +4,9 @@ struct Vector2i
 {
     int x;
     int y;
+
+    Vector2i operator+(const Vector2i& other) const;
+    Vector2i operator-(const Vector2i& other) const;
 };
 
 struct Vector2s

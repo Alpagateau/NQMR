@@ -427,6 +427,20 @@ void NitroSprite::Draw()
     DS.sprite_count ++;
 }
 
+BasicText::BasicText()
+{
+    channel = 0;
+    text = "";
+}
+
+void BasicText::Draw()
+{
+    if(DS.text_count >= TEXT_STACK_SIZE)
+        return;
+    DS.texts[DS.text_count] = this;
+    DS.text_count++;
+}
+
 void StaticModel::Draw()
 {
   if(DS.model_count < MODEL_STACK_SIZE)
@@ -481,6 +495,17 @@ void Draw3DScene(void *args)
   for(int i = 0; i < ds->sprite_count; i++)
   {
     NE_SpriteDraw(ds->sprites[i]);
+  }
+  ds->sprite_count = 0;
+
+  for(int i = 0; i < ds->text_count; i++)
+  {
+    NE_RichTextRender3D(
+        ds->texts[i]->channel,
+        ds->texts[i]->text.c_str(),
+        ds->texts[i]->position.x,
+        ds->texts[i]->position.y        
+    );
   }
   ds->sprite_count = 0;
 }

@@ -22,6 +22,21 @@ void MainMenu::Start()
   background_sprite.dimensions = {256, 236};
   background_sprite.transform.position = {0,0};
 
+  NE_RichTextInit(0);
+  NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
+  NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
+
+  NQME::Theme my_theme = NQME::NewTheme("models/button_map_png.grf");
+
+  btn.label.text = "This is a Button";
+  btn.label.channel = 0;
+  btn.position = {100, 50};
+  btn.txt_offset = {5, 0};
+  btn.SetTheme(&my_theme);
+
+  HiText.text = "Hello Pierre";
+  HiText.position = {0, 0};
+
   NQME::LoadSong("songs/ouverture.wav.raw");
 	NQME::PlayStream();
 }
@@ -37,10 +52,10 @@ void MainMenu::Update()
   if(NQME::JustPressed(KEY_B))
   {
     printf("B pressed\n");
-    
-    NE_RichTextRenderMaterial(0, "HIII\nHIII\b oh noes", &background_mat, NULL);
   }
   background_sprite.Draw();
+  HiText.Draw();
+  btn.Draw();
 }
 
 void MainMenu::Cleanup()

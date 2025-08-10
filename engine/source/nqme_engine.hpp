@@ -10,6 +10,7 @@
 #include "nqme_input.hpp"
 #include "nqme_anim.hpp"
 #include "nqme_scene.hpp"
+#include "nqme_gui.hpp"
 
 namespace NQME
 {

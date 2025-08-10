@@ -38,8 +38,6 @@ int main( void ) {
 	NQME::InitNQME();
 	printf("==================\n");
 	NQME::listDir();
-	printf("==================\n");
-	NQME::listDir("fonts");
 
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;

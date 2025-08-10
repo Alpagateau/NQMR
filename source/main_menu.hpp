@@ -14,6 +14,9 @@ public:
   NE_Material *background_mat;
   NE_Palette *background_pal;
 
+  NQME::BasicText HiText;
+  NQME::SimpleButton btn;
+
   explicit MainMenu(
     NQME::Sprite2D *pool,
     NQME::NitroSprite *pool2, 

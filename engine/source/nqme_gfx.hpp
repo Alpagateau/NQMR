@@ -2,6 +2,8 @@
 #define NQME_GFX_H
 
 #include <nds.h>
+//Let's try this 
+#include <string>
 #include "nqme_math.hpp"
 #include "nqme_debug.hpp"
 #include <NEMain.h>
@@ -18,8 +20,11 @@
 */
 
 namespace NQME{
-#define MODEL_STACK_SIZE 10
+
+
+#define MODEL_STACK_SIZE  10
 #define SPRITE_STACK_SIZE 20
+#define TEXT_STACK_SIZE    5
 //Sprite types 
 #define SQ8_16      0
 #define SQ16_16     1
@@ -170,20 +175,25 @@ public:
   void Draw();
 };
 
-struct Text
+class BasicText
 {
+public:
+  std::string text;
+  Vector2i position;
   u8 channel;
-  Vector2i pos;
-  char **text;
+  BasicText();
+  void Draw();
 };
 
 struct DrawStack 
 {
   NE_Camera *camera = nullptr; 
-  NE_Model *models[MODEL_STACK_SIZE];
+  NE_Model  *models[MODEL_STACK_SIZE];
   NE_Sprite *sprites[SPRITE_STACK_SIZE];
+  BasicText *texts[TEXT_STACK_SIZE];
   int model_count;
   int sprite_count;
+  int text_count;
 };
 
 void Draw3DScene(void* args);
