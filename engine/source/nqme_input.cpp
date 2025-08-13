@@ -18,12 +18,12 @@ bool JustPressed(u16 button)
     return (keysDown() & button)!=0;
 }
 
-bool isButtonReleased(u16 button)
+bool Released(u16 button)
 {
     return (keysDown() & button) == 0;
 }
 
-bool isButtonJustReleased(u16 button)
+bool JustReleased(u16 button)
 {
     return (keysUp() & button)!=0;
 }
@@ -38,6 +38,6 @@ Vector2i getTouchPosition()
     pos.x = data.px;
     pos.y = data.py;
 
-    return pos;
+    return (Pressed(KEY_TOUCH) ? pos : (Vector2i){-1, -1});
 }
 }

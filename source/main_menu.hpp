@@ -8,14 +8,15 @@ extern "C"{
 class MainMenu: public NQME::Scene
 {
 public:
-
   NQME::NitroSprite background_sprite;
+  //NQME::NitroSprite cursor;
 
   NE_Material *background_mat;
   NE_Palette *background_pal;
 
   NQME::BasicText HiText;
   NQME::SimpleButton btn;
+  NQME::SimpleButton btn2;
 
   explicit MainMenu(
     NQME::Sprite2D *pool,

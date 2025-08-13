@@ -25,14 +25,30 @@ void MainMenu::Start()
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
-
+  
+  
+  
   NQME::Theme my_theme = NQME::NewTheme("models/button_map_png.grf");
 
-  btn.label.text = "This is a Button";
+  btn.label.text = "START";
   btn.label.channel = 0;
-  btn.position = {100, 50};
+  btn.position = {80, 25};
   btn.txt_offset = {5, 0};
+  btn.margin = {10, 0};
   btn.SetTheme(&my_theme);
+  btn.selected_current = true;
+  
+  btn2.label.text = "CREDITS";
+  btn2.label.channel = 0;
+  btn2.txt_offset = {5, 0};
+  btn2.margin = {10, 0};
+  btn2.position = {80, 60};
+  btn2.SetTheme(&my_theme);
+  btn2.selected_current = false;
+  
+  btn.down = &btn2;
+  btn2.up = &btn;
+
 
   HiText.text = "Hello Pierre";
   HiText.position = {0, 0};
@@ -44,7 +60,7 @@ void MainMenu::Start()
 void MainMenu::Update()
 {
   NQME::UpdateInputs();
-  if(NQME::Pressed(KEY_A))
+  if(btn.IsClicked())
   {
     printf("A pressed\n");
     sm->SwitchTo(1);
@@ -56,6 +72,10 @@ void MainMenu::Update()
   background_sprite.Draw();
   HiText.Draw();
   btn.Draw();
+  btn2.Draw();
+
+  btn.UpdateSelected();
+  btn2.UpdateSelected();
 }
 
 void MainMenu::Cleanup()

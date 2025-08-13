@@ -27,6 +27,22 @@ void SimpleButton::SetTheme(Theme *t)
   NE_SpriteSetMaterial(panel.sprite, theme->material);
 }
 
+bool SimpleButton::IsClicked()
+{
+  if (selected_current && selected_before && JustPressed(KEY_A))
+    return true;
+
+  Vector2i p = getTouchPosition();
+  //printf("Touched : %d, %d\n", p.x, p.y);
+  if(p.x < position.x || p.y < position.y)
+    return false;
+
+  if(p.x > position.x + panel.dimensions.x || p.y > position.y + panel.dimensions.y)
+    return false;
+
+  return true;
+}
+
 void SimpleButton::Draw()
 {
   if(theme == nullptr)
@@ -35,14 +51,17 @@ void SimpleButton::Draw()
   size_t dimx;
   size_t dimy;
   NE_RichTextRenderDryRun(label.channel, label.text.c_str(), &dimx, &dimy);
-  rect_index = getBestPanel({(int)dimx, (int)dimy});
+  dimx += margin.x;
+  dimy += margin.y;
+  rect_index = getBestPanel({(int)dimx, (int)dimy });
 
   panel.uv_position = panel_sizes[rect_index].pos;
   panel.uv_dimensions = panel_sizes[rect_index].size;
   panel.dimensions = panel_sizes[rect_index].size;
 
   Vector2i centering = { (panel.dimensions.x - dimx)>>2 , (panel.dimensions.y - dimy) >> 2};
-
+  if(selected_current)
+    panel.uv_position.y += 128;
   panel.transform.position = position;
   panel.Draw();
   label.position = position + centering + txt_offset;
@@ -82,4 +101,38 @@ u8 getBestPanel(Vector2i dim)
   }
   return index;
 }
+
+void Selectable::UpdateSelected()
+{
+  //printf("Selectable %d, %d", selected_current, selected_before);
+  if(selected_current && selected_before)
+  {
+    //printf("Currently Selected");
+    if(JustPressed(KEY_UP) && up != nullptr)
+    {
+      selected_current = false;
+      up->selected_current = true;
+      //printf("UP SELECTED");
+    }
+    else if(JustPressed(KEY_DOWN) && down != nullptr)
+    {
+      selected_current = false;
+      down->selected_current = true;
+      //printf("DOWN SELECTED");
+    }
+    else if(JustPressed(KEY_LEFT) && left != nullptr)
+    {
+      selected_current = false;
+      left->selected_current = true;
+    }
+    else if(JustPressed(KEY_RIGHT) && right != nullptr)
+    {
+      selected_current = false;
+      up->selected_current = true;
+    }
+   
+  }
+  selected_before = selected_current;
+}
+
 }

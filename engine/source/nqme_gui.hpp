@@ -3,16 +3,17 @@
 
 #include <nds.h>
 #include "nqme_gfx.hpp"
+#include "nqme_input.hpp"
 
 #define len(n) sizeof(n)/sizeof(n[0])
 
 namespace NQME 
 {
-
   struct Theme
   {
     NE_Material *material;
     NE_Palette *palette;
+    NitroSprite *cursor;
   };
 
   struct Rectangle
@@ -22,8 +23,22 @@ namespace NQME
   };
 
   Theme NewTheme(const char *path);
+  
+  class Selectable 
+  {
+  public: 
+    bool selected_current = false;
+    bool selected_before = false;
+    Selectable *up = nullptr;
+    Selectable *down = nullptr;
+    Selectable *left = nullptr;
+    Selectable *right = nullptr;
+    Theme *theme;
 
-  class SimpleButton 
+    void UpdateSelected();
+  };
+
+  class SimpleButton : public Selectable
   {
   public:
     BasicText label;
@@ -31,17 +46,13 @@ namespace NQME
     Vector2i position;
     Vector2i margin;
     Vector2i txt_offset;
-    Theme *theme;
-
-    bool is_selected = false;
-    bool was_selected = false;
-    bool is_clicked = false;
 
     SimpleButton();
     void SetTheme(Theme *t);
 
     void Update();
     void Draw();
+    bool IsClicked();
   private:
     u8 rect_index;
   };
