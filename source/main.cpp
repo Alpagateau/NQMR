@@ -9,7 +9,7 @@
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
 NQME::Sprite2D sprite_pool[SPRITE_POOL_SIZE];
-NQME::NitroSprite nitro_pool[SPRITE_POOL_SIZE];
+//NQME::NitroSprite nitro_pool[SPRITE_POOL_SIZE];
 
 NQME::BGHeader title_screen_bg 
 	   {
@@ -42,8 +42,8 @@ int main( void ) {
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;
 
-	MainMenu main_menu(sprite_pool, nitro_pool, &scene_manager);
-	Gameplay gameplay(sprite_pool, nitro_pool, &scene_manager);
+	MainMenu main_menu(sprite_pool, &scene_manager);
+	Gameplay gameplay(sprite_pool, &scene_manager);
 
 	NQME::Scene *scenes[] = {
 		&main_menu,

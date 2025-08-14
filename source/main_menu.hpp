@@ -13,15 +13,15 @@ public:
 
   NE_Material *background_mat;
   NE_Palette *background_pal;
-
+  
+  NQME::Theme my_theme;
   NQME::BasicText HiText;
   NQME::SimpleButton btn;
   NQME::SimpleButton btn2;
 
   explicit MainMenu(
     NQME::Sprite2D *pool,
-    NQME::NitroSprite *pool2, 
-    NQME::SceneManager *scm) : Scene(pool, pool2,scm) {};
+    NQME::SceneManager *scm) : Scene(pool,scm) {};
   void Start() override;
   void Update() override;
   void Cleanup() override;

@@ -12,7 +12,13 @@ void MainMenu::Start()
   background_mat = NE_MaterialCreate();
   background_pal = NE_PaletteCreate();
 
-  NE_MaterialTexLoadGRF(background_mat, background_pal, (NE_TextureFlags)0, "models/menu_background_png.grf");
+  NE_MaterialTexLoadGRF(
+    background_mat, 
+    background_pal, 
+    (NE_TextureFlags)0, 
+    //"models/spritesheet_small_png.grf"
+    "models/menu_background_png.grf"
+  );
   
   NE_SpriteSetMaterial(
     background_sprite.sprite,
@@ -25,10 +31,8 @@ void MainMenu::Start()
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
-  
-  
-  
-  NQME::Theme my_theme = NQME::NewTheme("models/button_map_png.grf");
+   
+  my_theme = NQME::NewTheme("models/button_map_png.grf");
 
   btn.label.text = "START";
   btn.label.channel = 0;
@@ -48,10 +52,8 @@ void MainMenu::Start()
   
   btn.down = &btn2;
   btn2.up = &btn;
-
-
-  HiText.text = "Hello Pierre";
-  HiText.position = {0, 0};
+  //HiText.text = "Hello Pierre";
+  //HiText.position = {0, 0};
 
   NQME::LoadSong("songs/ouverture.wav.raw");
 	NQME::PlayStream();
@@ -62,15 +64,10 @@ void MainMenu::Update()
   NQME::UpdateInputs();
   if(btn.IsClicked())
   {
-    printf("A pressed\n");
     sm->SwitchTo(1);
   }
-  if(NQME::JustPressed(KEY_B))
-  {
-    printf("B pressed\n");
-  }
   background_sprite.Draw();
-  HiText.Draw();
+  //HiText.Draw();
   btn.Draw();
   btn2.Draw();
 
@@ -79,6 +76,9 @@ void MainMenu::Update()
 }
 
 void MainMenu::Cleanup()
-{
+{ 
   NE_RichTextEnd(0);
+  NE_MaterialDelete(my_theme.material);
+  NE_PaletteDelete(my_theme.palette);
+  NE_MaterialDelete(background_mat);
 }

@@ -13,7 +13,7 @@ namespace NQME
   {
     NE_Material *material;
     NE_Palette *palette;
-    NitroSprite *cursor;
+    //NitroSprite *cursor;
   };
 
   struct Rectangle

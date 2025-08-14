@@ -74,8 +74,7 @@ public:
 
    explicit Gameplay(
       NQME::Sprite2D     *pool,
-      NQME::NitroSprite  *pool2,
-      NQME::SceneManager *scm) : Scene(pool ,pool2 , scm) {};
+      NQME::SceneManager *scm) : Scene(pool, scm) {};
    void Start() override;
    void Update() override;
    void Cleanup() override;

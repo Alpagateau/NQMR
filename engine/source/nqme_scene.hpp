@@ -12,9 +12,8 @@ namespace NQME
   {
   public:
     Sprite2D *sprite_pool;
-    NitroSprite *nitro_pool;
     SceneManager *sm;
-    explicit Scene(Sprite2D *pool, NitroSprite *pool2 ,SceneManager *scene_manager);
+    explicit Scene(Sprite2D *pool, SceneManager *scene_manager);
     virtual void Start();
     virtual void Update();
     virtual void Cleanup();

@@ -3,10 +3,9 @@
 namespace NQME
 {
   
-  Scene::Scene(Sprite2D *pool, NitroSprite *pool2 ,SceneManager *scene_manager)
+  Scene::Scene(Sprite2D *pool, SceneManager *scene_manager)
   {
     sprite_pool = pool;
-    nitro_pool = pool2;
     sm = scene_manager;
   }
 
@@ -45,12 +44,12 @@ namespace NQME
 
   void SceneManager::Update()
   {
+    if(next != current){
+      scenes[current]->Cleanup();
+      current = next;
+      scenes[current]->Start(); 
+    }
     scenes[current]->Update();
-    if(next == current)
-      return;
-    scenes[current]->Cleanup();
-    scenes[next]->Start();
-    current = next;
   }
   
 }

@@ -25,8 +25,12 @@ void Gameplay::Start()
   NE_MaterialTexLoadGRF(arrows_mat, arrows_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/arrows_png.grf");
   
   printf("Loading player spritesheet\n");
-  NE_MaterialTexLoadGRF(player_mat, player_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/spritesheet_small_png.grf");
-
+  NE_MaterialTexLoadGRF(player_mat, 
+                        player_pal, 
+                        (NE_TextureFlags)0, 
+                        "models/spritesheet_small_png.grf");
+  
+  NE_SpriteSetMaterial(player.sprite, player_mat);
   printf("Creating camera\n");
   camera = NE_CameraCreate();
 
@@ -70,7 +74,7 @@ void Gameplay::Start()
 
   printf("Setting up Player Chatacter\n");
   player.dimensions = {64, 128};
-  NE_SpriteSetMaterial(player.sprite, player_mat);
+  
   player.transform.position = (Vector2i){-10, 0};
 
   player_animation.sprite = &player;
