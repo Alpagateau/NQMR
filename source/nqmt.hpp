@@ -6,4 +6,9 @@
 #define MAIN_MENU 0
 #define GAMEPLAY  1
 
-int pointsForKey(u8 channel, NQME::EventHandler &handler);
+int DistForKey(
+  u8 channel,
+  NQME::EventHandler &handler,
+  int grace);
+
+int PtsForDist(int dist);

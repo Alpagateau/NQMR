@@ -1,6 +1,6 @@
 #include "nqmt.hpp"
 
-int pointsForKey(u8 channel, NQME::EventHandler &eventHandler)
+int DistForKey(u8 channel, NQME::EventHandler &eventHandler, int grace)
 { 
   u8 min_index = 0;
   int min_dist = -1;
@@ -16,9 +16,26 @@ int pointsForKey(u8 channel, NQME::EventHandler &eventHandler)
       }
     }
   }
-  if(min_dist > 0)
+  if(min_dist < grace)
   {
     eventHandler.buffer[min_index].channel = 0;
   }
+  else 
+    min_dist = -1;
   return min_dist;
+}
+
+int PtsForDist(int dist)
+{
+  if(dist < 0)
+    return 0;
+  if(dist > 10)
+    return 10;
+  if(dist > 5)
+    return 20;
+  if(dist > 2)
+    return 30;
+  if(dist > 0)
+    return 50;
+  return 100;
 }

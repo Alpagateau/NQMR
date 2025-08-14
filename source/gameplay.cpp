@@ -75,7 +75,7 @@ void Gameplay::Start()
   printf("Setting up Player Chatacter\n");
   player.dimensions = {64, 128};
   
-  player.transform.position = (Vector2i){-10, 0};
+  player.transform.position = (Vector2i){100, 50};
 
   player_animation.sprite = &player;
 
@@ -101,7 +101,7 @@ void Gameplay::Update()
   {
 		arrow_sprites[i]._SetPosition(	
 		  X_Positions[arrws[i].channel],
-			(-1 * (frame - arrws[i].time_start)) + 16
+			(-1 * (frame - arrws[i].time_start)) + 16 - SCREEN_HEIGHT 
 		);
     top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
     top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
@@ -113,17 +113,42 @@ void Gameplay::Update()
 
   for(int i = 0; i < 4; i++)
 	{
+    if(NQME::Pressed(controls[i]))
+    {
+      target_arrows[i].transform.scale = 0.8;
+    }
+    else 
+    {
+      target_arrows[i].transform.scale = 1;
+    }
 		if(NQME::JustPressed(controls[i]))
 		{
-			if(pointsForKey(i+1, eh) == 0)
+      int d = DistForKey(i+1, eh, 15);
+			if(d >= 0)
 			{
-				target_arrows[i].transform.scale = 0.8;
+        int pts = PtsForDist(d);
+        if(pts > 40){
+          player_animation.Play_then(
+            &kick, 
+            &idle);
+        }
+        else if(pts >= 10)
+        {
+          player_animation.Play_then(
+            &shove,
+            &idle
+          );
+        }
+        else
+        {
+          player_animation.Play_then(
+            &ollie,
+            &idle
+          );
+        }
 			}
 		}
-		else 
-		{
-			target_arrows[i].transform.scale = 1.0;
-		}
+		
 		target_arrows[i].Draw();
 	}
 
