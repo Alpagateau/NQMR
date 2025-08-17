@@ -25,35 +25,68 @@ void MainMenu::Start()
     background_mat
   );
 
-  background_sprite.dimensions = {256, 236};
+  background_sprite.dimensions = {256, 196};
   background_sprite.transform.position = {0,0};
 
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
-   
+  
+  NE_RichTextInit(1);
+  NE_RichTextMetadataLoadFAT(1, "fonts/graphiti.fnt");
+  NE_RichTextMaterialLoadGRF(1, "fonts/graphiti_0_png.grf");
+  
   my_theme = NQME::NewTheme("models/button_map_png.grf");
 
-  btn.label.text = "START";
-  btn.label.channel = 0;
-  btn.position = {80, 25};
-  btn.txt_offset = {5, 0};
-  btn.margin = {10, 0};
-  btn.SetTheme(&my_theme);
-  btn.selected_current = true;
+  start_button.label.text = "START";
+  start_button.label.channel = 0;
+  start_button.position = {80, 25};
+  start_button.txt_offset = {5, 0};
+  start_button.margin = {10, 0};
+  start_button.SetTheme(&my_theme);
+  start_button.selected_current = true;
   
-  btn2.label.text = "CREDITS";
-  btn2.label.channel = 0;
-  btn2.txt_offset = {5, 0};
-  btn2.margin = {10, 0};
-  btn2.position = {80, 60};
-  btn2.SetTheme(&my_theme);
-  btn2.selected_current = false;
+  credits_button.label.text = "CREDITS";
+  credits_button.label.channel = 0;
+  credits_button.txt_offset = {5, 0};
+  credits_button.margin = {10, 0};
+  credits_button.position = {80, 60};
+  credits_button.SetTheme(&my_theme);
+  credits_button.selected_current = false;
   
-  btn.down = &btn2;
-  btn2.up = &btn;
-  //HiText.text = "Hello Pierre";
-  //HiText.position = {0, 0};
+  start_button.down = &credits_button;
+  credits_button.up = &start_button;
+
+  //Load Song List
+  
+  char *line = NULL;
+  size_t len;
+  FILE *list_file = fopen("songlist.txt", "r");
+  for(int i = 0; i < NUMBER_OF_SONGS; i++)
+  {
+    getline( &line, &len, list_file );
+    printf("[SONG]%s\n", line); 
+    available_songs[i] = line;
+    for(int j = 0; j < available_songs[i].size();j++)
+    {
+      if(available_songs[i][j] == '\n') available_songs[i][j] = '_';
+    }
+    //available_songs.push_back(str.substr(0, str.size() -1));
+  }
+  fclose(list_file);
+
+  for(int i = 0; i < 5; i++)
+  {
+    selection[i].label.text = available_songs[i];
+    selection[i].position = {10 + max_delta, 35 * i};
+    selection[i].is_visible = true;
+    selection[i].label.channel = 1;
+    selection[i].SetTheme(&my_theme);
+    selection[i].txt_offset = {5, 0};
+    selection[i].margin = {10, 0};
+    selection[i].up   = (i == 0) ? &selection[4] : &selection[i-1];
+    selection[i].down = (i == 4) ? &selection[0] : &selection[i+1];
+  }
 
   NQME::LoadSong("songs/ouverture.wav.raw");
 	NQME::PlayStream();
@@ -61,18 +94,124 @@ void MainMenu::Start()
 
 void MainMenu::Update()
 {
-  NQME::UpdateInputs();
-  if(btn.IsClicked())
+  switch(state)
   {
-    sm->SwitchTo(1);
+    case MAIN_SCREEN: 
+      HiText.text = "MAIN_SCREEN";
+      break;
+    case LVL_SELECT: 
+      HiText.text = "LVL_SELECT";
+      break;
+    case TO_MAIN: 
+      HiText.text = "TO_MAIN";
+      break;
+    case TO_SELECT: 
+      HiText.text = "TO_SELECT";
+      break;
   }
-  background_sprite.Draw();
-  //HiText.Draw();
-  btn.Draw();
-  btn2.Draw();
+  if(state == TO_MAIN)
+  {
+    if(delta > 0){
+      delta-=20;
+      start_button.position.x -= delta;
+      credits_button.position.x -= delta;
+      
+      for(int i = 0; i  < 5; i++)
+      {
+        selection[i].position.x -= delta;
+        selection[i].Draw(); 
+        selection[i].position.x += delta;
+      }
 
-  btn.UpdateSelected();
-  btn2.UpdateSelected();
+      start_button.Draw();
+      credits_button.Draw();
+       
+      start_button.position.x += delta;
+      credits_button.position.x += delta;
+    }else {
+      state = MAIN_SCREEN; 
+    }
+  }
+  if(state == LVL_SELECT)
+  {
+    NQME::UpdateInputs();
+    for(int i = 0; i < 5; i++)
+    {
+      selection[i].position.x -= delta;
+      selection[i].Draw();
+      selection[i].UpdateSelected();
+      selection[i].position.x += delta;
+    }
+    if(NQME::JustPressed(KEY_B))
+    {
+      state = TO_MAIN; 
+      for(int i = 0; i < 5; i++){
+        selection[i].selected_current = false; 
+      }
+      start_button.selected_current = true;
+      start_button.is_visible = true;
+      credits_button.is_visible = true;
+
+    }
+  }
+  if(state == TO_SELECT)
+  {
+    if(delta < max_delta){
+      delta+=20;
+      start_button.position.x -= delta;
+      credits_button.position.x -= delta;
+      
+      for(int i = 0; i  < 5; i++)
+      {
+        selection[i].position.x -= delta;
+        selection[i].Draw(); 
+        selection[i].position.x += delta;
+      }
+
+      start_button.Draw();
+      credits_button.Draw();
+       
+      start_button.position.x += delta;
+      credits_button.position.x += delta;
+    }else {
+      state = LVL_SELECT;
+      start_button.is_visible = false;
+      credits_button.is_visible = false;
+      for(int i = 0; i  < 5; i++)
+      {
+        selection[i].is_visible = true;
+      }
+    }
+  }
+  if(state == MAIN_SCREEN){
+    NQME::UpdateInputs();
+    if(start_button.IsClicked())
+    {
+      state = TO_SELECT;
+      start_button.selected_current = false;
+      credits_button.selected_current = false;
+      selection[0].selected_current = true;
+      for(int i = 0; i < 5; i++)
+      {
+        selection[i].is_visible = true;
+      }
+      //sm->SwitchTo(1);
+    }
+    
+    start_button.Draw();
+    credits_button.Draw(); 
+    start_button.UpdateSelected();
+    credits_button.UpdateSelected();
+    for(int i = 0; i < 5; i++)
+    {
+      //selection[i].position.x -= delta;
+      selection[i].Draw();
+      //selection[i].UpdateSelected();
+      //selection[i].position.x += delta;
+    }
+  }
+  //HiText.Draw();
+  background_sprite.Draw();
 }
 
 void MainMenu::Cleanup()

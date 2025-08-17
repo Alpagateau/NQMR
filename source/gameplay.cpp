@@ -101,7 +101,7 @@ void Gameplay::Update()
   {
 		arrow_sprites[i]._SetPosition(	
 		  X_Positions[arrws[i].channel],
-			(-1 * (frame - arrws[i].time_start)) + 16 - SCREEN_HEIGHT 
+			(-1 * (frame - arrws[i].time_start)) + 16 - SCREEN_HEIGHT - SCREEN_GAP
 		);
     top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
     top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;

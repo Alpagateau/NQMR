@@ -61,6 +61,7 @@ int main( void ) {
 		scene_manager.Update();
 		NQME::UpdateGraphics();
 		mmStreamUpdate();
+    fflush(stdout);
 	}
 
 	return 0;

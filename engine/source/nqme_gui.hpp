@@ -46,6 +46,7 @@ namespace NQME
     Vector2i position;
     Vector2i margin;
     Vector2i txt_offset;
+    bool is_visible = true;
 
     SimpleButton();
     void SetTheme(Theme *t);

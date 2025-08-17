@@ -29,6 +29,9 @@ void SimpleButton::SetTheme(Theme *t)
 
 bool SimpleButton::IsClicked()
 {
+  if(!is_visible)
+    return false;
+
   if (selected_current && selected_before && JustPressed(KEY_A))
     return true;
 
@@ -48,9 +51,15 @@ void SimpleButton::Draw()
   if(theme == nullptr)
     return;
   
+  if(!is_visible)
+    return;
+
   size_t dimx;
   size_t dimy;
-  NE_RichTextRenderDryRun(label.channel, label.text.c_str(), &dimx, &dimy);
+  NE_RichTextRenderDryRun(
+    label.channel, 
+    label.text.c_str(), 
+    &dimx, &dimy);
   dimx += margin.x;
   dimy += margin.y;
   rect_index = getBestPanel({(int)dimx, (int)dimy });

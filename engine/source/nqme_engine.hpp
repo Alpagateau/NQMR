@@ -14,7 +14,6 @@
 
 namespace NQME
 {
-    void InitNQME();
+  void InitNQME(); 
 }
-
 #endif

@@ -401,12 +401,7 @@ void NitroSprite::Draw()
       sprite,
       floattof32(transform.angle)
     );
-    /*
-    NE_SpriteSetScale(
-      sprite,
-      transform.scale
-    );
-    */
+    
     int u = (uv_dimensions.x == 0) ? dimensions.x : uv_dimensions.x; 
     int v = (uv_dimensions.y == 0) ? dimensions.y : uv_dimensions.y;
 

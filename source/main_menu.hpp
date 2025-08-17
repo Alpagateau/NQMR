@@ -5,19 +5,33 @@ extern "C"{
 }
 #include "nqmt.hpp"
 
+#define MAIN_SCREEN 0
+#define LVL_SELECT  1
+#define TO_MAIN     2 
+#define TO_SELECT   3
+
+#define NUMBER_OF_SONGS 5
+
 class MainMenu: public NQME::Scene
 {
 public:
   NQME::NitroSprite background_sprite;
-  //NQME::NitroSprite cursor;
+  
+  std::string available_songs[NUMBER_OF_SONGS];
+  u8 state = MAIN_SCREEN;
+  
+  int delta     = 0;
+  int max_delta = 255;
 
   NE_Material *background_mat;
   NE_Palette *background_pal;
   
   NQME::Theme my_theme;
   NQME::BasicText HiText;
-  NQME::SimpleButton btn;
-  NQME::SimpleButton btn2;
+  NQME::SimpleButton start_button;
+  NQME::SimpleButton credits_button;
+
+  NQME::SimpleButton selection[5];
 
   explicit MainMenu(
     NQME::Sprite2D *pool,
