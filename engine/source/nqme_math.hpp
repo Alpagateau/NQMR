@@ -30,4 +30,4 @@ struct Vector3f
 };
 
 int dot(Vector2i a, Vector2i b);
-
+int min(int a, int b);

@@ -194,6 +194,7 @@ struct DrawStack
   int model_count;
   int sprite_count;
   int text_count;
+  u8 fading_percent = 0;
 };
 
 void Draw3DScene(void* args);
@@ -211,6 +212,7 @@ int InitSprites();
 int InitGfx();
 void UseCamera(NE_Camera *cam);
 void UpdateGraphics();
+void SetFade(u8 percent);
 void Draw3DScene(void *args);
 
 }

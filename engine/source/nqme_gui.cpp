@@ -98,9 +98,11 @@ u8 getBestPanel(Vector2i dim)
   u8 l = len(panel_sizes);
   for(int i = 0; i < l; i++)
   {
-    if(panel_sizes[i].size.x >= dim.x && panel_sizes[i].size.y >= dim.y)
+    if(panel_sizes[i].size.x >= dim.x && 
+      panel_sizes[i].size.y >= dim.y)
     {
-      int d = (abs( panel_sizes[i].size.x - dim.x) + abs( panel_sizes[i].size.y - dim.y) );
+      int d = (abs(panel_sizes[i].size.x - dim.x) + 
+        abs( panel_sizes[i].size.y - dim.y) );
       if(d < delta)
       {
         delta = d;

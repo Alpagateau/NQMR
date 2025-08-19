@@ -82,6 +82,16 @@ void Gameplay::Start()
   player_animation.Play(&idle);
 
   player.index = 1;
+  NE_MainScreenSetOnTop();
+  
+  for(int i = 0; i < 198; i++)
+  {
+    NE_WaitForVBL((NE_UpdateFlags)0);
+    fading--;
+    NQME::SetFade(fading);
+    player_animation.Update();
+    NQME::UpdateGraphics();
+  }
 
   NQME::LoadSong("songs/khali.wav.raw");
 	NQME::PlayStream();
@@ -89,7 +99,7 @@ void Gameplay::Start()
   eh.Init( "bms/khali.bbm", EVENT_BUFFER_SIZE, arrws);
   eh.grace = 64;
   
-	NE_MainScreenSetOnTop();
+	
 }
 
 void Gameplay::Update()

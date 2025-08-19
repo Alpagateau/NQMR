@@ -27,7 +27,7 @@ void MainMenu::Start()
 
   background_sprite.dimensions = {256, 196};
   background_sprite.transform.position = {0,0};
-
+  //NE_RichTextPrioritySet(2); NE_RichTextPrioritySet(2); 
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
@@ -80,7 +80,7 @@ void MainMenu::Start()
     selection[i].label.text = available_songs[i];
     selection[i].position = {10 + max_delta, 35 * i};
     selection[i].is_visible = true;
-    selection[i].label.channel = 1;
+    selection[i].label.channel = 0;
     selection[i].SetTheme(&my_theme);
     selection[i].txt_offset = {5, 0};
     selection[i].margin = {10, 0};
@@ -94,23 +94,9 @@ void MainMenu::Start()
 
 void MainMenu::Update()
 {
-  switch(state)
-  {
-    case MAIN_SCREEN: 
-      HiText.text = "MAIN_SCREEN";
-      break;
-    case LVL_SELECT: 
-      HiText.text = "LVL_SELECT";
-      break;
-    case TO_MAIN: 
-      HiText.text = "TO_MAIN";
-      break;
-    case TO_SELECT: 
-      HiText.text = "TO_SELECT";
-      break;
-  }
   if(state == TO_MAIN)
   {
+
     if(delta > 0){
       delta-=20;
       start_button.position.x -= delta;
@@ -137,12 +123,16 @@ void MainMenu::Update()
     NQME::UpdateInputs();
     for(int i = 0; i < 5; i++)
     {
+      if(selection[i].IsClicked())
+      {
+        loading_out = true; 
+      }
       selection[i].position.x -= delta;
       selection[i].Draw();
       selection[i].UpdateSelected();
       selection[i].position.x += delta;
     }
-    if(NQME::JustPressed(KEY_B))
+    if(NQME::JustPressed(KEY_B) && !loading_out)
     {
       state = TO_MAIN; 
       for(int i = 0; i < 5; i++){
@@ -184,6 +174,8 @@ void MainMenu::Update()
     }
   }
   if(state == MAIN_SCREEN){
+    if(fading > 0)
+      fading--;
     NQME::UpdateInputs();
     if(start_button.IsClicked())
     {
@@ -210,7 +202,18 @@ void MainMenu::Update()
       //selection[i].position.x += delta;
     }
   }
-  //HiText.Draw();
+  HiText.text = std::to_string(fading); 
+  HiText.Draw();
+  
+  if(loading_out && fading < 198)
+    fading++;
+
+  if(loading_out && fading == 198)
+  {
+    sm->SwitchTo(1);
+  }
+  NQME::SetFade(fading);
+
   background_sprite.Draw();
 }
 

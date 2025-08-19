@@ -39,3 +39,4 @@ int PtsForDist(int dist)
     return 50;
   return 100;
 }
+

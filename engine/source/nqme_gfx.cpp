@@ -391,7 +391,7 @@ void NitroSprite::Draw()
     if(DS.sprite_count >= SPRITE_STACK_SIZE)
         return;
     NE_SpriteSetParams(sprite, 0xFF, DS.sprite_count, 0xffffff);
-    NE_SpriteSetPriority(sprite, (int)index);
+    NE_SpriteSetPriority(sprite, (int)index+1);
     NE_SpriteSetPos(
         sprite, 
         transform.position.x - (int)(anchor.x * transform.scale), 
@@ -492,9 +492,10 @@ void Draw3DScene(void *args)
     NE_SpriteDraw(ds->sprites[i]);
   }
   ds->sprite_count = 0;
-
+  
+  if(ds->fading_percent == 0){
   for(int i = 0; i < ds->text_count; i++)
-  {
+  { 
     NE_RichTextRender3D(
         ds->texts[i]->channel,
         ds->texts[i]->text.c_str(),
@@ -502,7 +503,30 @@ void Draw3DScene(void *args)
         ds->texts[i]->position.y        
     );
   }
+  }
   ds->sprite_count = 0;
+  NE_PolyFormat(31, 
+                SPRITE_STACK_SIZE,
+                (NE_LightEnum)0,
+                NE_CULL_BACK,
+                (NE_OtherFormatEnum)0);
+ 
+  for(int i = 0; i < ds->fading_percent; i++)
+  {
+    NE_2DDrawQuad(
+      (i / 12) * 16,
+      (i % 12) * 16,
+      ((i / 12) + 1)*16,
+      min( ((i % 12) + 1) * 16, SCREEN_HEIGHT-1),
+      0,
+      0x0000
+    );
+  }
+}
+
+void SetFade(u8 percent)
+{
+  DS.fading_percent = percent;
 }
 
 }

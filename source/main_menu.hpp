@@ -22,7 +22,10 @@ public:
   
   int delta     = 0;
   int max_delta = 255;
-
+  
+  bool loading_out = false;
+  u8 fading = 198;
+   
   NE_Material *background_mat;
   NE_Palette *background_pal;
   
