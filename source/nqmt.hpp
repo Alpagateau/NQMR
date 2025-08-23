@@ -10,10 +10,11 @@
 
 #define SCREEN_GAP 8
 
-struct GameplayData 
+struct GameData 
 {
   std::string music_name;
-  int pts;
+  int pts = 0;
+  bool success = false;
 };
 
 int DistForKey(

@@ -1,6 +1,7 @@
 #include "gameplay.hpp"
 
 extern NQME::BGHeader title_screen_bg;
+extern GameData game_data;
 
 void Gameplay::Start()
 {
@@ -43,9 +44,7 @@ void Gameplay::Start()
   
   printf("Seeting some pointers\n");
   arrow_sprites = sprite_pool;
-  //top_arrows = nitro_pool;
-  //target_arrows = &(nitro_pool[EVENT_BUFFER_SIZE]);
-
+  
   printf("Setting target arrows \n");
 	for(int i = 0; i < 4; i++)
 	{
@@ -82,21 +81,16 @@ void Gameplay::Start()
   player_animation.Play(&idle);
 
   player.index = 1;
-  NE_MainScreenSetOnTop();
-  
-  for(int i = 0; i < 198; i++)
-  {
-    NE_WaitForVBL((NE_UpdateFlags)0);
-    fading--;
-    NQME::SetFade(fading);
-    player_animation.Update();
-    NQME::UpdateGraphics();
-  }
-
-  NQME::LoadSong("songs/khali.wav.raw");
+  NE_MainScreenSetOnTop(); 
+  std::string song_path = ("songs/" + game_data.music_name + ".wav.raw");
+  printf("(%s)", song_path.c_str());
+  NQME::LoadSong(song_path.c_str());
 	NQME::PlayStream();
 
-  eh.Init( "bms/khali.bbm", EVENT_BUFFER_SIZE, arrws);
+  eh.Init(
+    ("bms/" + game_data.music_name + ".bbm").c_str(),
+    EVENT_BUFFER_SIZE, 
+    arrws);
   eh.grace = 64;
   
 	
@@ -104,7 +98,6 @@ void Gameplay::Start()
 
 void Gameplay::Update()
 {
-  //Happens right after VB
   frame++;
   NQME::UpdateInputs(); 
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)

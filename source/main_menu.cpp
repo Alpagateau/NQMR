@@ -1,6 +1,7 @@
 #include "main_menu.hpp"
 
 extern NQME::BGHeader title_screen_bg;
+extern GameData game_data;
 
 void MainMenu::Start()
 {
@@ -13,10 +14,9 @@ void MainMenu::Start()
   background_pal = NE_PaletteCreate();
 
   NE_MaterialTexLoadGRF(
-    background_mat, 
-    background_pal, 
-    (NE_TextureFlags)0, 
-    //"models/spritesheet_small_png.grf"
+    background_mat,
+    background_pal,
+    (NE_TextureFlags)0,
     "models/menu_background_png.grf"
   );
   
@@ -27,7 +27,7 @@ void MainMenu::Start()
 
   background_sprite.dimensions = {256, 196};
   background_sprite.transform.position = {0,0};
-  //NE_RichTextPrioritySet(2); NE_RichTextPrioritySet(2); 
+  
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
@@ -59,21 +59,15 @@ void MainMenu::Start()
 
   //Load Song List
   
-  char *line = NULL;
-  size_t len;
-  FILE *list_file = fopen("songlist.txt", "r");
+  std::string line;
+  std::ifstream list_file("songlist.txt");
   for(int i = 0; i < NUMBER_OF_SONGS; i++)
   {
-    getline( &line, &len, list_file );
-    printf("[SONG]%s\n", line); 
-    available_songs[i] = line;
-    for(int j = 0; j < available_songs[i].size();j++)
-    {
-      if(available_songs[i][j] == '\n') available_songs[i][j] = '_';
-    }
-    //available_songs.push_back(str.substr(0, str.size() -1));
+    std::getline(list_file, line);
+    printf("[SONG]%s\n", line.c_str()); 
+    available_songs[i] = line; 
   }
-  fclose(list_file);
+  list_file.close();
 
   for(int i = 0; i < 5; i++)
   {
@@ -123,11 +117,14 @@ void MainMenu::Update()
     NQME::UpdateInputs();
     for(int i = 0; i < 5; i++)
     {
+      selection[i].position.x -= delta;
       if(selection[i].IsClicked())
       {
-        loading_out = true; 
+        loading_out = true;
+        game_data.music_name = selection[i].label.text;
+        sm->SwitchTo(1);
       }
-      selection[i].position.x -= delta;
+      
       selection[i].Draw();
       selection[i].UpdateSelected();
       selection[i].position.x += delta;
@@ -174,8 +171,6 @@ void MainMenu::Update()
     }
   }
   if(state == MAIN_SCREEN){
-    if(fading > 0)
-      fading--;
     NQME::UpdateInputs();
     if(start_button.IsClicked())
     {
@@ -202,18 +197,11 @@ void MainMenu::Update()
       //selection[i].position.x += delta;
     }
   }
-  HiText.text = std::to_string(fading); 
-  HiText.Draw();
   
-  if(loading_out && fading < 198)
-    fading++;
-
-  if(loading_out && fading == 198)
+  if(loading_out)
   {
-    sm->SwitchTo(1);
+    
   }
-  NQME::SetFade(fading);
-
   background_sprite.Draw();
 }
 

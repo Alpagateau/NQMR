@@ -1,5 +1,7 @@
 #include "nqmt.hpp"
 
+GameData game_data;
+
 int DistForKey(u8 channel, NQME::EventHandler &eventHandler, int grace)
 { 
   u8 min_index = 0;

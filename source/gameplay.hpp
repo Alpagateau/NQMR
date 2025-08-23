@@ -35,7 +35,7 @@ public:
 	NE_Palette *player_pal;
 
   NE_Camera *camera;
-  u8 fading = 198;
+  //u8 fading = 198;
 
   NQME::EventHandler eh;
 

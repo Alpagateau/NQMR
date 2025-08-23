@@ -3,6 +3,7 @@ extern "C"{
 #include "gfx/arrows_png.h"
 #include "gfx/tiny_fat_luigi_png.h"
 }
+#include <fstream>
 #include "nqmt.hpp"
 
 #define MAIN_SCREEN 0
@@ -24,7 +25,6 @@ public:
   int max_delta = 255;
   
   bool loading_out = false;
-  u8 fading = 198;
    
   NE_Material *background_mat;
   NE_Palette *background_pal;

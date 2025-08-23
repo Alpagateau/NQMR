@@ -1,8 +1,12 @@
 #include "nqme_scene.hpp"
 
+#define FULL_BLACK 198
+
 namespace NQME
 {
-  
+
+  int fade = FULL_BLACK;
+
   Scene::Scene(Sprite2D *pool, SceneManager *scene_manager)
   {
     sprite_pool = pool;
@@ -45,10 +49,22 @@ namespace NQME
   void SceneManager::Update()
   {
     if(next != current){
-      scenes[current]->Cleanup();
-      current = next;
-      scenes[current]->Start(); 
+      if(fade < FULL_BLACK){
+        fade+=2;
+      }else{
+        scenes[current]->Cleanup();
+        current = next;
+        scenes[current]->Start(); 
+      }
     }
+    else 
+    {
+      if(fade > 0)
+      {
+        fade-=2;
+      }
+    }
+    SetFade(fade);
     scenes[current]->Update();
   }
   
