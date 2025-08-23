@@ -31,6 +31,7 @@ public:
   u32 time;
   bool eof = false;
   void Update(u32 date);
+  bool Ended();
 };
 
 }

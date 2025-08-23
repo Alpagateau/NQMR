@@ -22,6 +22,18 @@ EventHandler::EventHandler(
   }
 }
 
+bool EventHandler::Ended()
+{
+  if(!eof)
+    return false;
+  for(int i = 0; i < size; i++)
+  {
+    if(buffer[i].channel != 0)
+      return false;
+  }
+  return true;
+}
+
 void EventHandler::Init(
   const char *path, 
   u8 capacity, 

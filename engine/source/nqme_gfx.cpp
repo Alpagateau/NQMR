@@ -494,17 +494,17 @@ void Draw3DScene(void *args)
   ds->sprite_count = 0;
   
   if(ds->fading_percent == 0){
-  for(int i = 0; i < ds->text_count; i++)
-  { 
-    NE_RichTextRender3D(
-        ds->texts[i]->channel,
-        ds->texts[i]->text.c_str(),
-        ds->texts[i]->position.x,
-        ds->texts[i]->position.y        
-    );
+    for(int i = 0; i < ds->text_count; i++)
+    { 
+      NE_RichTextRender3D(
+          ds->texts[i]->channel,
+          ds->texts[i]->text.c_str(),
+          ds->texts[i]->position.x,
+          ds->texts[i]->position.y        
+      );
+    }
   }
-  }
-  ds->sprite_count = 0;
+  ds->text_count = 0;
   NE_PolyFormat(31, 
                 SPRITE_STACK_SIZE,
                 (NE_LightEnum)0,

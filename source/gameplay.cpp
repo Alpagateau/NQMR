@@ -53,6 +53,11 @@ void Gameplay::Start()
 		target_arrows[i].transform.position = {X_Positions[i+1],  16};
 		target_arrows[i].dimensions = {32, 32};
 		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
+  NE_RichTextInit(1);
+  NE_RichTextMetadataLoadFAT(1, "fonts/graphiti.fnt");
+  NE_RichTextMaterialLoadGRF(1, "fonts/graphiti_0_png.grf");
+  
+
 	}
 
   printf("Setting up movement arrows\n");
@@ -91,9 +96,12 @@ void Gameplay::Start()
     ("bms/" + game_data.music_name + ".bbm").c_str(),
     EVENT_BUFFER_SIZE, 
     arrws);
-  eh.grace = 64;
-  
-	
+  eh.grace = 64;	
+
+  game_data.pts = 0;
+  score_text.channel = 0;
+  score_text.text = "0";
+  score_text.position = {0, 0};
 }
 
 void Gameplay::Update()
@@ -130,6 +138,7 @@ void Gameplay::Update()
 			if(d >= 0)
 			{
         int pts = PtsForDist(d);
+        game_data.pts += pts;
         if(pts > 40){
           player_animation.Play_then(
             &kick, 
@@ -157,6 +166,12 @@ void Gameplay::Update()
 
   eh.Update(frame);
   player_animation.Update();
+  score_text.text = std::to_string(
+    game_data.pts
+  );
+  score_text.Draw();
+  if(eh.Ended())
+    sm->SwitchTo(0);
 }
 
 void Gameplay::Cleanup()

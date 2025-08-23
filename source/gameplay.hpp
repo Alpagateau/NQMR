@@ -18,6 +18,8 @@ public:
 	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
 
+
+  NQME::BasicText score_text;
   NQME::Sprite2D *arrow_sprites;
   NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
   NQME::NitroSprite player;
@@ -35,7 +37,6 @@ public:
 	NE_Palette *player_pal;
 
   NE_Camera *camera;
-  //u8 fading = 198;
 
   NQME::EventHandler eh;
 

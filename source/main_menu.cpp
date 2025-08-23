@@ -32,10 +32,6 @@ void MainMenu::Start()
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
   
-  NE_RichTextInit(1);
-  NE_RichTextMetadataLoadFAT(1, "fonts/graphiti.fnt");
-  NE_RichTextMaterialLoadGRF(1, "fonts/graphiti_0_png.grf");
-  
   my_theme = NQME::NewTheme("models/button_map_png.grf");
 
   start_button.label.text = "START";
@@ -182,7 +178,6 @@ void MainMenu::Update()
       {
         selection[i].is_visible = true;
       }
-      //sm->SwitchTo(1);
     }
     
     start_button.Draw();
@@ -191,23 +186,15 @@ void MainMenu::Update()
     credits_button.UpdateSelected();
     for(int i = 0; i < 5; i++)
     {
-      //selection[i].position.x -= delta;
       selection[i].Draw();
-      //selection[i].UpdateSelected();
-      //selection[i].position.x += delta;
     }
-  }
-  
-  if(loading_out)
-  {
-    
   }
   background_sprite.Draw();
 }
 
 void MainMenu::Cleanup()
 { 
-  NE_RichTextEnd(0);
+  //NE_RichTextEnd(0);
   NE_MaterialDelete(my_theme.material);
   NE_PaletteDelete(my_theme.palette);
   NE_MaterialDelete(background_mat);
