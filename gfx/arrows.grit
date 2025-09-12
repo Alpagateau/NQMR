@@ -1,3 +1,4 @@
 # 8 bit depth 
 #-gB8 -gt -p -m! -Mw 2 -Mh 2 
 -gB8 -m!
+#-gBpal16 -gx

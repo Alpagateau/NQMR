@@ -14,7 +14,7 @@ extern "C"{
 class Gameplay: public NQME::Scene
 {
 public:
-   int X_Positions[5]       = {-32, 32, 94, 168, 232};
+  int X_Positions[5]       = {-32, 32, 94, 168, 232};
 	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
 
@@ -31,10 +31,10 @@ public:
    
   NQME::SpriteHeader ArrowHeader;
 
-  NE_Material *arrows_mat;
-	NE_Palette *arrows_pal;
-  NE_Material *player_mat;
-	NE_Palette *player_pal;
+  //NE_Material *arrows_mat;
+	//NE_Palette *arrows_pal;
+  //NE_Material *player_mat;
+	//NE_Palette *player_pal;
 
   NE_Camera *camera;
 

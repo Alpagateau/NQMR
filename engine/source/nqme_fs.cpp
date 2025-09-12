@@ -4,8 +4,8 @@ namespace NQME{
 
 int initFS()
 {
-    if(!fatInitDefault())
-      return 1;
+    //if(!fatInitDefault())
+    //  return 1;
     //chdir(NQME_ROOT);
     
     if(!nitroFSInit(NULL))

@@ -9,7 +9,8 @@
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
 NQME::Sprite2D sprite_pool[SPRITE_POOL_SIZE];
-//NQME::NitroSprite nitro_pool[SPRITE_POOL_SIZE];
+NE_Material* player_mat;
+NE_Palette*  player_pal;
 
 NQME::BGHeader title_screen_bg 
 	   {
@@ -30,14 +31,21 @@ int main( void ) {
 		VRAM_C_SUB_BG,
 		VRAM_D_SUB_SPRITE
   );
-	
-	NE_TextureSystemReset(0, 0, NE_VRAM_AB);
+
+  vramSetBankE(VRAM_E_TEX_PALETTE);	
+  
+	NE_TextureSystemReset(3, 3, NE_VRAM_AB);
 	consoleDebugInit(DebugDevice_NOCASH);
 	printf("==================\n");
   printf("= INITIALISATION =\n");
 	NQME::InitNQME();
 	printf("==================\n");
 	NQME::listDir();
+  chdir("./models");
+  printf("=====================\n");
+  NQME::listDir();
+  printf("======================\n");
+  chdir("..");
 
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;
