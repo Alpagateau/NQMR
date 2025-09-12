@@ -54,6 +54,9 @@ namespace NQME{
 #define SCREEN_WIDTH 256
 #define SCREEN_HEIGHT 192
 
+#define TEXT_DEFAULT 0
+#define TEXT_CENTER  1
+
 // 2D Rendering
 
 struct BGHeader
@@ -181,6 +184,7 @@ public:
   std::string text;
   Vector2i position;
   u8 channel;
+  u8 centering = TEXT_DEFAULT;
   BasicText();
   void Draw();
 };

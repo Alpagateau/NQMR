@@ -9,7 +9,9 @@ extern NE_Palette* player_pal;
 void MainMenu::Start()
 {
   NE_MainScreenSetOnBottom();
-
+  state = MAIN_SCREEN;
+  delta = 0;
+  loading_out = false;
   NQME::SetBackgroundSub(title_screen_bg);
   NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
 
@@ -47,17 +49,16 @@ void MainMenu::Start()
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
-  
-  my_theme = NQME::NewTheme(
-    "models/button_map_png.grf"
-    //"models/16_tiny_png.grf"
-  );
+
+  NE_RichTextPriorityReset(); 
+  my_theme = NQME::NewTheme("models/button_map_png.grf");
 
   start_button.label.text = "START";
   start_button.label.channel = 0;
   start_button.position = {80, 25};
   start_button.txt_offset = {5, 0};
   start_button.margin = {10, 0};
+  start_button.is_visible = true;
   start_button.SetTheme(&my_theme);
   start_button.selected_current = true;
   
@@ -66,6 +67,7 @@ void MainMenu::Start()
   credits_button.txt_offset = {5, 0};
   credits_button.margin = {10, 0};
   credits_button.position = {80, 60};
+  credits_button.is_visible = true;
   credits_button.SetTheme(&my_theme);
   credits_button.selected_current = false;
   

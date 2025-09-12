@@ -108,7 +108,8 @@ void Gameplay::Start()
   game_data.pts = 0;
   score_text.channel = 0;
   score_text.text = "0";
-  score_text.position = {0, 0};
+  score_text.position = {127, 170};
+  score_text.centering = TEXT_CENTER;
 }
 
 void Gameplay::Update()

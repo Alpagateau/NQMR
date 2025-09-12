@@ -493,16 +493,35 @@ void Draw3DScene(void *args)
   }
   ds->sprite_count = 0;
   
-  if(ds->fading_percent == 0){
+  if(true){//ds->fading_percent == 0){
+    NE_RichTextPrioritySet(1);
     for(int i = 0; i < ds->text_count; i++)
     { 
-      NE_RichTextRender3D(
+      if(ds->texts[i]->centering == TEXT_DEFAULT)
+      {
+        NE_RichTextRender3D(
           ds->texts[i]->channel,
           ds->texts[i]->text.c_str(),
           ds->texts[i]->position.x,
           ds->texts[i]->position.y        
-      );
+        );
+      }else if(ds->texts[i]->centering == TEXT_CENTER)
+      {
+        size_t dimx, dimy;
+        NE_RichTextRenderDryRun(
+          ds->texts[i]->channel,
+          ds->texts[i]->text.c_str(),
+          &dimx, &dimy
+        );
+        NE_RichTextRender3D(
+          ds->texts[i]->channel,
+          ds->texts[i]->text.c_str(),
+          ds->texts[i]->position.x - (dimx>>2),
+          ds->texts[i]->position.y - (dimy>>2)       
+        );
+      }
     }
+    NE_RichTextPriorityReset();
   }
   ds->text_count = 0;
   NE_PolyFormat(31, 

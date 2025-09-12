@@ -37,7 +37,6 @@ namespace NQME
   void SceneManager::SwitchTo(u8 next_scene)
   {
     next = next_scene;
-    printf("Going to scene #%d\n", next);
   }
 
   void SceneManager::Start()
