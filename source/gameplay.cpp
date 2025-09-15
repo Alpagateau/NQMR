@@ -3,9 +3,6 @@
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
-extern NE_Material* player_mat;
-extern NE_Palette* player_pal;
-
 void Gameplay::Start()
 {
 
@@ -20,22 +17,32 @@ void Gameplay::Start()
   ArrowHeader.Load((void*)arrows_pngTiles, arrows_pngTilesLen, SQ32_256);
 
   printf("Creating materials\n");
-  //arrows_mat = NE_MaterialCreate();
-	//arrows_pal = NE_PaletteCreate();
-  //player_mat = NE_MaterialCreate();
-	//player_pal  = NE_PaletteCreate();
+  arrows_mat = NE_MaterialCreate();
+	arrows_pal = NE_PaletteCreate();
+  player_mat = NE_MaterialCreate();
+	player_pal  = NE_PaletteCreate();
 
   printf("Loading player spritesheet\n");
-  NE_MaterialTexLoadGRF(player_mat, 
+  int small = NE_MaterialTexLoadGRF(player_mat, 
                         player_pal, 
                         //NE_TEXTURE_COLOR0_TRANSPARENT,
                         (NE_TextureFlags)0, 
-                        "models/spritesheet_small_png.grf");
-                        //"models/16_tiny_png.grf");
+                        //"models/spritesheet_small_png.grf");
+                        "models/sheet_png.grf");
+  if(small != 1 )
+  {
+    printf("Couldnt load small txt, error code : %d\n", small);
+    int big = NE_MaterialTexLoadGRF(player_mat,
+                                    player_pal, 
+                                    (NE_TextureFlags)0, 
+                                    "models/spritesheet_small_png.grf");
+    if(big != 1) printf("Neither the big one...\n");
+    printf("===============\n");
+  }
 
 
   printf("Loading arrow material\n");
-  //NE_MaterialTexLoadGRF(arrows_mat, arrows_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/arrows_png.grf");
+  NE_MaterialTexLoadGRF(arrows_mat, arrows_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/arrows_png.grf");
   
   NE_SpriteSetMaterial(player.sprite, player_mat);
   printf("Creating camera\n");
@@ -58,15 +65,13 @@ void Gameplay::Start()
 		target_arrows[i].anchor = (Vector2i){16, 16};
 		target_arrows[i].transform.position = {X_Positions[i+1],  16};
 		target_arrows[i].dimensions = {32, 32};
-		//NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
-	  NE_SpriteSetMaterial(target_arrows[i].sprite, player_mat);
+		NE_SpriteSetMaterial(target_arrows[i].sprite, arrows_mat);
+	  //NE_SpriteSetMaterial(target_arrows[i].sprite, player_mat);
+  }
   NE_RichTextInit(1);
   NE_RichTextMetadataLoadFAT(1, "fonts/graphiti.fnt");
-  NE_RichTextMaterialLoadGRF(1, "fonts/graphiti_0_png.grf");
-  
-
-	}
-
+  NE_RichTextMaterialLoadGRF(1, "fonts/graphiti_0_png.grf"); 
+	
   printf("Setting up movement arrows\n");
 
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
@@ -80,16 +85,14 @@ void Gameplay::Start()
     top_arrows[i].dimensions = {32, 32};
     top_arrows[i].anchor.x = 16;
     top_arrows[i].anchor.y =  16;
-    NE_SpriteSetMaterial(top_arrows[i].sprite, player_mat);
+    NE_SpriteSetMaterial(top_arrows[i].sprite, arrows_mat);
   }
 
   printf("Setting up Player Chatacter\n");
   player.dimensions = {64, 128};
-  
+  player.centering = SPT_DM;
   player.transform.position = (Vector2i){100, 50};
-
   player_animation.sprite = &player;
-
   player_animation.Play(&idle);
 
   player.index = 1;
@@ -173,7 +176,7 @@ void Gameplay::Update()
 	}
 
   eh.Update(frame);
-  player_animation.Update();
+  player_animation.Update(); 
   score_text.text = std::to_string(
     game_data.pts
   );

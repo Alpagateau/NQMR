@@ -75,7 +75,7 @@ nitrofs.generate_image()
 arm9 = Arm9Binary(
   sourcedirs=['source', 'engine/source'],
   includedirs=['source', 'engine/source'],
-  libs=['nds9', 'mm9', 'dsf','NE', 'c'],
+  libs=['nds9', 'mm9', 'dsf','NE_debug', 'c'],
   libdirs=[
     '${BLOCKSDS}/libs/libnds', 
     '${BLOCKSDS}/libs/maxmod', 
@@ -83,6 +83,7 @@ arm9 = Arm9Binary(
     '${BLOCKSDSEXT}/libdsf'
     ]
   )
+arm9.defines = ["NE_DEBUG"]
 
 arm9.add_grit(["gfx"], "gfx")
 

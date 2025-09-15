@@ -12,7 +12,7 @@ struct NSAnimation
   
   u8 size;
   u8 fpf; //frames(render) per frame(animation) 
-  Vector2i *frames;
+  Rect *frames;
 };
 
 class AnimatedSprite

@@ -57,6 +57,16 @@ namespace NQME{
 #define TEXT_DEFAULT 0
 #define TEXT_CENTER  1
 
+#define SPT_TL 0
+#define SPT_TM 1
+#define SPT_TR 2
+#define SPT_ML 3
+#define SPT_MM 4
+#define SPT_MR 5
+#define SPT_DL 6
+#define SPT_DM 7
+#define SPT_DR 8
+
 // 2D Rendering
 
 struct BGHeader
@@ -170,11 +180,13 @@ public:
   Transform2D transform;
   Vector2i uv_position = (Vector2i){0, 0};   
   Vector2i uv_dimensions = (Vector2i){0,0};
+  u8 centering = SPT_MM;
   Vector2i anchor = (Vector2i){0,0};
   u8 index = 0;
   NE_Sprite *sprite;
   NitroSprite();
   NitroSprite(int w, int h);
+  Vector2i GetOffset();
   void Draw();
 };
 

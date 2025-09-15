@@ -386,12 +386,58 @@ StaticModel::StaticModel(const char *path)
   NE_ModelLoadStaticMeshFAT(mesh, path);
 }
 
+Vector2i NitroSprite::GetOffset()
+{
+  int w = dimensions.x;
+  int h = dimensions.y;
+  Vector2i output = {0, 0};
+  switch(centering)
+  {
+    case SPT_TL:
+      break;
+    case SPT_TM:
+      output.x = (w>>1);
+      break;
+    case SPT_TR:
+      output.x = w;
+      break;
+    case SPT_ML:
+      output.y = (h>>1);
+      break;
+    case SPT_MM:
+      output.x = (w>>1);
+      output.y = (h>>1);
+      break;
+    case SPT_MR:
+      output.x = w;
+      output.y = (h>>1);
+      break;
+    case SPT_DL:
+      output.y = h;
+      break;
+    case SPT_DM:
+      output.y = h;
+      output.x = (w>>1);
+      break;
+    case SPT_DR:
+      output.y = h;
+      output.x = w;
+  }
+  return output;
+}
+
 void NitroSprite::Draw()
 {
     if(DS.sprite_count >= SPRITE_STACK_SIZE)
         return;
-    NE_SpriteSetParams(sprite, 0xFF, DS.sprite_count, 0xffffff);
+    NE_SpriteSetParams(sprite, 0x1F, DS.sprite_count, 0xffffff);
     NE_SpriteSetPriority(sprite, (int)index+1);
+    Vector2i old_pos = transform.position; 
+    Vector2i delta = GetOffset();
+    Vector2i new_pos = {
+      transform.position.x - delta.x - (int)(anchor.x * transform.scale),
+      transform.position.y - delta.y - (int)(anchor.y * transform.scale)
+    };
     NE_SpriteSetPos(
         sprite, 
         transform.position.x - (int)(anchor.x * transform.scale), 

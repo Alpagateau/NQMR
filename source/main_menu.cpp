@@ -3,9 +3,6 @@
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
-extern NE_Material* player_mat;
-extern NE_Palette* player_pal;
-
 void MainMenu::Start()
 {
   NE_MainScreenSetOnBottom();
@@ -14,18 +11,6 @@ void MainMenu::Start()
   loading_out = false;
   NQME::SetBackgroundSub(title_screen_bg);
   NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
-
-  
-  player_mat = NE_MaterialCreate();
-  player_pal = NE_PaletteCreate();
-
-  NE_MaterialTexLoadGRF(
-    player_mat,
-    player_pal,
-    (NE_TextureFlags)0,
-    //"models/menu_background_png.grf"
-    "models/256_tiny_png.grf"
-  ); 
 
   background_mat = NE_MaterialCreate();
   background_pal = NE_PaletteCreate();

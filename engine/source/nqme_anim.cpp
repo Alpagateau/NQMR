@@ -33,7 +33,13 @@ void AnimatedSprite::Update()
   if(cur_anim == NULL)
     return;
   
-  sprite->uv_position = cur_anim->frames[framepos];
+  sprite->uv_position.x = cur_anim->frames[framepos].x;
+  sprite->uv_position.y = cur_anim->frames[framepos].y;
+  sprite->uv_dimensions.x = cur_anim->frames[framepos].w;
+  sprite->uv_dimensions.y = cur_anim->frames[framepos].h;
+  sprite->dimensions.x = cur_anim->frames[framepos].w;
+  sprite->dimensions.y = cur_anim->frames[framepos].h;
+
   framecount++;
   if(framecount >= cur_anim->fpf)
   {

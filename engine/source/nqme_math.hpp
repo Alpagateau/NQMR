@@ -1,5 +1,7 @@
 #pragma once
 
+#include <nds.h>
+
 struct Vector2i
 {
     int x;
@@ -27,6 +29,11 @@ struct Vector3f
   float x;
   float y;
   float z;
+};
+
+struct Rect 
+{
+  u8 x, y, w, h;
 };
 
 int dot(Vector2i a, Vector2i b);

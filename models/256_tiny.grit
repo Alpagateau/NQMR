@@ -1,2 +1,4 @@
 #PAL16
--gx -gb -gBpal256
+#-gx -gb -gB8
+#-gx -gb -gB8 -gTFF00FF
+-gt -gB8 -m! -p!
