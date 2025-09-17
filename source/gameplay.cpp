@@ -61,7 +61,8 @@ void Gameplay::Start()
   printf("Setting target arrows \n");
 	for(int i = 0; i < 4; i++)
 	{
-		target_arrows[i].uv_position.y = 32 * i;
+    target_arrows[i].uv_position.x = arrow_frame.x;
+		target_arrows[i].uv_position.y = arrow_frame.y;
 		target_arrows[i].anchor = (Vector2i){16, 16};
 		target_arrows[i].transform.position = {X_Positions[i+1],  16};
 		target_arrows[i].dimensions = {32, 32};
@@ -85,6 +86,8 @@ void Gameplay::Start()
     top_arrows[i].dimensions = {32, 32};
     top_arrows[i].anchor.x = 16;
     top_arrows[i].anchor.y =  16;
+    top_arrows[i].uv_position.x = arrow_frame.x;
+    top_arrows[i].uv_position.y = arrow_frame.y;
     NE_SpriteSetMaterial(top_arrows[i].sprite, player_mat);
   }
 
@@ -129,15 +132,20 @@ void Gameplay::Update()
   NQME::UpdateInputs(); 
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
   {
+    int chnl = arrws[i].channel;
 		arrow_sprites[i]._SetPosition(	
-		  X_Positions[arrws[i].channel],
+		  X_Positions[chnl],
 			(-1 * (frame - arrws[i].time_start)) + 16 - SCREEN_HEIGHT - SCREEN_GAP
 		);
-    top_arrows[i].transform.position.x = X_Positions[arrws[i].channel];
+
+    top_arrows[i].transform.position.x = X_Positions[chnl];
     top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
-    top_arrows[i].uv_position = {0, 32 * (arrws[i].channel - 1)};
+    //top_arrows[i].uv_position = {0, 32 * (chnl - 1)};
+    top_arrows[i].tint = arrws_col[chnl];
+		top_arrows[i].transform.angle = arrws_rot[chnl];
     top_arrows[i].Draw();
-		arrow_sprites[i].offset = arrws_offsets[arrws[i].channel];
+		top_arrows[i].transform.angle = arrws_rot[arrws[i].channel];
+    arrow_sprites[i].offset = arrws_offset[chnl];
 		arrow_sprites[i].Update();
   }
 

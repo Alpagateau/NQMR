@@ -16,7 +16,15 @@ class Gameplay: public NQME::Scene
 {
 public:
   int X_Positions[5]       = {-32, 32, 94, 168, 232};
-	int arrws_offsets[5]     = {  0,  0,  8,  16,  24};
+  int arrws_offset[5]      = {0, 0, 8, 16, 24};
+	float arrws_rot[5]     = {  0,  0,  0.25, 0.5 , 0.75};
+  u32 arrws_col[5]     = {
+    0xFFFFFF, //Black but invisible so who cares
+    0xFF0000, //Red
+    0x00FF00, //Green
+    0x0000FF, //Blue
+    0xFFFF00, //Yellow
+  };
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
 
 
@@ -49,6 +57,8 @@ flip
 push 
 sonic
 */
+
+  Rect arrow_frame = {256 -32, 256 - 32, 32, 32};
 
   Rect idle0_frames[4] = {
     {31, 69, 24, 60},

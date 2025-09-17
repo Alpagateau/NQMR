@@ -430,7 +430,7 @@ void NitroSprite::Draw()
 {
     if(DS.sprite_count >= SPRITE_STACK_SIZE)
         return;
-    NE_SpriteSetParams(sprite, 0x1F, DS.sprite_count, 0xffffff);
+    NE_SpriteSetParams(sprite, 0x1F, DS.sprite_count, tint);
     NE_SpriteSetPriority(sprite, (int)index+1);
     Vector2i old_pos = transform.position; 
     Vector2i delta = GetOffset();
