@@ -38,7 +38,8 @@ void MainMenu::Start()
   NE_RichTextPriorityReset(); 
   my_theme = NQME::NewTheme("models/button_map_png.grf");
 
-  start_button.label.text = "START";
+  //start_button.label.text = "START";
+  strcpy(start_button.label.text, "START");
   start_button.label.channel = 0;
   start_button.position = {80, 25};
   start_button.txt_offset = {5, 0};
@@ -47,7 +48,8 @@ void MainMenu::Start()
   start_button.SetTheme(&my_theme);
   start_button.selected_current = true;
   
-  credits_button.label.text = "CREDITS";
+  //credits_button.label.text = "CREDITS";
+  strcpy(credits_button.label.text, "CREDITS");
   credits_button.label.channel = 0;
   credits_button.txt_offset = {5, 0};
   credits_button.margin = {10, 0};
@@ -73,7 +75,7 @@ void MainMenu::Start()
 
   for(int i = 0; i < 5; i++)
   {
-    selection[i].label.text = available_songs[i];
+    strcpy(selection[i].label.text, available_songs[i].c_str());
     selection[i].position = {10 + max_delta, 35 * i};
     selection[i].is_visible = true;
     selection[i].label.channel = 0;
@@ -123,7 +125,8 @@ void MainMenu::Update()
       if(selection[i].IsClicked())
       {
         loading_out = true;
-        game_data.music_name = selection[i].label.text;
+        //game_data.music_name = selection[i].label.text;
+        strcpy(game_data.music_name, selection[i].label.text);
         sm->SwitchTo(1);
       }
       

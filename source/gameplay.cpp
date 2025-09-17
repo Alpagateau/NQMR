@@ -97,20 +97,28 @@ void Gameplay::Start()
 
   player.index = 1;
   NE_MainScreenSetOnTop(); 
-  std::string song_path = ("songs/" + game_data.music_name + ".wav.raw");
-  printf("(%s)", song_path.c_str());
-  NQME::LoadSong(song_path.c_str());
+
+  char song_path[100] = "songs/";
+  strcat(song_path, game_data.music_name);
+  strcat(song_path, ".wav.raw");
+  //song_path = ("songs/" + game_data.music_name + ".wav.raw");
+  printf("(%s)", song_path);
+  NQME::LoadSong(song_path);
 	NQME::PlayStream();
 
+  song_path[0] = 0;
+  strcat(song_path, "bms/");
+  strcat(song_path, game_data.music_name);
+  strcat(song_path, ".bbm");
   eh.Init(
-    ("bms/" + game_data.music_name + ".bbm").c_str(),
+    song_path,
     EVENT_BUFFER_SIZE, 
     arrws);
   eh.grace = 64;	
 
   game_data.pts = 0;
   score_text.channel = 0;
-  score_text.text = "0";
+  strcpy(score_text.text, "0"); 
   score_text.position = {127, 170};
   score_text.centering = TEXT_CENTER;
 }
@@ -177,9 +185,8 @@ void Gameplay::Update()
 
   eh.Update(frame);
   player_animation.Update(); 
-  score_text.text = std::to_string(
-    game_data.pts
-  );
+  //score_text.text = std::to_string(game_data.pts);
+  sprintf(score_text.text, "%d", game_data.pts);
   score_text.Draw();
   if(eh.Ended())
     sm->SwitchTo(0);

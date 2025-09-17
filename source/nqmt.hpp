@@ -12,7 +12,7 @@
 
 struct GameData 
 {
-  std::string music_name;
+  char music_name[40];
   int pts = 0;
   bool success = false;
 };

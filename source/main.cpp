@@ -48,20 +48,6 @@ int main( void ) {
 
   NE_DebugSetHandler(debug_print);
 
-  //player_mat = NE_MaterialCreate();
-  //player_pal = NE_PaletteCreate();
-
- /* NE_MaterialTexLoadGRF(
-    player_mat,
-    player_pal,
-    (NE_TextureFlags)0,
-    //"models/menu_background_png.grf"
-    "models/256_tiny_png.grf"
-  ); 
-  */
-
-
-
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;
 

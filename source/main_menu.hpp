@@ -16,14 +16,12 @@ extern "C"{
 class MainMenu: public NQME::Scene
 {
 public:
-  NQME::NitroSprite background_sprite;
-  
+  NQME::NitroSprite background_sprite; 
   std::string available_songs[NUMBER_OF_SONGS];
   u8 state = MAIN_SCREEN;
   
   int delta     = 0;
-  int max_delta = 255;
-  
+  int max_delta = 255; 
   bool loading_out = false;
    
   NE_Material *background_mat;

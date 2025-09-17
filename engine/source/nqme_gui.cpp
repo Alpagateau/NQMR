@@ -17,7 +17,7 @@ const Rectangle panel_sizes[] ={
 
 SimpleButton::SimpleButton()
 {
-  label.text = "";
+  label.text[0] = 0;
   theme = nullptr;
 }
 
@@ -58,7 +58,7 @@ void SimpleButton::Draw()
   size_t dimy;
   NE_RichTextRenderDryRun(
     label.channel, 
-    label.text.c_str(), 
+    label.text,
     &dimx, &dimy);
   dimx += margin.x;
   dimy += margin.y;
@@ -115,10 +115,8 @@ u8 getBestPanel(Vector2i dim)
 
 void Selectable::UpdateSelected()
 {
-  //printf("Selectable %d, %d", selected_current, selected_before);
   if(selected_current && selected_before)
   {
-    //printf("Currently Selected");
     if(JustPressed(KEY_UP) && up != nullptr)
     {
       selected_current = false;
@@ -129,7 +127,6 @@ void Selectable::UpdateSelected()
     {
       selected_current = false;
       down->selected_current = true;
-      //printf("DOWN SELECTED");
     }
     else if(JustPressed(KEY_LEFT) && left != nullptr)
     {

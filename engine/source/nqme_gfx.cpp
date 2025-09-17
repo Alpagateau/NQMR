@@ -471,7 +471,7 @@ void NitroSprite::Draw()
 BasicText::BasicText()
 {
     channel = 0;
-    text = "";
+    text[0] = 0;
 }
 
 void BasicText::Draw()
@@ -547,7 +547,7 @@ void Draw3DScene(void *args)
       {
         NE_RichTextRender3D(
           ds->texts[i]->channel,
-          ds->texts[i]->text.c_str(),
+          ds->texts[i]->text,
           ds->texts[i]->position.x,
           ds->texts[i]->position.y        
         );
@@ -556,12 +556,12 @@ void Draw3DScene(void *args)
         size_t dimx, dimy;
         NE_RichTextRenderDryRun(
           ds->texts[i]->channel,
-          ds->texts[i]->text.c_str(),
+          ds->texts[i]->text,
           &dimx, &dimy
         );
         NE_RichTextRender3D(
           ds->texts[i]->channel,
-          ds->texts[i]->text.c_str(),
+          ds->texts[i]->text,
           ds->texts[i]->position.x - (dimx>>2),
           ds->texts[i]->position.y - (dimy>>2)       
         );

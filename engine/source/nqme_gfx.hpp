@@ -3,7 +3,8 @@
 
 #include <nds.h>
 //Let's try this 
-#include <string>
+// Let's go back to c strings
+//#include <string>
 #include "nqme_math.hpp"
 #include "nqme_debug.hpp"
 #include <NEMain.h>
@@ -193,7 +194,7 @@ public:
 class BasicText
 {
 public:
-  std::string text;
+  char text[30];
   Vector2i position;
   u8 channel;
   u8 centering = TEXT_DEFAULT;
