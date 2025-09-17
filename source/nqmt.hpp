@@ -3,7 +3,7 @@
 #include "nqme_engine.hpp"
 #include <vector>
 
-#define SPRITE_POOL_SIZE 25
+#define SPRITE_POOL_SIZE 20
 
 #define MAIN_MENU 0
 #define GAMEPLAY  1
