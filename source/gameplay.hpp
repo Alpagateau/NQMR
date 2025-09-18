@@ -11,7 +11,7 @@ extern "C"{
 #define EVENT_BUFFER_SIZE 10
 #define NUM_ARROWS 32
 
-#define SPEED_MULT 3
+#define SPEED_MULT 4
 
 
 class Gameplay: public NQME::Scene

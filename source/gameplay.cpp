@@ -26,8 +26,7 @@ void Gameplay::Start()
   int small = NE_MaterialTexLoadGRF(player_mat, 
                         player_pal, 
                         NE_TEXTURE_COLOR0_TRANSPARENT,
-                        //(NE_TextureFlags)0, 
-                        //"models/spritesheet_small_png.grf");
+                        //(NE_TextureFlags)0,
                         "models/squeezed_256_png.grf");
   if(small != 1 )
   {
@@ -42,7 +41,6 @@ void Gameplay::Start()
 
 
   printf("Loading arrow material\n");
-  //NE_MaterialTexLoadGRF(player_mat, player_pal, NE_TEXTURE_COLOR0_TRANSPARENT, "models/arrows_png.grf");
   
   NE_SpriteSetMaterial(player.sprite, player_mat);
   printf("Creating camera\n");
@@ -94,7 +92,7 @@ void Gameplay::Start()
   printf("Setting up Player Chatacter\n");
   player.dimensions = {64, 128};
   player.centering = SPT_DM;
-  player.transform.position = (Vector2i){100, 50};
+  player.transform.position = (Vector2i){127, 160};
   player_animation.sprite = &player;
   player_animation.Play(&idle);
 
@@ -162,7 +160,7 @@ void Gameplay::Update()
     }
 		if(NQME::JustPressed(controls[i]))
 		{
-      printf("[DEBUG] Angle : %ld\n", top_arrows[i].transform.angle);
+      //printf("[DEBUG] Angle : %ld\n", top_arrows[i].transform.angle);
       int d = DistForKey(i+1, eh, 15);
 			if(d >= 0)
 			{

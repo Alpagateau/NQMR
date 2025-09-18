@@ -181,7 +181,7 @@ public:
   Transform2D transform;
   Vector2i uv_position = (Vector2i){0, 0};   
   Vector2i uv_dimensions = (Vector2i){0,0};
-  u8 centering = SPT_MM;
+  u8 centering = SPT_TL;
   int tint = 0xffffff;
   Vector2i anchor = (Vector2i){0,0};
   u8 index = 0;

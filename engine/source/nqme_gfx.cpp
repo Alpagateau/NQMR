@@ -396,33 +396,34 @@ Vector2i NitroSprite::GetOffset()
     case SPT_TL:
       break;
     case SPT_TM:
-      output.x = (w>>1);
+      output.x = w/2;
       break;
     case SPT_TR:
       output.x = w;
       break;
     case SPT_ML:
-      output.y = (h>>1);
+      output.y = (h/2);
       break;
     case SPT_MM:
-      output.x = (w>>1);
-      output.y = (h>>1);
+      output.x = (w/2);
+      output.y = (h/2);
       break;
     case SPT_MR:
       output.x = w;
-      output.y = (h>>1);
+      output.y = (h/2);
       break;
     case SPT_DL:
       output.y = h;
       break;
     case SPT_DM:
       output.y = h;
-      output.x = (w>>1);
+      output.x = (w/2);
       break;
     case SPT_DR:
       output.y = h;
       output.x = w;
   }
+  //printf("[DEBUG] OFFSET : %d, %d\n", output.x, output.y);
   return output;
 }
 
@@ -440,8 +441,10 @@ void NitroSprite::Draw()
     };
     NE_SpriteSetPos(
         sprite, 
-        transform.position.x - (int)(anchor.x * transform.scale), 
-        transform.position.y - (int)(anchor.y * transform.scale)
+        new_pos.x,
+        new_pos.y
+        //transform.position.x - (int)(anchor.x * transform.scale), 
+        //transform.position.y - (int)(anchor.y * transform.scale)
     );
     NE_SpriteSetRot(
       sprite,
