@@ -35,6 +35,6 @@ struct Rect
 {
   u8 x, y, w, h;
 };
-
+int randInt();
 int dot(Vector2i a, Vector2i b);
 int min(int a, int b);

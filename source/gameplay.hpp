@@ -1,7 +1,6 @@
 extern "C"{
 #include "gfx/title_png.h"
 #include "gfx/arrows_png.h"
-#include "gfx/tiny_fat_luigi_png.h"
 }
 
 #include "nqme_engine.hpp"
@@ -9,6 +8,7 @@ extern "C"{
 //#include "frames.cpp"
 
 #define EVENT_BUFFER_SIZE 10
+#define PROPS_BUFFER_SIZE 4
 #define NUM_ARROWS 32
 
 #define SPEED_MULT 4
@@ -39,7 +39,9 @@ public:
   NQME::BasicText score_text;
   NQME::Sprite2D *arrow_sprites;
   NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
+  NQME::NitroSprite props[PROPS_BUFFER_SIZE];
   NQME::NitroSprite player;
+  NQME::NitroSprite road;
   NQME::AnimatedSprite player_animation;
 
 	NQME::event arrws[EVENT_BUFFER_SIZE];
@@ -67,6 +69,10 @@ sonic
 */
 
   Rect arrow_frame = {256 -32, 256 - 32, 32, 32};
+
+  Rect bench   = {204,  98, 23, 56};
+  Rect bin     = {231, 100, 24, 40};
+  Rect barrier = {228, 152, 25, 36};
 
   Rect idle0_frames[4] = {
     {31, 69, 24, 60},

@@ -95,7 +95,7 @@ nds = NdsRom(
   game_title="NQMT",
   game_subtitle="Not Quite My Tempo",
   game_author="Martin Nadaud",
-  game_icon="icon.bmp",
+  game_icon="icon2.bmp",
 )
 
 nds.generate_nds()

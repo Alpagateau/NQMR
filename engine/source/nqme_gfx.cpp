@@ -565,8 +565,8 @@ void Draw3DScene(void *args)
         NE_RichTextRender3D(
           ds->texts[i]->channel,
           ds->texts[i]->text,
-          ds->texts[i]->position.x - (dimx>>2),
-          ds->texts[i]->position.y - (dimy>>2)       
+          ds->texts[i]->position.x - (dimx>>1),
+          ds->texts[i]->position.y - (dimy>>1)       
         );
       }
     }

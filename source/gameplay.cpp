@@ -19,10 +19,7 @@ void Gameplay::Start()
   printf("Creating materials\n");
   player_mat = NE_MaterialCreate();
 	player_pal = NE_PaletteCreate();
-  player_mat = NE_MaterialCreate();
-	player_pal  = NE_PaletteCreate();
-
-  printf("Loading player spritesheet\n");
+  printf("Loading global spritesheet\n");
   int small = NE_MaterialTexLoadGRF(player_mat, 
                         player_pal, 
                         NE_TEXTURE_COLOR0_TRANSPARENT,
@@ -43,6 +40,7 @@ void Gameplay::Start()
   printf("Loading arrow material\n");
   
   NE_SpriteSetMaterial(player.sprite, player_mat);
+  NE_SpriteSetMaterial(road.sprite, player_mat);
   printf("Creating camera\n");
   camera = NE_CameraCreate();
 
@@ -55,7 +53,15 @@ void Gameplay::Start()
   
   printf("Seeting some pointers\n");
   arrow_sprites = sprite_pool;
-  
+  printf("Setting up the props");
+  for(int i = 0; i < PROPS_BUFFER_SIZE; i++)
+  {
+    NE_SpriteSetMaterial(props[i].sprite, player_mat);
+    props[i].centering = SPT_DM;
+    props[i].transform.position.y = 0;
+    props[i].transform.position.x = 20;
+    props[i].index = 1;
+  }
   printf("Setting target arrows \n");
 	for(int i = 0; i < 4; i++)
 	{
@@ -96,7 +102,13 @@ void Gameplay::Start()
   player_animation.sprite = &player;
   player_animation.Play(&idle);
 
+  printf("Setting up river\n");
+  road.dimensions = {256, 256};
+  road.uv_position = {0, 256};
+  road.uv_dimensions = {256, 256};
+
   player.index = 1;
+  road.index = 2;
   NE_MainScreenSetOnTop(); 
 
   char song_path[100] = "songs/";
@@ -128,6 +140,50 @@ void Gameplay::Update()
 {
   frame++;
   NQME::UpdateInputs(); 
+  road.Draw();
+  road.transform.position.y += 1;
+
+  for(int i = 0; i < PROPS_BUFFER_SIZE; i++)
+  {
+    printf("[Prop Pos] %d\n", props[i].transform.position.y);
+    if(props[i].transform.position.y == 0)
+    {
+      if(randInt()%101 == 0)
+      {
+        props[i].transform.position.y++;
+        Rect *r;
+        int ra = randInt();
+        if(ra%3 == 0) r = &bench;
+        if(ra%3 == 1) r = &bin;
+        if(ra%3 == 2) r = &barrier; 
+        
+        props[i].uv_position.x = r->x;
+        props[i].uv_position.y = r->y;
+        props[i].uv_dimensions.x = r->w;
+        props[i].uv_dimensions.y = r->h;
+        props[i].dimensions.x = r->w;
+        props[i].dimensions.y = r->h;
+
+        if(randInt()%2 == 0)
+        {
+          props[i].transform.position.x = 236;
+          props[i].dimensions.x *= -1;
+        }
+        else
+        {
+          props[i].transform.position.x = 20;
+        }
+      }
+    }
+    else
+    {
+      props[i].transform.position.y++;
+      if(props[i].transform.position.y >= 256) props[i].transform.position.y = 0;
+    }  
+    props[i].Draw();
+  }
+  
+  if(road.transform.position.y >= 0 ) road.transform.position.y = (196 - 256);
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
   {
     int chnl = arrws[i].channel;
@@ -186,8 +242,7 @@ void Gameplay::Update()
           );
         }
 			}
-		}
-		
+		}		
 		target_arrows[i].Draw();
 	}
 
