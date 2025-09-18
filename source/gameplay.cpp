@@ -71,7 +71,6 @@ void Gameplay::Start()
 		target_arrows[i].transform.position = {X_Positions[i+1],  16};
 		target_arrows[i].dimensions = {32, 32};
 		NE_SpriteSetMaterial(target_arrows[i].sprite, player_mat);
-	  //NE_SpriteSetMaterial(target_arrows[i].sprite, player_mat);
   }
   NE_RichTextInit(1);
   NE_RichTextMetadataLoadFAT(1, "fonts/graphiti.fnt");
@@ -131,9 +130,13 @@ void Gameplay::Start()
 
   game_data.pts = 0;
   score_text.channel = 0;
+  accuracy_text.channel = 0;
+  strcpy(accuracy_text.text, "");
   strcpy(score_text.text, "0"); 
   score_text.position = {127, 170};
   score_text.centering = TEXT_CENTER;
+  accuracy_text.position = {100, 100};
+  accuracy_text.centering = TEXT_CENTER;
 }
 
 void Gameplay::Update()
@@ -216,7 +219,6 @@ void Gameplay::Update()
     }
 		if(NQME::JustPressed(controls[i]))
 		{
-      //printf("[DEBUG] Angle : %ld\n", top_arrows[i].transform.angle);
       int d = DistForKey(i+1, eh, 15);
 			if(d >= 0)
 			{
@@ -251,6 +253,15 @@ void Gameplay::Update()
   //score_text.text = std::to_string(game_data.pts);
   sprintf(score_text.text, "%d", game_data.pts);
   score_text.Draw();
+  accuracy_text.Draw();
+  if(accuracy_cooldown > 0)
+  {
+    accuracy_cooldown--;
+    if(accuracy_cooldown == 0)
+    {
+      strcpy(accuracy_text.text, "");
+    }
+  }
   if(eh.Ended())
     sm->SwitchTo(0);
 }

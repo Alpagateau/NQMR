@@ -2,6 +2,7 @@
 
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
+extern SaveData save_data;
 
 void MainMenu::Start()
 {

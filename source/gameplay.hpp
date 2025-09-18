@@ -13,6 +13,12 @@ extern "C"{
 
 #define SPEED_MULT 4
 
+struct accuracy_level 
+{
+  int min_score;
+  NQME::NSAnimation *animation;
+  char *label;
+};
 
 class Gameplay: public NQME::Scene
 {
@@ -37,6 +43,8 @@ public:
 
 
   NQME::BasicText score_text;
+  NQME::BasicText accuracy_text;
+  int accuracy_cooldown = 0;
   NQME::Sprite2D *arrow_sprites;
   NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
   NQME::NitroSprite props[PROPS_BUFFER_SIZE];
@@ -153,8 +161,20 @@ sonic
                         	{
                             	.size = 4,
                               .fpf = 8,
-                              .frames = sonic_frames
+                              .frames = shoveit_frames
                           };
+  NQME::NSAnimation push = (NQME::NSAnimation)
+                          {
+                            .size = 4;
+                            .fpf = 8;
+                            .frames = push_frames
+                          };
+
+  accuracy_level lvls = {
+    {2, &} 
+  };
+
+
   int frame = 0;
 
   explicit Gameplay(

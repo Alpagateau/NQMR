@@ -10,6 +10,16 @@
 
 #define SCREEN_GAP 8
 
+#define SAVE_OFFSET 0
+struct SaveData 
+{
+  int newSave;
+  int[5] scores;
+};
+
+bool loadSave();
+bool saveSave();
+
 struct GameData 
 {
   char music_name[40];
