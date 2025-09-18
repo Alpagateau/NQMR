@@ -432,7 +432,7 @@ void NitroSprite::Draw()
         return;
     NE_SpriteSetParams(sprite, 0x1F, DS.sprite_count, tint);
     NE_SpriteSetPriority(sprite, (int)index+1);
-    Vector2i old_pos = transform.position; 
+    //Vector2i old_pos = transform.position; 
     Vector2i delta = GetOffset();
     Vector2i new_pos = {
       transform.position.x - delta.x - (int)(anchor.x * transform.scale),
@@ -445,7 +445,7 @@ void NitroSprite::Draw()
     );
     NE_SpriteSetRot(
       sprite,
-      floattof32(transform.angle)
+      transform.angle
     );
     
     int u = (uv_dimensions.x == 0) ? dimensions.x : uv_dimensions.x; 

@@ -11,19 +11,27 @@ extern "C"{
 #define EVENT_BUFFER_SIZE 10
 #define NUM_ARROWS 32
 
+#define SPEED_MULT 3
+
 
 class Gameplay: public NQME::Scene
 {
 public:
   int X_Positions[5]       = {-32, 32, 94, 168, 232};
   int arrws_offset[5]      = {0, 0, 8, 16, 24};
-	float arrws_rot[5]     = {  0,  0,  0.25, 0.5 , 0.75};
+  Rect arrws_rect[5]        = {
+    {0, 0, 32, 32},
+    {256 - 32, 256 - 64, 32, 32},  // LEFT
+    {256 - 32, 256 - 32, 32, 32}, // UP
+    {256 - 64, 256 - 64, 32, 32}, // DOWN
+    {256 - 64, 256 - 32, 32, 32}, // RIGHT
+  };
   u32 arrws_col[5]     = {
     0xFFFFFF, //Black but invisible so who cares
-    0xFF0000, //Red
-    0x00FF00, //Green
-    0x0000FF, //Blue
-    0xFFFF00, //Yellow
+    0b000001111111111, //Yellow
+    0b000001111100000, //Green
+    0b000000000011111, //Red
+    0b111110000000000, //Blue
   };
 	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
 

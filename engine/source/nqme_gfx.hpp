@@ -161,7 +161,7 @@ struct Transform2D
 {
   Vector2i position = (Vector2i){0, 0};
   float scale = 1.0f;
-  float angle = 0.0f;
+  u32 angle = 1 << 14;
 };
 
 class StaticModel 

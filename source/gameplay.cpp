@@ -25,8 +25,8 @@ void Gameplay::Start()
   printf("Loading player spritesheet\n");
   int small = NE_MaterialTexLoadGRF(player_mat, 
                         player_pal, 
-                        //NE_TEXTURE_COLOR0_TRANSPARENT,
-                        (NE_TextureFlags)0, 
+                        NE_TEXTURE_COLOR0_TRANSPARENT,
+                        //(NE_TextureFlags)0, 
                         //"models/spritesheet_small_png.grf");
                         "models/squeezed_256_png.grf");
   if(small != 1 )
@@ -61,8 +61,8 @@ void Gameplay::Start()
   printf("Setting target arrows \n");
 	for(int i = 0; i < 4; i++)
 	{
-    target_arrows[i].uv_position.x = arrow_frame.x;
-		target_arrows[i].uv_position.y = arrow_frame.y;
+    target_arrows[i].uv_position.x = arrws_rect[i+1].x;
+		target_arrows[i].uv_position.y = arrws_rect[i+1].y;
 		target_arrows[i].anchor = (Vector2i){16, 16};
 		target_arrows[i].transform.position = {X_Positions[i+1],  16};
 		target_arrows[i].dimensions = {32, 32};
@@ -135,16 +135,17 @@ void Gameplay::Update()
     int chnl = arrws[i].channel;
 		arrow_sprites[i]._SetPosition(	
 		  X_Positions[chnl],
-			(-1 * (frame - arrws[i].time_start)) + 16 - SCREEN_HEIGHT - SCREEN_GAP
+			(-1 * (frame - arrws[i].time_start) * SPEED_MULT) + 16 - SCREEN_HEIGHT - SCREEN_GAP
 		);
 
     top_arrows[i].transform.position.x = X_Positions[chnl];
-    top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start)) + 16;
+    top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start) * SPEED_MULT) + 16;
     //top_arrows[i].uv_position = {0, 32 * (chnl - 1)};
     top_arrows[i].tint = arrws_col[chnl];
-		top_arrows[i].transform.angle = arrws_rot[chnl];
+		//top_arrows[i].transform.angle = ar
+    top_arrows[i].uv_position.x = arrws_rect[chnl].x;
+		top_arrows[i].uv_position.y = arrws_rect[chnl].y;
     top_arrows[i].Draw();
-		top_arrows[i].transform.angle = arrws_rot[arrws[i].channel];
     arrow_sprites[i].offset = arrws_offset[chnl];
 		arrow_sprites[i].Update();
   }
@@ -161,6 +162,7 @@ void Gameplay::Update()
     }
 		if(NQME::JustPressed(controls[i]))
 		{
+      printf("[DEBUG] Angle : %ld\n", top_arrows[i].transform.angle);
       int d = DistForKey(i+1, eh, 15);
 			if(d >= 0)
 			{
