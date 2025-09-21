@@ -45,22 +45,18 @@ int PtsForDist(int dist)
   return 100;
 }
 
-bool loadSave()
+void loadSave()
 {
-  // Grant access to save memory (do this once at startup, but here is safe too)
-   sysSetCardOwner(BUS_OWNER_ARM9);
-    
-  // Attempt to read the data from save memory into our struct
-  return cardRead(save_data, SAVE_OFFSET, sizeof(SaveData)); 
+  printf("[NO IMP](%s, %d): Trying to load a save\n", __FILE__, __LINE__);
 }
 
-bool saveSave()
+void saveSave()
 {
   // Grant access to save memory
   sysSetCardOwner(BUS_OWNER_ARM9);
     
   // Write our struct data to the save memory
-  return cardWrite(save_data, SAVE_OFFSET, sizeof(SaveData));
+  cardWriteEeprom(SAVE_OFFSET, (u8*)&save_data, sizeof(SaveData), cardEepromGetType());
 }
 
 

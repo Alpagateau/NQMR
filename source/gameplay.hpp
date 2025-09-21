@@ -39,11 +39,10 @@ public:
     0b000000000011111, //Red
     0b111110000000000, //Blue
   };
-	u16 controls[4] = {KEY_LEFT, KEY_UP, KEY_X, KEY_A};
-
+	u16 controls[4] = {KEY_LEFT | KEY_Y, KEY_UP | KEY_X , KEY_B | KEY_DOWN, KEY_A | KEY_RIGHT};
 
   NQME::BasicText score_text;
-  NQME::BasicText accuracy_text;
+  NQME::BasicText accuracy_text; //accuracy_text
   int accuracy_cooldown = 0;
   NQME::Sprite2D *arrow_sprites;
   NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
@@ -137,6 +136,13 @@ sonic
                             {
                                 .size = 4,
                                 .fpf = 8,
+                                .frames = idle0_frames
+                            };
+
+  NQME::NSAnimation idle1 = (NQME::NSAnimation)
+                            {
+                                .size = 4,
+                                .fpf = 8,
                                 .frames = idle1_frames
                             };
     
@@ -165,13 +171,30 @@ sonic
                           };
   NQME::NSAnimation push = (NQME::NSAnimation)
                           {
-                            .size = 4;
-                            .fpf = 8;
-                            .frames = push_frames
+                              .size = 4,
+                              .fpf = 8,
+                              .frames = push_frames
+                          };
+  NQME::NSAnimation sonic = (NQME::NSAnimation)
+                          {
+                              .size = 4,
+                              .fpf = 8,
+                              .frames = sonic_frames
                           };
 
-  accuracy_level lvls = {
-    {2, &} 
+  char* accuracy_labels[4] = 
+  {
+    "MYSTIQUE",
+    "SUPER",
+    "BIEN",
+    "PAS MAL"
+  };
+
+  accuracy_level lvls[4] = {
+    {1, &sonic,  accuracy_labels[0]},
+    {3, &kick,   accuracy_labels[1]},
+    {8, &shove,  accuracy_labels[2]},
+    {14, &ollie, accuracy_labels[3]}
   };
 
 

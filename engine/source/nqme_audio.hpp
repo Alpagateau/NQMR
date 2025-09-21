@@ -16,24 +16,25 @@ namespace NQME{
 
 typedef struct {
     FILE* audioFile;
-    long int SamplePosition;
-    int sample_rate;
+    long int samplePosition;
+    int sampleRate;
     mm_ds_system sys;
     mm_stream stream;
-    bool is_playing;
-    long int time_ms;
+    bool isPlaying;
+    //long int time_ms;
 }AudioStreamer;
 
-int initAudio();
+int InitAudio();
 
 mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format);
 
 int  LoadSong(const char *path);
 int  PlayStream();
-void pauseStream();
-void stopStream();
+void PauseStream();
+void StopStream();
+void CloseStream();
 
-int getTime();
+//int getTime();
 
 }
 #endif

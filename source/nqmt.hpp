@@ -11,14 +11,15 @@
 #define SCREEN_GAP 8
 
 #define SAVE_OFFSET 0
+#define NEW_SAVE_VAL 3342
 struct SaveData 
 {
   int newSave;
-  int[5] scores;
+  int scores[5];
 };
 
-bool loadSave();
-bool saveSave();
+void loadSave();
+void saveSave();
 
 struct GameData 
 {

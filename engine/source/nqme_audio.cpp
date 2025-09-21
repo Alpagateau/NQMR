@@ -8,13 +8,13 @@ AudioStreamer audioStreamer;
 #define FIFO_MAXMOD_UNLINKED 3
 
 void timer3_interrupt() {
-    audioStreamer.time_ms++;
+    //audioStreamer.time_ms++;
     TIMER_DATA(3)= 65503; // reload for ~1 ms
     TIMER_CR(3) |= TIMER_ENABLE; // restart timer
     //irqClear(IRQ_TIMER(3));
 }
 
-int initAudio()
+int InitAudio()
 {
     audioStreamer.sys.mod_count  = 0;
     audioStreamer.sys.samp_count = 0;
@@ -30,7 +30,7 @@ int initAudio()
 	audioStreamer.stream.timer			= MM_TIMER0;
 	audioStreamer.stream.manual			= true;
 
-    audioStreamer.time_ms               = 0;
+    //audioStreamer.time_ms               = 0;
     irqEnable(IRQ_TIMER(3));
     irqSet(IRQ_TIMER(3), timer3_interrupt);
 
@@ -44,20 +44,20 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
     if(audioStreamer.audioFile == NULL)
     {
         //printf("No File\n");
-        audioStreamer.is_playing = false;
+        audioStreamer.isPlaying = false;
         return 0;
     }
     int a = fread((void*)target, 1, length, audioStreamer.audioFile);
-    audioStreamer.SamplePosition += a;
+    audioStreamer.samplePosition += a;
     if(feof(audioStreamer.audioFile))
     {
         //printf("goodbye\n");
-        stopStream();
+        StopStream();
         return 0;
     }
     if(a == 0)
     {
-        stopStream();
+        StopStream();
         return 0;
     }
     return a;
@@ -66,22 +66,22 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
 int PlayStream()
 {
     printf("Requested\n");
-    if(audioStreamer.is_playing)
+    if(audioStreamer.isPlaying)
     {
         printf("Already playing\n");
         return 0;
     }
     if(audioStreamer.audioFile == NULL)
     {
-        audioStreamer.is_playing = false;
+        audioStreamer.isPlaying = false;
         printf("No file to play\n");
         return 1;
     }
-    if(audioStreamer.SamplePosition != 0)
+    if(audioStreamer.samplePosition != 0)
     {
-        fseek(audioStreamer.audioFile, audioStreamer.SamplePosition, 0);
+        fseek(audioStreamer.audioFile, audioStreamer.samplePosition, 0);
     }
-    audioStreamer.is_playing = true;
+    audioStreamer.isPlaying = true;
     printf("Starts Playing\n");
     mmStreamOpen(&(audioStreamer.stream));
     printf("Started playing\n");
@@ -92,17 +92,17 @@ int PlayStream()
     return 0;
 }
 
-void pauseStream()
+void PauseStream()
 {
-    audioStreamer.is_playing = false;
+    audioStreamer.isPlaying = false;
     mmStreamClose();
 }
 
-void stopStream()
+void StopStream()
 {
-    pauseStream();
+    PauseStream();
     rewind(audioStreamer.audioFile);
-    audioStreamer.SamplePosition = 0;
+    audioStreamer.samplePosition = 0;
 }
 
 int LoadSong(const char *path)
@@ -112,9 +112,16 @@ int LoadSong(const char *path)
     return (audioStreamer.audioFile == NULL) ? 1 : 0;
 }
 
+void CloseStream()
+{
+  fclose(audioStreamer.audioFile);
+  audioStreamer.samplePosition = 0;
+  audioStreamer.isPlaying = false;
+}
+/*
 int getTime()
 {
     return audioStreamer.time_ms;
 }
-
+*/
 }

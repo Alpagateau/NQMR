@@ -7,7 +7,7 @@ void Gameplay::Start()
 {
 
   printf("Gameplay settup \n");
-  NQME::stopStream();
+  NQME::StopStream();
   printf("Setting up background\n");
   NQME::SetBackgroundSub(title_screen_bg);
 	NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
@@ -148,13 +148,13 @@ void Gameplay::Update()
 
   for(int i = 0; i < PROPS_BUFFER_SIZE; i++)
   {
-    printf("[Prop Pos] %d\n", props[i].transform.position.y);
+    //printf("[Prop Pos] %d\n", props[i].transform.position.y);
     if(props[i].transform.position.y == 0)
     {
       if(randInt()%101 == 0)
       {
         props[i].transform.position.y++;
-        Rect *r;
+        Rect *r = NULL;
         int ra = randInt();
         if(ra%3 == 0) r = &bench;
         if(ra%3 == 1) r = &bin;
@@ -181,7 +181,12 @@ void Gameplay::Update()
     else
     {
       props[i].transform.position.y++;
-      if(props[i].transform.position.y >= 256) props[i].transform.position.y = 0;
+      //props[i].index++;
+      if(props[i].transform.position.y >= 256) 
+      {
+        props[i].transform.position.y = 0;
+        props[i].index = 2;
+      }
     }  
     props[i].Draw();
   }
@@ -224,25 +229,19 @@ void Gameplay::Update()
 			{
         int pts = PtsForDist(d);
         game_data.pts += pts;
-        if(pts > 40){
-          player_animation.Play_then(
-            &kick, 
-            &idle);
-        }
-        else if(pts >= 10)
+        for(int i = 0; i < 4; i++)
         {
-          player_animation.Play_then(
-            &shove,
-            &idle
-          );
+          if(d <= lvls[i].min_score)
+          {
+            player_animation.Play_then(
+              lvls[i].animation,
+              &idle
+            ); 
+            //printf("Level %d\n", i);
+            break;
+          }
         }
-        else
-        {
-          player_animation.Play_then(
-            &ollie,
-            &idle
-          );
-        }
+        
 			}
 		}		
 		target_arrows[i].Draw();
@@ -278,4 +277,7 @@ void Gameplay::Cleanup()
     arrow_sprites[i].visible = false;
 		arrow_sprites[i].Update();
   }
+
+  NQME::StopStream();
+  NQME::CloseStream();
 }

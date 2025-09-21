@@ -5,7 +5,7 @@ namespace NQME
 
 void InitNQME()
 {
-    initAudio();
+    InitAudio();
     initFS();
     InitBG();
     InitGfx();

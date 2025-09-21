@@ -10,8 +10,6 @@
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
 NQME::Sprite2D sprite_pool[SPRITE_POOL_SIZE];
-//NE_Material* player_mat;
-//NE_Palette*  player_pal;
 
 NQME::BGHeader title_screen_bg 
 	   {
@@ -34,16 +32,6 @@ int main( void ) {
 	videoSetModeSub(MODE_0_2D);
   
   NE_Init3D();
-  sysSetCardOwner (BUS_OWNER_ARM9);
-
-  if (!loadGame(&mySaveData)) {
-    //consoleDemoInit();
-    iprintf("No save found!\nStarting new game...");
-    swiWaitForVBlank();
-    waitForKeyAny();
-    // You could save the default data here if you want
-    saveGame(&save_data);
-  }
   
 	NE_TextureSystemReset(3, 3, NE_VRAM_AB);
 	consoleDebugInit(DebugDevice_NOCASH);
