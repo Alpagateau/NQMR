@@ -6,6 +6,7 @@
 //Scenes
 #include "main_menu.hpp"
 #include "gameplay.hpp"
+#include "resultat.hpp"
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
@@ -41,22 +42,39 @@ int main( void ) {
 	printf("==================\n");
 	NQME::listDir();
   chdir("./models");
-  printf("=====================\n");
-  NQME::listDir();
-  printf("=====================\n");
+  //printf("=====================\n");
+  //NQME::listDir();
+  //printf("=====================\n");
   chdir("..");  
 
   NE_DebugSetHandler(debug_print);
+
+  //Save System
+   
+  //Do some mem tests
+  printf("[DEBUG] Eeprom Size : %ld\n", cardEepromGetSize());
+  loadSave();
+  saveSave();
+
+  printf("[DEBUG] Save data : {\n %d,\n %d, \n %d, \n %d, \n %d}\n", 
+         save_data.scores[0],
+         save_data.scores[1],
+         save_data.scores[2],
+         save_data.scores[3],
+         save_data.scores[4]
+         );
 
 	//TODO Material Pools (or preload a handful)
 	NQME::SceneManager scene_manager;
 
 	MainMenu main_menu(sprite_pool, &scene_manager);
 	Gameplay gameplay(sprite_pool, &scene_manager);
+  Results results(sprite_pool, &scene_manager);
 
 	NQME::Scene *scenes[] = {
 		&main_menu,
-		&gameplay
+		&gameplay,
+    &results
 	};
 
 	scene_manager.scenes = scenes;

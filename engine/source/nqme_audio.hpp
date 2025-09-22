@@ -34,7 +34,5 @@ void PauseStream();
 void StopStream();
 void CloseStream();
 
-//int getTime();
-
 }
 #endif

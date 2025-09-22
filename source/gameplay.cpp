@@ -262,7 +262,7 @@ void Gameplay::Update()
     }
   }
   if(eh.Ended())
-    sm->SwitchTo(0);
+    sm->SwitchTo(2);
 }
 
 void Gameplay::Cleanup()
@@ -277,7 +277,7 @@ void Gameplay::Cleanup()
     arrow_sprites[i].visible = false;
 		arrow_sprites[i].Update();
   }
-
+  eh.Close();
   NQME::StopStream();
   NQME::CloseStream();
 }

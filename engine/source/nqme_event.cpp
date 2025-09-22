@@ -22,6 +22,11 @@ EventHandler::EventHandler(
   }
 }
 
+void EventHandler::Close()
+{
+  fclose(source);
+}
+
 bool EventHandler::Ended()
 {
   if(!eof)

@@ -1,7 +1,5 @@
 #include "nqmt.hpp"
 
-
-
 GameData game_data;
 SaveData save_data;
 
@@ -45,18 +43,35 @@ int PtsForDist(int dist)
   return 100;
 }
 
-void loadSave()
-{
-  printf("[NO IMP](%s, %d): Trying to load a save\n", __FILE__, __LINE__);
-}
-
 void saveSave()
 {
-  // Grant access to save memory
-  sysSetCardOwner(BUS_OWNER_ARM9);
-    
-  // Write our struct data to the save memory
-  cardWriteEeprom(SAVE_OFFSET, (u8*)&save_data, sizeof(SaveData), cardEepromGetType());
+  //printf("[NO IMP](%s, %d): Trying to load a save\n", __FILE__, __LINE__);
+  FILE* save_file = fopen("fat:/nqmt.sav", "wb+");
+  if(save_file == NULL)
+  {
+    printf("[ERROR] Save Save : Couldn't read the SD Card\n");
+    return;
+  }
+  fwrite(&save_data,sizeof(save_data), 1, save_file); 
+  fclose(save_file);
+}
+
+void loadSave()
+{ 
+  FILE* save_file = fopen("fat:/nqmt.sav", "rb");
+  if(save_file == NULL)
+  {
+    printf("[ERROR] Load Save : Couldn't read the SD Card\n");
+    return;
+  }
+  SaveData sd = {0};
+  int i = fread(&sd, sizeof(SaveData), 1, save_file);
+  if(i <= 0)
+  {
+    printf("[ERROR] Couldn't read the save file\n");
+  }
+  save_data = sd;
+  fclose(save_file);
 }
 
 

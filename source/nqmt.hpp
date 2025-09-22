@@ -14,7 +14,6 @@
 #define NEW_SAVE_VAL 3342
 struct SaveData 
 {
-  int newSave;
   int scores[5];
 };
 
@@ -26,6 +25,7 @@ struct GameData
   char music_name[40];
   int pts = 0;
   bool success = false;
+  u8 song_idx;
 };
 
 int DistForKey(

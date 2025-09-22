@@ -107,8 +107,7 @@ void StopStream()
 
 int LoadSong(const char *path)
 {
-    audioStreamer.audioFile = fopen(path, "rb");
-    //for(int i = 0; i < 20; i++){swiWaitForVBlank();
+    audioStreamer.audioFile = fopen(path, "rb"); 
     return (audioStreamer.audioFile == NULL) ? 1 : 0;
 }
 

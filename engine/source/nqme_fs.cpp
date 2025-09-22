@@ -4,9 +4,10 @@ namespace NQME{
 
 int initFS()
 {
-    //if(!fatInitDefault())
-    //  return 1;
-    //chdir(NQME_ROOT);
+    if(!fatInitDefault())
+    {
+      printf("[NQME] Couldnt Load FAT\n");
+    }
     
     if(!nitroFSInit(NULL))
       printf("Couldnt load nitrofs");
@@ -63,7 +64,5 @@ int listDir(const char *path)
 	}
     return 0;
 }
-
-		
 
 }
