@@ -182,7 +182,7 @@ sonic
                               .frames = sonic_frames
                           };
 
-  char* accuracy_labels[4] = 
+  char accuracy_labels[4][25] = 
   {
     "MYSTIQUE",
     "SUPER",

@@ -68,7 +68,10 @@ void SimpleButton::Draw()
   panel.uv_dimensions = panel_sizes[rect_index].size;
   panel.dimensions = panel_sizes[rect_index].size;
 
-  Vector2i centering = { (panel.dimensions.x - dimx)>>2 , (panel.dimensions.y - dimy) >> 2};
+  Vector2i centering = { 
+    (panel.dimensions.x - (int)dimx) >>2 , 
+    (panel.dimensions.y - (int)dimy) >> 2
+  };
   if(selected_current)
     panel.uv_position.y += 128;
   panel.transform.position = position;
