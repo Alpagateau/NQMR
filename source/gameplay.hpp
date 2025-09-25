@@ -182,6 +182,12 @@ sonic
                               .fpf = 8,
                               .frames = sonic_frames
                           };
+  NQME::NSAnimation sonic = (NQME::NSAnimation)
+                          {
+                            .size = 4;
+                            .fpf = 8;
+                            .frames = sonic_frames
+                          };
 
   char accuracy_labels[4][25] = 
   {
@@ -196,7 +202,7 @@ sonic
     {3, &kick,   accuracy_labels[1]},
     {8, &shove,  accuracy_labels[2]},
     {14, &ollie, accuracy_labels[3]}
-  };
+ };
 
 
   int frame = 0;
