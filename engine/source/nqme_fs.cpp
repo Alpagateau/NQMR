@@ -3,34 +3,30 @@
 namespace NQME{
 
 int initFS()
-{
-    if(!fatInitDefault())
-    {
-      printf("[NQME] Couldnt Load FAT\n");
-    }
+{    
+  if(!nitroFSInit(NULL))
+    printf("[ERROR] Couldnt load nitrofs \n");
     
-    if(!nitroFSInit(NULL))
-      printf("Couldnt load nitrofs");
-    chdir(NQME_ROOT); 
-    return 0;
+  chdir(NQME_ROOT); 
+  return 0;
 }
 
 int listDir()
 {
-    DIR *pdir;
-    struct dirent *pent;
+  DIR *pdir;
+  struct dirent *pent;
 
-    pdir = opendir(".");
+  pdir = opendir(".");
 
-    if (pdir){
+  if (pdir){
 
-		while ((pent=readdir(pdir))!=NULL) {
-	    	if(strcmp(".", pent->d_name) == 0 || strcmp("..", pent->d_name) == 0)
-	        	continue;
-	    	if(pent->d_type == DT_DIR)
-	        	printf("[%s]\n", pent->d_name);
-	    	else
-	        	printf("%s\n", pent->d_name);
+	  while ((pent=readdir(pdir))!=NULL) {
+	    if(strcmp(".", pent->d_name) == 0 || strcmp("..", pent->d_name) == 0)
+	      continue;
+	    if(pent->d_type == DT_DIR)
+	      printf("[%s]\n", pent->d_name);
+	    else
+	      printf("%s\n", pent->d_name);
 		}
 		closedir(pdir);
 	} else {

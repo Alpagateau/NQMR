@@ -28,6 +28,8 @@ void debug_print(const char* s)
 }
 
 int main( void ) {
+  defaultExceptionHandler();
+
 
 	videoSetMode(MODE_0_3D);
 	videoSetModeSub(MODE_0_2D);
@@ -36,23 +38,26 @@ int main( void ) {
   
 	NE_TextureSystemReset(3, 3, NE_VRAM_AB);
 	consoleDebugInit(DebugDevice_NOCASH);
+  //consoleDemoInit();
+  //consoleInit(NULL, 1, BgType_Text4bpp, BgSize_T_256x256, 22, 3, false, true);
+  //consoleDebugInit(DebugDevice_CONSOLE);
 	printf("==================\n");
   printf("= INITIALISATION =\n");
 	NQME::InitNQME();
 	printf("==================\n");
 	NQME::listDir();
-  chdir("./models");
+  //chdir("./models");
   //printf("=====================\n");
   //NQME::listDir();
   //printf("=====================\n");
-  chdir("..");  
+  //chdir("..");
 
   NE_DebugSetHandler(debug_print);
 
   //Save System
    
   //Do some mem tests
-  printf("[DEBUG] Eeprom Size : %ld\n", cardEepromGetSize());
+  //printf("[DEBUG] Eeprom Size : %ld\n", cardEepromGetSize());
   loadSave();
   saveSave();
 
@@ -65,7 +70,8 @@ int main( void ) {
          );
 
 	//TODO Material Pools (or preload a handful)
-	NQME::SceneManager scene_manager;
+   
+  NQME::SceneManager scene_manager;
 
 	MainMenu main_menu(sprite_pool, &scene_manager);
 	Gameplay gameplay(sprite_pool, &scene_manager);
@@ -78,7 +84,18 @@ int main( void ) {
 	};
 
 	scene_manager.scenes = scenes;
-	
+  	
+  printf("End of initialisation\n");
+  printf("Press A to resume");
+  while(true)
+  {
+    NQME::UpdateInputs();
+    if(NQME::JustPressed(KEY_A))
+    {consoleClear();break;}
+    swiWaitForVBlank();
+  }
+
+
 	scene_manager.current = MAIN_MENU;
 	scene_manager.Start();
 
