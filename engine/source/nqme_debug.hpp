@@ -2,7 +2,8 @@
 #define NQME_DEBUG_HPP
 
 #include <nds.h>
-
+#define DEBUG_PRINT(fmt, ...) \
+    printf("[DEBUG] %s:%d : " fmt, __FILE__, __LINE__, ##__VA_ARGS__)
 //#define printf(args...) fprintf(stderr, ##args)
 
 #define RESET   "\033[0m"

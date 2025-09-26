@@ -40,12 +40,13 @@ void Results::Start()
 
   strcpy(continue_button.label.text, "CONTINUE");
   continue_button.label.channel = 0;
-  continue_button.position = {80, 80};
+  continue_button.position = {100, 120};
   continue_button.txt_offset = {5, 0};
   continue_button.margin = {10, 0};
   continue_button.is_visible = true;
   continue_button.SetTheme(&my_theme);
   continue_button.selected_current = true;
+  continue_button.selected_before = true;
 
   score_text.position.y = 32;
   best_score.position.y = 64;
@@ -66,7 +67,7 @@ void Results::Update()
           );
     best_score.Draw();
   }
-  if(!finished) dp+=3;
+  if(!finished) dp+=9;
   if(dp >= game_data.pts) 
   {
     finished = true;

@@ -41,10 +41,10 @@ int main( void ) {
   //consoleDemoInit();
   //consoleInit(NULL, 1, BgType_Text4bpp, BgSize_T_256x256, 22, 3, false, true);
   //consoleDebugInit(DebugDevice_CONSOLE);
-	printf("==================\n");
-  printf("= INITIALISATION =\n");
+	DEBUG_PRINT("==================\n");
+  DEBUG_PRINT("= INITIALISATION =\n");
 	NQME::InitNQME();
-	printf("==================\n");
+	DEBUG_PRINT("==================\n");
 	NQME::listDir();
   //chdir("./models");
   //printf("=====================\n");
@@ -61,7 +61,7 @@ int main( void ) {
   loadSave();
   saveSave();
 
-  printf("[DEBUG] Save data : {\n %d,\n %d, \n %d, \n %d, \n %d}\n", 
+  DEBUG_PRINT("Save data : {\n %d,\n %d, \n %d, \n %d, \n %d}\n", 
          save_data.scores[0],
          save_data.scores[1],
          save_data.scores[2],
@@ -69,7 +69,7 @@ int main( void ) {
          save_data.scores[4]
          );
 
-	//TODO Material Pools (or preload a handful)
+  //TODO Material Pools (or preload a handful)
    
   NQME::SceneManager scene_manager;
 
@@ -84,18 +84,6 @@ int main( void ) {
 	};
 
 	scene_manager.scenes = scenes;
-  	
-  printf("End of initialisation\n");
-  printf("Press A to resume");
-  while(true)
-  {
-    NQME::UpdateInputs();
-    if(NQME::JustPressed(KEY_A))
-    {consoleClear();break;}
-    swiWaitForVBlank();
-  }
-
-
 	scene_manager.current = MAIN_MENU;
 	scene_manager.Start();
 

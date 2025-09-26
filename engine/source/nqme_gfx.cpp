@@ -430,7 +430,10 @@ Vector2i NitroSprite::GetOffset()
 void NitroSprite::Draw()
 {
     if(DS.sprite_count >= SPRITE_STACK_SIZE)
-        return;
+    {
+      DEBUG_PRINT("Not enough space for nsprites\n");   
+      return;
+    }
     NE_SpriteSetParams(sprite, 0x1F, DS.sprite_count, tint);
     NE_SpriteSetPriority(sprite, (int)index+1);
     //Vector2i old_pos = transform.position; 

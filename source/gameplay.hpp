@@ -48,7 +48,8 @@ public:
   NQME::NitroSprite top_arrows[EVENT_BUFFER_SIZE];
   NQME::NitroSprite props[PROPS_BUFFER_SIZE];
   NQME::NitroSprite player;
-  NQME::NitroSprite road;
+  NQME::NitroSprite road1;
+  NQME::NitroSprite road2;
   NQME::AnimatedSprite player_animation;
 
 	NQME::event arrws[EVENT_BUFFER_SIZE];

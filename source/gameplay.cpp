@@ -41,7 +41,8 @@ void Gameplay::Start()
   printf("Loading arrow material\n");
   
   NE_SpriteSetMaterial(player.sprite, player_mat);
-  NE_SpriteSetMaterial(road.sprite, player_mat);
+  NE_SpriteSetMaterial(road1.sprite, player_mat);
+  NE_SpriteSetMaterial(road2.sprite, player_mat);
   printf("Creating camera\n");
   camera = NE_CameraCreate();
 
@@ -103,12 +104,16 @@ void Gameplay::Start()
   player_animation.Play(&idle);
 
   printf("Setting up river\n");
-  road.dimensions = {256, 256};
-  road.uv_position = {0, 256};
-  road.uv_dimensions = {256, 256};
+  road1.dimensions = {256, 256};
+  road2.dimensions = {256, 256};
+  road1.uv_position = {0, 256};
+  road2.uv_position = {0, 256};
+  road1.uv_dimensions = {256, 256};
+  road2.uv_dimensions = {256, 256};
 
   player.index = 1;
-  road.index = 2;
+  road1.index = 3;
+  road2.index = 3;
   NE_MainScreenSetOnTop(); 
 
   char song_path[100] = "songs/";
@@ -144,8 +149,10 @@ void Gameplay::Update()
 {
   frame++;
   NQME::UpdateInputs(); 
-  road.Draw();
-  road.transform.position.y += 1;
+  road1.Draw();
+  road2.Draw();
+  road1.transform.position.y += 1;
+  road2.transform.position.y += 1;
 
   for(int i = 0; i < PROPS_BUFFER_SIZE; i++)
   {
@@ -192,7 +199,11 @@ void Gameplay::Update()
     props[i].Draw();
   }
   
-  if(road.transform.position.y >= 0 ) road.transform.position.y = (196 - 256);
+  if(road1.transform.position.y >= 0 ) 
+  {
+    road1.transform.position.y = -256;
+    road2.transform.position.y = 0;
+  }
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
   {
     int chnl = arrws[i].channel;
