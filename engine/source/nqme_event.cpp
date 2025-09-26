@@ -51,7 +51,12 @@ void EventHandler::Init(
     buffer = buf;
     size = capacity;
     fread((void*) buffer, sizeof(event), size, source);
+    eof = false;
+  }else 
+  {
+    printf("[DEBUG] %s : %d : Couldnt read file \n",__FILE__, __LINE__);
   }
+   
 }
 
 void EventHandler::Update(u32 date)

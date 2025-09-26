@@ -6,6 +6,7 @@ extern GameData game_data;
 void Gameplay::Start()
 {
 
+  frame = 0;
   printf("Gameplay settup \n");
   NQME::StopStream();
   printf("Setting up background\n");
