@@ -200,7 +200,9 @@ sonic
 
 
   int frame = 0;
-
+  float accuracy = 0; 
+  int num_arrows = 0;
+  bool is_fast = false;
   explicit Gameplay(
       NQME::Sprite2D     *pool,
       NQME::SceneManager *scm) : Scene(pool, scm) {};

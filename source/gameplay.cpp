@@ -7,6 +7,9 @@ void Gameplay::Start()
 {
 
   frame = 0;
+  accuracy = 0;
+  num_arrows = 0;
+
   printf("Gameplay settup \n");
   NQME::StopStream();
   printf("Setting up background\n");
@@ -151,8 +154,8 @@ void Gameplay::Update()
   NQME::UpdateInputs(); 
   road1.Draw();
   road2.Draw();
-  road1.transform.position.y += 1;
-  road2.transform.position.y += 1;
+  road1.transform.position.y += (is_fast) ? 2 : 1;
+  road2.transform.position.y += (is_fast) ? 2 : 1;
 
   for(int i = 0; i < PROPS_BUFFER_SIZE; i++)
   {
@@ -161,7 +164,7 @@ void Gameplay::Update()
     {
       if(randInt()%101 == 0)
       {
-        props[i].transform.position.y++;
+        props[i].transform.position.y += (is_fast) ? 2 : 1;
         Rect *r = NULL;
         int ra = randInt();
         if(ra%3 == 0) r = &bench;
@@ -239,6 +242,7 @@ void Gameplay::Update()
       int d = DistForKey(i+1, eh, 15);
 			if(d >= 0)
 			{
+        num_arrows++;
         int pts = PtsForDist(d);
         game_data.pts += pts;
         for(int i = 0; i < 4; i++)
@@ -247,21 +251,29 @@ void Gameplay::Update()
           {
             player_animation.Play_then(
               lvls[i].animation,
-              &idle
-            ); 
-            //printf("Level %d\n", i);
+              is_fast ? &idle1 : &idle
+            );
             break;
           }
-        }
-        
+        } 
 			}
 		}		
 		target_arrows[i].Draw();
 	}
+  
+  if(player_animation.cur_anim == &idle || player_animation.cur_anim == &idle1)
+  {
+    if(frame % 180 == 0)
+      player_animation.Play_then(
+              &push,
+              is_fast ? &idle1 : &idle
+            );
+  }
 
   eh.Update(frame);
+  accuracy = (float)(game_data.pts)/(num_arrows * 100);
+  is_fast = (accuracy > 0.6); 
   player_animation.Update(); 
-  //score_text.text = std::to_string(game_data.pts);
   sprintf(score_text.text, "%d", game_data.pts);
   score_text.Draw();
   accuracy_text.Draw();
