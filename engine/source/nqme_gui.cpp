@@ -69,8 +69,8 @@ void SimpleButton::Draw()
   panel.dimensions = panel_sizes[rect_index].size;
 
   Vector2i centering = { 
-    (panel.dimensions.x - (int)dimx) >>2 , 
-    (panel.dimensions.y - (int)dimy) >> 2
+    (panel.dimensions.x - (int)dimx) >> 1 , 
+    (panel.dimensions.y - (int)dimy) >> 1
   };
   if(selected_current)
     panel.uv_position.y += 128;
@@ -90,7 +90,7 @@ Theme NewTheme(const char *path)
   output.material = NE_MaterialCreate();
   output.palette = NE_PaletteCreate();
 
-  NE_MaterialTexLoadGRF(output.material, output.palette, (NE_TextureFlags)0, path);
+  NE_MaterialTexLoadGRF(output.material, output.palette, NE_TEXTURE_COLOR0_TRANSPARENT, path);
   return output;
 }
 

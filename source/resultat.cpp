@@ -10,7 +10,7 @@ void Results::Start()
   
   delta = 0;
   NQME::SetBackgroundSub(title_screen_bg);
-  NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
+  NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
 
   background_mat = NE_MaterialCreate();
   background_pal = NE_PaletteCreate();
@@ -19,7 +19,7 @@ void Results::Start()
     background_mat,
     background_pal,
     (NE_TextureFlags)0,
-    "models/menu_background_png.grf"
+    "models/new_menu_background_png.grf"
   );
   
   NE_SpriteSetMaterial(
@@ -30,7 +30,7 @@ void Results::Start()
   background_sprite.dimensions = {256, 196};
   background_sprite.transform.position = {0,0};
   
-  my_theme = NQME::NewTheme("models/button_map_png.grf");
+  my_theme = NQME::NewTheme("models/new_button_map_png.grf");
 
   strcpy(song_name.text, game_data.music_name);
   sprintf(score_text.text, "SCORE : %d", 0);

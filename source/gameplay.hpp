@@ -1,5 +1,6 @@
 extern "C"{
-#include "gfx/title_png.h"
+//#include "gfx/title_png.h"
+#include "gfx/new_title_png.h"
 #include "gfx/arrows_png.h"
 }
 

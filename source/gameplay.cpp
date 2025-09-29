@@ -15,7 +15,7 @@ void Gameplay::Start()
   NQME::StopStream();
   printf("Setting up background\n");
   NQME::SetBackgroundSub(title_screen_bg);
-	NQME::SetBackgroundPaletteSub((void*)title_pngPal, title_pngPalLen);
+	NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
   NQME::SetSpritePalette((void*)arrows_pngPal, arrows_pngPalLen);
   
   printf("Loading ArrowHeader\n");

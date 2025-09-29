@@ -580,7 +580,7 @@ void Draw3DScene(void *args)
   ds->text_count = 0;
 
   //Screen fading
-  NE_PolyFormat(25, 
+  NE_PolyFormat(31, 
                 SPRITE_STACK_SIZE + 3,
                 (NE_LightEnum)0,
                 NE_CULL_BACK,

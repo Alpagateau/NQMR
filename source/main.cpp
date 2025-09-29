@@ -14,10 +14,10 @@ NQME::Sprite2D sprite_pool[SPRITE_POOL_SIZE];
 
 NQME::BGHeader title_screen_bg 
 	   {
-		   .tiles = (void*)title_pngTiles,
-		   .tileSize = title_pngTilesLen,
-		   .map = (void*)title_pngMap,
-		   .mapSize = title_pngMapLen,
+		   .tiles = (void*)new_title_pngTiles,
+		   .tileSize = new_title_pngTilesLen,
+		   .map = (void*)new_title_pngMap,
+		   .mapSize = new_title_pngMapLen,
 	   };
 
 extern SaveData save_data;
