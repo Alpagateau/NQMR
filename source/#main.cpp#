@@ -38,6 +38,9 @@ int main( void ) {
   
 	NE_TextureSystemReset(3, 3, NE_VRAM_AB);
 	consoleDebugInit(DebugDevice_NOCASH);
+  //consoleDemoInit();
+  //consoleInit(NULL, 1, BgType_Text4bpp, BgSize_T_256x256, 22, 3, false, true);
+  //consoleDebugInit(DebugDevice_CONSOLE);
 	DEBUG_PRINT("==================\n");
   DEBUG_PRINT("= INITIALISATION =\n");
 	NQME::InitNQME();
@@ -79,7 +82,7 @@ int main( void ) {
 	scene_manager.Start();
 
 	while(1)
-	{
+	  	{
 	  NE_WaitForVBL((NE_UpdateFlags)0);
 		scene_manager.Update();
 		NQME::UpdateGraphics();

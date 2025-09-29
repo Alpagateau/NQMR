@@ -50,7 +50,7 @@ SpriteSetting decodeSS(u8 spr)
 
 int InitBG()
 {
-    bg_sub  = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
+    bg_sub  = bgInitSub(2, BgType_Text4bpp, BgSize_T_256x256, 0, 1);
     //bg_main = bgInit   (0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
     return 0;
 }
@@ -532,50 +532,62 @@ void Draw3DScene(void *args)
   DrawStack *ds = (DrawStack*)args;
   if(ds->camera != nullptr)
     NE_CameraUse(ds->camera);
+  
+  //3D Models [Not really implemented yet
   for(int i = 0; i < ds->model_count; i++)
   {
     NE_ModelDraw(ds->models[i]); 
   }
   ds->model_count = 0;
 
+  //2D Sprites on main engine
   NE_2DViewInit();
   for(int i = 0; i < ds->sprite_count; i++)
   {
     NE_SpriteDraw(ds->sprites[i]);
   }
   ds->sprite_count = 0;
-  
-  if(true){//ds->fading_percent == 0){
-    NE_RichTextPrioritySet(1);
-    for(int i = 0; i < ds->text_count; i++)
-    { 
-      if(ds->texts[i]->centering == TEXT_DEFAULT)
-      {
+  NE_RichTextPrioritySet(1);
+  for(int i = 0; i < ds->text_count; i++)
+  { 
+    if(ds->texts[i]->centering == TEXT_DEFAULT)
+    {
+      if(ds->texts[i]->alpha < 32){
         NE_RichTextRender3D(
           ds->texts[i]->channel,
           ds->texts[i]->text,
           ds->texts[i]->position.x,
-          ds->texts[i]->position.y        
-        );
-      }else if(ds->texts[i]->centering == TEXT_CENTER)
-      {
-        size_t dimx, dimy;
-        NE_RichTextRenderDryRun(
-          ds->texts[i]->channel,
-          ds->texts[i]->text,
-          &dimx, &dimy
-        );
-        NE_RichTextRender3D(
-          ds->texts[i]->channel,
-          ds->texts[i]->text,
-          ds->texts[i]->position.x - (dimx>>1),
-          ds->texts[i]->position.y - (dimy>>1)       
+          ds->texts[i]->position.y,
+          POLY_ALPHA( ds->texts[i]->alpha)
+          | POLY_CULL_BACK ,
+          2
         );
       }
+      else 
+      {
+        
+      }
+    }else if(ds->texts[i]->centering == TEXT_CENTER)
+    {
+      size_t dimx, dimy;
+      NE_RichTextRenderDryRun(
+        ds->texts[i]->channel,
+        ds->texts[i]->text,
+        &dimx, &dimy
+      );
+      NE_RichTextRender3D(
+        ds->texts[i]->channel,
+        ds->texts[i]->text,
+        ds->texts[i]->position.x - (dimx>>1),
+        ds->texts[i]->position.y - (dimy>>1)       
+      );
     }
+  
     NE_RichTextPriorityReset();
   }
   ds->text_count = 0;
+
+  //Screen fading
   NE_PolyFormat(31, 
                 SPRITE_STACK_SIZE,
                 (NE_LightEnum)0,

@@ -199,6 +199,7 @@ public:
   Vector2i position;
   u8 channel;
   u8 centering = TEXT_DEFAULT;
+  u8 alpha = 31; 
   BasicText();
   void Draw();
 };

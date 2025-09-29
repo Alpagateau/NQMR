@@ -1,4 +1,5 @@
 #include "gameplay.hpp"
+#include <cstring>
 
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
@@ -7,7 +8,7 @@ void Gameplay::Start()
 {
 
   frame = 0;
-  accuracy = 0;
+  drive = 0;
   num_arrows = 0;
 
   printf("Gameplay settup \n");
@@ -144,7 +145,7 @@ void Gameplay::Start()
   strcpy(score_text.text, "0"); 
   score_text.position = {127, 170};
   score_text.centering = TEXT_CENTER;
-  accuracy_text.position = {100, 100};
+  accuracy_text.position = {127, 80};
   accuracy_text.centering = TEXT_CENTER;
 }
 
@@ -191,7 +192,7 @@ void Gameplay::Update()
     }
     else
     {
-      props[i].transform.position.y++;
+      props[i].transform.position.y += (is_fast) ? 2 : 1;
       //props[i].index++;
       if(props[i].transform.position.y >= 256) 
       {
@@ -253,6 +254,11 @@ void Gameplay::Update()
               lvls[i].animation,
               is_fast ? &idle1 : &idle
             );
+            drive += pts*2;
+            DEBUG_PRINT("Drive : %d\n", drive);
+            strcpy(accuracy_text.text, 
+                   lvls[i].label);
+            accuracy_cooldown = 32;
             break;
           }
         } 
@@ -271,8 +277,10 @@ void Gameplay::Update()
   }
 
   eh.Update(frame);
-  accuracy = (float)(game_data.pts)/(num_arrows * 100);
-  is_fast = (accuracy > 0.6); 
+  //accuracy = (float)(game_data.pts)/(num_arrows * 100);
+  is_fast = (drive > 55); 
+  drive -= 2;
+  if(drive <= 0) drive = 0;
   player_animation.Update(); 
   sprintf(score_text.text, "%d", game_data.pts);
   score_text.Draw();
@@ -280,6 +288,7 @@ void Gameplay::Update()
   if(accuracy_cooldown > 0)
   {
     accuracy_cooldown--;
+    accuracy_text.alpha = accuracy_cooldown;
     if(accuracy_cooldown == 0)
     {
       strcpy(accuracy_text.text, "");
