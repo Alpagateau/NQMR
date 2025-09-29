@@ -182,12 +182,6 @@ sonic
                               .fpf = 8,
                               .frames = sonic_frames
                           };
-  NQME::NSAnimation sonic = (NQME::NSAnimation)
-                          {
-                            .size = 4;
-                            .fpf = 8;
-                            .frames = sonic_frames
-                          };
 
   char accuracy_labels[4][25] = 
   {

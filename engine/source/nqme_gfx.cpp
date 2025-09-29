@@ -547,26 +547,18 @@ void Draw3DScene(void *args)
     NE_SpriteDraw(ds->sprites[i]);
   }
   ds->sprite_count = 0;
+  
   NE_RichTextPrioritySet(1);
   for(int i = 0; i < ds->text_count; i++)
   { 
     if(ds->texts[i]->centering == TEXT_DEFAULT)
     {
-      if(ds->texts[i]->alpha < 32){
-        NE_RichTextRender3D(
-          ds->texts[i]->channel,
-          ds->texts[i]->text,
-          ds->texts[i]->position.x,
-          ds->texts[i]->position.y,
-          POLY_ALPHA( ds->texts[i]->alpha)
-          | POLY_CULL_BACK ,
-          2
-        );
-      }
-      else 
-      {
-        
-      }
+      NE_RichTextRender3D(
+        ds->texts[i]->channel,
+        ds->texts[i]->text,
+        ds->texts[i]->position.x,
+        ds->texts[i]->position.y
+      );
     }else if(ds->texts[i]->centering == TEXT_CENTER)
     {
       size_t dimx, dimy;
@@ -583,13 +575,13 @@ void Draw3DScene(void *args)
       );
     }
   
-    NE_RichTextPriorityReset();
+    //NE_RichTextPriorityReset();
   }
   ds->text_count = 0;
 
   //Screen fading
-  NE_PolyFormat(31, 
-                SPRITE_STACK_SIZE,
+  NE_PolyFormat(25, 
+                SPRITE_STACK_SIZE + 3,
                 (NE_LightEnum)0,
                 NE_CULL_BACK,
                 (NE_OtherFormatEnum)0);
