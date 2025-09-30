@@ -54,7 +54,8 @@ void EventHandler::Init(
     eof = false;
   }else 
   {
-    printf("[DEBUG] %s : %d : Couldnt read file \n",__FILE__, __LINE__);
+    //printf("[DEBUG] %s : %d : Couldnt read file \n",__FILE__, __LINE__);
+    DEBUG_PRINT("Couldnt read the file %s\n", path);
   }
    
 }

@@ -3,6 +3,7 @@
 #define NQME_EVENT_HPP 
 
 #include <nds.h>
+#include "nqme_debug.hpp"
 
 namespace NQME
 {
