@@ -4,6 +4,8 @@ extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 extern SaveData save_data;
 
+extern NQME::Theme my_theme;
+
 void Results::Start()
 {
   NE_MainScreenSetOnBottom();

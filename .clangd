@@ -1,0 +1,30 @@
+CompileFlags:
+  Add: [              # or c++17/c++20 if you switch to C++
+    -Wall,
+    -Wextra,
+    -Isource,               # for ./source/header.h
+    -Iengine/source,        # for ./engine/source/file1.h
+    -I/opt/wonderful/thirdparty/blocksds/external/nitro-engine/include,
+    -I/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/,
+    -I/opt/wonderful/thirdparty/blocksds/core/libs/maxmod/include
+  ]
+
+CompilationDatabase: build   # expects compile_commands.json in ./build
+
+Index:
+  Background: Build
+  StandardLibrary: Yes
+
+Diagnostics:
+  ClangTidy:
+    Add: [
+      bugprone-*,
+      readability-*,
+      performance-*,
+    ]
+    Remove: [
+      llvm-header-guard,
+    ]
+
+InlayHints:
+  Enabled: Yes

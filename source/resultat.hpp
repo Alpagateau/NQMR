@@ -22,7 +22,6 @@ public:
   NQME::BasicText best_score;
   NQME::SimpleButton continue_button;
 
-  NQME::Theme my_theme;
 
   explicit Results(
     NQME::Sprite2D *pool,

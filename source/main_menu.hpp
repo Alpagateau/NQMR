@@ -26,7 +26,6 @@ public:
   NE_Material *background_mat;
   NE_Palette *background_pal;
   
-  NQME::Theme my_theme;
   NQME::BasicText score_texts[5];
   NQME::SimpleButton start_button;
   NQME::SimpleButton credits_button;

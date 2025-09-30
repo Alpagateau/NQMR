@@ -43,12 +43,6 @@ int main( void ) {
 	NQME::InitNQME();
 	DEBUG_PRINT("==================\n");
 	NQME::listDir();
-  //chdir("./models");
-  //printf("=====================\n");
-  //NQME::listDir();
-  //printf("=====================\n");
-  //chdir("..");
-
   NE_DebugSetHandler(debug_print);
  
   loadSave();
@@ -86,6 +80,5 @@ int main( void ) {
 		mmStreamUpdate();
     fflush(stdout);
 	}
-
 	return 0;
 }

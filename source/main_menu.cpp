@@ -4,6 +4,8 @@ extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 extern SaveData save_data;
 
+NQME::Theme my_theme;
+
 void MainMenu::Start()
 {
   NE_MainScreenSetOnBottom();
@@ -15,7 +17,7 @@ void MainMenu::Start()
 
   background_mat = NE_MaterialCreate();
   background_pal = NE_PaletteCreate();
-
+  //Loading textures
   NE_MaterialTexLoadGRF(
     background_mat,
     background_pal,
@@ -204,7 +206,6 @@ void MainMenu::Update()
 
 void MainMenu::Cleanup()
 { 
-  //NE_RichTextEnd(0);
   NE_MaterialDelete(my_theme.material);
   NE_PaletteDelete(my_theme.palette);
   NE_MaterialDelete(background_mat);

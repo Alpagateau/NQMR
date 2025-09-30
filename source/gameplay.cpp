@@ -123,7 +123,7 @@ void Gameplay::Start()
   char song_path[100] = "songs/";
   strcat(song_path, game_data.music_name);
   strcat(song_path, ".wav.raw");
-  //song_path = ("songs/" + game_data.music_name + ".wav.raw");
+  
   printf("(%s)", song_path);
   NQME::LoadSong(song_path);
 	NQME::PlayStream();
@@ -300,9 +300,7 @@ void Gameplay::Update()
 
 void Gameplay::Cleanup()
 {
-  //NE_MaterialDelete(player_mat);
   NE_MaterialDelete(player_mat);
-  //NE_PaletteDelete(player_pal);
   NE_PaletteDelete(player_pal);
 
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
