@@ -22,7 +22,8 @@ public:
   int delta     = 0;
   int max_delta = 255; 
   bool loading_out = false;
-   
+  bool splash_screen = false; 
+
   NE_Material *background_mat;
   NE_Palette *background_pal;
   

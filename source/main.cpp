@@ -71,12 +71,17 @@ int main( void ) {
 	scene_manager.scenes = scenes;
 	scene_manager.current = MAIN_MENU;
 	scene_manager.Start();
+  
+  long long frame_idx = 0;
 
 	while(1)
 	{
+    frame_idx++;
 	  NE_WaitForVBL((NE_UpdateFlags)0);
 		scene_manager.Update();
 		NQME::UpdateGraphics();
+    if(frame_idx % 120 == 0)
+      DEBUG_PRINT("Free meme : %d\n", NE_TextureFreeMemPercent());
 		mmStreamUpdate();
     fflush(stdout);
 	}

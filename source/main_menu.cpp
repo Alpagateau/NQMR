@@ -12,11 +12,48 @@ void MainMenu::Start()
   state = MAIN_SCREEN;
   delta = 0;
   loading_out = false;
-  NQME::SetBackgroundSub(title_screen_bg);
-  NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
+  background_mat = NE_MaterialCreate();
+  background_pal = NE_PaletteCreate();
+
+  background_sprite.dimensions = {256, 196};
+  background_sprite.transform.position = {0,0};
+  
+  NE_SpriteSetMaterial(
+    background_sprite.sprite,
+    background_mat
+  );
+
+  if(!splash_screen)
+  {
+    NE_MaterialTexLoadGRF(
+      background_mat,
+      background_pal,
+      (NE_TextureFlags)0,
+      "models/splash_screen1_png.grf"
+    );
+    for(int i = 0; i < 80; i++)
+    {
+      background_sprite.Draw();
+      NQME::UpdateGraphics();
+	    NE_WaitForVBL((NE_UpdateFlags)0);
+    }
+    splash_screen = true;    
+    NE_MaterialDelete(background_mat);
+    NE_PaletteDelete(background_pal);
+  }
 
   background_mat = NE_MaterialCreate();
   background_pal = NE_PaletteCreate();
+  NE_SpriteSetMaterial(
+    background_sprite.sprite,
+    background_mat
+  );
+
+
+
+  NQME::SetBackgroundSub(title_screen_bg);
+  NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
+
   //Loading textures
   NE_MaterialTexLoadGRF(
     background_mat,
@@ -24,16 +61,8 @@ void MainMenu::Start()
     (NE_TextureFlags)0,
     "models/new_menu_background_png.grf"
     //"models/256_tiny_png.grf"
-  );
-  
-  NE_SpriteSetMaterial(
-    background_sprite.sprite,
-    background_mat
-  );
+  ); 
 
-  background_sprite.dimensions = {256, 196};
-  background_sprite.transform.position = {0,0};
-  
   NE_RichTextInit(0);
   NE_RichTextMetadataLoadFAT(0, "fonts/graphiti.fnt");
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
