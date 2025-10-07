@@ -8,6 +8,7 @@ extern NQME::Theme my_theme;
 
 void Results::Start()
 {
+  dp = 0;
   NE_MainScreenSetOnBottom();
   
   delta = 0;
@@ -75,26 +76,28 @@ void Results::Update()
     finished = true;
     dp = game_data.pts;
   }
+  
+  if(game_data.pts > save_data.scores[game_data.song_idx])
+    save_data.scores[game_data.song_idx] = game_data.pts;
+   
   song_name.Draw();
   score_text.Draw();
   continue_button.Draw();
   background_sprite.Draw();
 
   if(continue_button.IsClicked())
-  {
-    if(game_data.pts > save_data.scores[game_data.song_idx])
-    {
-      save_data.scores[game_data.song_idx] = game_data.pts;
-      saveSave();
-    }
-
+  { 
     sm->SwitchTo(0);
-
   }
 }
 
 void Results::Cleanup()
 { 
+  if(game_data.pts > save_data.scores[game_data.song_idx])
+  {
+    save_data.scores[game_data.song_idx] = game_data.pts;
+    saveSave();
+  }
   //NE_RichTextEnd(0);
   NE_MaterialDelete(my_theme.material);
   NE_PaletteDelete(my_theme.palette);

@@ -8,9 +8,9 @@ extern "C"{
 #include "nqmt.hpp"
 //#include "frames.cpp"
 
-#define EVENT_BUFFER_SIZE 10
+#define EVENT_BUFFER_SIZE 15
 #define PROPS_BUFFER_SIZE 4
-#define NUM_ARROWS 32
+#define NUM_ARROWS 15
 
 #define SPEED_MULT 4
 

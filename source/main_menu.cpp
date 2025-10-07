@@ -68,7 +68,7 @@ void MainMenu::Start()
   NE_RichTextMaterialLoadGRF(0, "fonts/graphiti_0_png.grf");
 
   NE_RichTextPriorityReset(); 
-  my_theme = NQME::NewTheme("models/new_button_map_png.grf");
+  my_theme = NQME::NewTheme("models/new_button_map2_png.grf");
 
   //start_button.label.text = "START";
   strcpy(start_button.label.text, "START");
@@ -158,6 +158,7 @@ void MainMenu::Update()
       {
         loading_out = true;
         //game_data.music_name = selection[i].label.text;
+        game_data.song_idx = i;
         strcpy(game_data.music_name, selection[i].label.text);
         sm->SwitchTo(1);
       }

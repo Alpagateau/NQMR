@@ -4,6 +4,8 @@
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
+#define TT_LES_GENS 1
+
 void Gameplay::Start()
 {
 
@@ -25,20 +27,31 @@ void Gameplay::Start()
   player_mat = NE_MaterialCreate();
 	player_pal = NE_PaletteCreate();
   printf("Loading global spritesheet\n");
-  int small = NE_MaterialTexLoadGRF(player_mat, 
-                        player_pal, 
-                        NE_TEXTURE_COLOR0_TRANSPARENT,
-                        //(NE_TextureFlags)0,
-                        "models/squeezed_256_png.grf");
-  if(small != 1 )
+  if(game_data.song_idx == TT_LES_GENS)
   {
-    printf("Couldnt load small txt, error code : %d\n", small);
-    int big = NE_MaterialTexLoadGRF(player_mat,
-                                    player_pal, 
-                                    (NE_TextureFlags)0, 
-                                    "models/spritesheet_small_png.grf");
-    if(big != 1) printf("Neither the big one...\n");
-    printf("===============\n");
+    NE_MaterialTexLoadGRF(player_mat, 
+                          player_pal, 
+                          NE_TEXTURE_COLOR0_TRANSPARENT,
+                          //(NE_TextureFlags)0,
+                          "models/squeezed_256_2_png.grf");
+  }
+  else 
+  {
+    int small = NE_MaterialTexLoadGRF(player_mat, 
+                          player_pal, 
+                          NE_TEXTURE_COLOR0_TRANSPARENT,
+                          //(NE_TextureFlags)0,
+                          "models/squeezed_256_png.grf");
+    if(small != 1 )
+    {
+      printf("Couldnt load small txt, error code : %d\n", small);
+      int big = NE_MaterialTexLoadGRF(player_mat,
+                                      player_pal, 
+                                      (NE_TextureFlags)0, 
+                                      "models/spritesheet_small_png.grf");
+      if(big != 1) printf("Neither the big one...\n");
+      printf("===============\n");
+    }
   }
 
 
