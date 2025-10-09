@@ -40,6 +40,60 @@ void MainMenu::Start()
     splash_screen = true;    
     NE_MaterialDelete(background_mat);
     NE_PaletteDelete(background_pal);
+    
+    background_mat = NE_MaterialCreate();
+    background_pal = NE_PaletteCreate();
+
+    NE_SpriteSetMaterial(
+      background_sprite.sprite,
+      background_mat
+    );
+
+    NE_MaterialTexLoadGRF(
+      background_mat,
+      background_pal,
+      (NE_TextureFlags)0,
+      "models/splash_screen2_png.grf"
+    ); 
+
+    NE_MainScreenSetOnTop();
+    for(int i = 0; i < 80; i++)
+    {
+      background_sprite.Draw();
+      NQME::UpdateGraphics();
+	    NE_WaitForVBL((NE_UpdateFlags)0);
+    }
+    splash_screen = true;    
+    NE_MaterialDelete(background_mat);
+    NE_PaletteDelete(background_pal);
+
+    background_mat = NE_MaterialCreate();
+    background_pal = NE_PaletteCreate();
+
+    NE_SpriteSetMaterial(
+      background_sprite.sprite,
+      background_mat
+    );
+
+    NE_MaterialTexLoadGRF(
+      background_mat,
+      background_pal,
+      (NE_TextureFlags)0,
+      "models/splash_screen3_png.grf"
+    ); 
+
+    NE_MainScreenSetOnBottom();
+    for(int i = 0; i < 80; i++)
+    {
+      background_sprite.Draw();
+      NQME::UpdateGraphics();
+	    NE_WaitForVBL((NE_UpdateFlags)0);
+    }
+    splash_screen = true;    
+    NE_MaterialDelete(background_mat);
+    NE_PaletteDelete(background_pal);
+
+
   }
 
   background_mat = NE_MaterialCreate();
@@ -55,9 +109,7 @@ void MainMenu::Start()
   NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
 
   //Loading textures
-  NE_MaterialTexLoadGRF(
-    background_mat,
-    background_pal,
+  NE_MaterialTexLoadGRF( background_mat, background_pal,
     (NE_TextureFlags)0,
     "models/new_menu_background_png.grf"
     //"models/256_tiny_png.grf"
