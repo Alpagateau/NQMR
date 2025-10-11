@@ -161,6 +161,8 @@ void MainMenu::Start()
   {
     strcpy(selection[i].label.text, available_songs[i].c_str());
     selection[i].position = {10 + max_delta, 35 * i};
+    selection[i].selected_current = false;
+    selection[i].selected_before = false;
     selection[i].is_visible = true;
     selection[i].label.channel = 0;
     selection[i].SetTheme(&my_theme);
@@ -169,6 +171,9 @@ void MainMenu::Start()
     selection[i].up   = (i == 0) ? &selection[4] : &selection[i-1];
     selection[i].down = (i == 4) ? &selection[0] : &selection[i+1];
   }
+
+  //selection[i].selected_current = true;
+  //selection[i].selected_before = false;
 
   NQME::LoadSong("songs/ouverture.wav.raw");
 	NQME::PlayStream();

@@ -2,17 +2,18 @@ extern "C"{
 //#include "gfx/title_png.h"
 #include "gfx/new_title_png.h"
 #include "gfx/arrows_png.h"
+#include "gfx/anuvverbubbla_8x8_png.h"
 }
 
 #include "nqme_engine.hpp"
 #include "nqmt.hpp"
 //#include "frames.cpp"
 
-#define EVENT_BUFFER_SIZE 15
+#define EVENT_BUFFER_SIZE 20
 #define PROPS_BUFFER_SIZE 4
-#define NUM_ARROWS 15
+#define NUM_ARROWS 20
 
-#define SPEED_MULT 4
+#define SPEED_MULT 6
 
 struct accuracy_level 
 {
@@ -24,7 +25,15 @@ struct accuracy_level
 class Gameplay: public NQME::Scene
 {
 public:
-  int X_Positions[5]       = {-32, 32, 94, 168, 232};
+
+  // Size of a color in bytes
+  const size_t size_color = 2;
+
+  // Size of a font character in 4 and 8 BPP modes in bytes
+  const size_t size_char_4bpp = (8 * 8) / 2;
+  const size_t size_char_8bpp = 8 * 8;
+
+  int X_Positions[5]       = {-32, 29, 88, 167, 225};
   int arrws_offset[5]      = {0, 0, 8, 16, 24};
   Rect arrws_rect[5]        = {
     {0, 0, 32, 32},
@@ -65,6 +74,17 @@ public:
   NE_Camera *camera;
 
   NQME::EventHandler eh;
+
+  ConsoleFont font_anuvverbubbla= {
+    .gfx = anuvverbubbla_8x8_pngTiles,
+    .pal = anuvverbubbla_8x8_pngPal,
+    .numColors = anuvverbubbla_8x8_pngPalLen / size_color,
+    .bpp = 8,
+    .asciiOffset = 32,
+    .numChars = anuvverbubbla_8x8_pngTilesLen / size_char_8bpp,
+  }; 
+
+  PrintConsole sub_console1;
 
 /*
 idle0 

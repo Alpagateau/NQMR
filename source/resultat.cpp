@@ -33,7 +33,7 @@ void Results::Start()
   background_sprite.dimensions = {256, 196};
   background_sprite.transform.position = {0,0};
   
-  my_theme = NQME::NewTheme("models/new_button_map_png.grf");
+  my_theme = NQME::NewTheme("models/new_button_map2_png.grf");
 
   strcpy(song_name.text, game_data.music_name);
   sprintf(score_text.text, "SCORE : %d", 0);
@@ -75,10 +75,7 @@ void Results::Update()
   {
     finished = true;
     dp = game_data.pts;
-  }
-  
-  if(game_data.pts > save_data.scores[game_data.song_idx])
-    save_data.scores[game_data.song_idx] = game_data.pts;
+  } 
    
   song_name.Draw();
   score_text.Draw();

@@ -1,4 +1,5 @@
-//#define NE_DEBUG
+#define NQMT_DEBUG
+
 #include <nds.h>
 #include "nqme_engine.hpp"
 #include "nqmt.hpp"
@@ -80,8 +81,8 @@ int main( void ) {
 	  NE_WaitForVBL((NE_UpdateFlags)0);
 		scene_manager.Update();
 		NQME::UpdateGraphics();
-    if(frame_idx % 120 == 0)
-      DEBUG_PRINT("Free meme : %d\n", NE_TextureFreeMemPercent());
+    //if(frame_idx % 120 == 0)
+    //  DEBUG_PRINT("Free meme : %d\n", NE_TextureFreeMemPercent());
 		mmStreamUpdate();
     fflush(stdout);
 	}

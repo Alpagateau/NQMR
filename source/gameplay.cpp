@@ -4,10 +4,18 @@
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
-#define TT_LES_GENS 1
+#define TT_LES_GENS 2
 
 void Gameplay::Start()
 {
+
+  consoleInit(
+    NULL, 
+    0, 
+    BgType_Text4bpp, 
+    BgSize_T_256x256, 22, 3, false, true
+  );
+
 
   frame = 0;
   drive = 0;
@@ -19,6 +27,8 @@ void Gameplay::Start()
   NQME::SetBackgroundSub(title_screen_bg);
 	NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
   NQME::SetSpritePalette((void*)arrows_pngPal, arrows_pngPalLen);
+
+  consoleSetColor(NULL, CONSOLE_RED);
   
   printf("Loading ArrowHeader\n");
   ArrowHeader.Load((void*)arrows_pngTiles, arrows_pngTilesLen, SQ32_256);
@@ -149,7 +159,7 @@ void Gameplay::Start()
     song_path,
     EVENT_BUFFER_SIZE, 
     arrws);
-  eh.grace = 64;	
+  eh.grace = 16;	
 
   game_data.pts = 0;
   score_text.channel = 0;
@@ -268,7 +278,7 @@ void Gameplay::Update()
               is_fast ? &idle1 : &idle
             );
             drive += pts*2;
-            DEBUG_PRINT("Drive : %d\n", drive);
+            //DEBUG_PRINT("Drive : %d\n", drive);
             strcpy(accuracy_text.text, 
                    lvls[i].label);
             accuracy_cooldown = 32;
@@ -290,6 +300,22 @@ void Gameplay::Update()
   }
 
   eh.Update(frame);
+
+  //Print events
+  consoleClear();
+  printf("channel [");
+  for(int i = 0; i < eh.size; i++)
+  {
+    printf(" %2d,", eh.buffer[i].channel);
+  } 
+  printf("]\n");
+  printf("distanc [");
+  for(int i = 0; i < eh.size; i++)
+  {
+    printf("%3ld,", eh.buffer[i].time_start - eh.time );
+  } 
+  printf("]");
+
   //accuracy = (float)(game_data.pts)/(num_arrows * 100);
   is_fast = (drive > 55); 
   drive -= 2;
