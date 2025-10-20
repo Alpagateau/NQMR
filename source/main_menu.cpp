@@ -277,8 +277,11 @@ void MainMenu::Update()
       {
         selection[i].is_visible = true;
       }
-    }
-    
+    }else if(credits_button.IsClicked())
+    {
+      sm->SwitchTo(3);
+    } 
+
     start_button.Draw();
     credits_button.Draw(); 
     start_button.UpdateSelected();

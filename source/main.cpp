@@ -8,6 +8,7 @@
 #include "main_menu.hpp"
 #include "gameplay.hpp"
 #include "resultat.hpp"
+#include "credits.hpp"
 
 // ffmpeg -i input.wav -ar 22050 -ac 1 -f u8 -map_metadata -1 output.raw
 
@@ -62,11 +63,12 @@ int main( void ) {
 	MainMenu main_menu(sprite_pool, &scene_manager);
 	Gameplay gameplay(sprite_pool, &scene_manager);
   Results results(sprite_pool, &scene_manager);
-
+  Credits credits(sprite_pool, &scene_manager);
 	NQME::Scene *scenes[] = {
 		&main_menu,
 		&gameplay,
-    &results
+    &results,
+    &credits
 	};
 
 	scene_manager.scenes = scenes;
@@ -81,9 +83,7 @@ int main( void ) {
 	  NE_WaitForVBL((NE_UpdateFlags)0);
 		scene_manager.Update();
 		NQME::UpdateGraphics();
-    //if(frame_idx % 120 == 0)
-    //  DEBUG_PRINT("Free meme : %d\n", NE_TextureFreeMemPercent());
-		mmStreamUpdate();
+    mmStreamUpdate();
     fflush(stdout);
 	}
 	return 0;
