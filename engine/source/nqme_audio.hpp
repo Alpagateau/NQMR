@@ -30,6 +30,7 @@ mm_word on_stream_request(mm_word length, mm_addr dest, mm_stream_formats format
 
 int  LoadSong(const char *path);
 int  PlayStream();
+uint32 GetSamplePos();
 void PauseStream();
 void StopStream();
 void CloseStream();

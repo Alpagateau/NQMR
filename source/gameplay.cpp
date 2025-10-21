@@ -299,7 +299,8 @@ void Gameplay::Update()
             );
   }
 
-  eh.Update(frame);
+  //eh.Update(frame);
+  eh.Update( NQME::GetSamplePos() );
 
   //Print events
   consoleClear();

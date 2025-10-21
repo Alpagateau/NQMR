@@ -12,7 +12,7 @@ find "$DIR" -type f -name "*.mid" | while read -r midfile; do
 
     echo "Processing $midfile → $tbmfile"
     # Step 2: Run comm1 on each MIDI file
-    python3 ./tools/midi_to_tbm.py "$midfile" "$tbmfile"
+    python3 ./tools/midi_to_tbm.py "$midfile" "$tbmfile" --sample-rate 11025
 done
 
 # Step 3: Find all TBM files and run comm2 on each

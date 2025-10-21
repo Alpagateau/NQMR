@@ -117,10 +117,10 @@ void CloseStream()
   audioStreamer.samplePosition = 0;
   audioStreamer.isPlaying = false;
 }
-/*
-int getTime()
+
+uint32 GetSamplePos()
 {
-    return audioStreamer.time_ms;
+  return mmStreamGetPosition();
 }
-*/
+
 }
