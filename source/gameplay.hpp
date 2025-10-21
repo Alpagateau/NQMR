@@ -96,10 +96,10 @@ public:
   ConsoleFont font_anuvverbubbla= {
     .gfx = anuvverbubbla_8x8_pngTiles,
     .pal = anuvverbubbla_8x8_pngPal,
-    .numColors = anuvverbubbla_8x8_pngPalLen / size_color,
+    .numColors =  (u16)(anuvverbubbla_8x8_pngPalLen / size_color),
     .bpp = 8,
     .asciiOffset = 32,
-    .numChars = anuvverbubbla_8x8_pngTilesLen / size_char_8bpp,
+    .numChars = (u16)(anuvverbubbla_8x8_pngTilesLen / size_char_8bpp),
   }; 
 
   PrintConsole sub_console1;

@@ -74,7 +74,7 @@ nitrofs.generate_image()
 
 arm9 = Arm9Binary(
   sourcedirs=['source', 'engine/source'],
-  includedirs=['source', 'engine/source'],
+  includedirs=['source', 'engine/source', 'engine/include'],
   libs=['nds9', 'mm9', 'dsf','NE_debug', 'c'],
   libdirs=[
     '${BLOCKSDS}/libs/libnds', 
