@@ -1,6 +1,5 @@
 import argparse
 import mido
-import heapq
 
 def get_note_mapping(octave_offset=0):
     base = 60 + (octave_offset * 12)
@@ -11,14 +10,9 @@ def get_note_mapping(octave_offset=0):
         base + 3: "RIGHT"   # D#
     }
 
-def parse_midi(file_path, sample_rate=32768, octave_offset=0):
+def parse_midi(file_path, octave_offset=0):
     """
-    Parse MIDI file for rhythm game using sample-based timing for MaxMod
-    
-    Args:
-        file_path: Path to MIDI file
-        sample_rate: Audio sample rate (32768 Hz typical for DS MaxMod)
-        octave_offset: Octave adjustment for note mapping
+    Parse MIDI file and return arrow events with millisecond timing
     """
     mid = mido.MidiFile(file_path)
     ticks_per_beat = mid.ticks_per_beat
@@ -90,10 +84,6 @@ def parse_midi(file_path, sample_rate=32768, octave_offset=0):
         
         return total_ms
 
-    def ms_to_samples(ms, sample_rate):
-        """Convert milliseconds to audio samples"""
-        return int(ms * sample_rate / 1000)
-
     # Build the tempo map
     tempo_map = build_tempo_map(mid)
     
@@ -125,38 +115,32 @@ def parse_midi(file_path, sample_rate=32768, octave_offset=0):
                 start_ms, start_ticks = note_on_times.pop(key)
                 duration_ms = current_ms - start_ms
                 
-                # Convert to samples
-                start_samples = ms_to_samples(start_ms, sample_rate)
-                duration_samples = ms_to_samples(duration_ms, sample_rate)
-                
                 # Only add events with positive duration
-                if duration_samples > 0:
+                if duration_ms > 0:
                     direction = NOTE_TO_DIRECTION[msg.note]
-                    events.append((direction, start_samples, duration_samples))
+                    events.append((direction, start_ms, duration_ms))
     
     # Sort events by start time
     events.sort(key=lambda x: x[1])
     
     return events
 
-def write_tbm(events, output_file, sample_rate):
+def write_tbm(events, output_file):
     """
-    Write TBM file with sample-based timing for MaxMod
+    Write TBM file with millisecond timing
     
-    Format: DIRECTION START_SAMPLES DURATION_SAMPLES
+    Format: DIRECTION START_MS DURATION_MS
     """
     with open(output_file, 'w') as f:
-        f.write(f"# MaxMod sample-based timing (sample rate: {sample_rate} Hz)\n")
-        f.write(f"# DIRECTION START_SAMPLES DURATION_SAMPLES\n")
-        for direction, start_samples, duration_samples in events:
-            f.write(f"{direction} {start_samples} {duration_samples}\n")
+        f.write("# Millisecond timing format\n")
+        f.write("# DIRECTION START_MS DURATION_MS\n")
+        for direction, start_ms, duration_ms in events:
+            f.write(f"{direction} {int(start_ms)} {int(duration_ms)}\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Convert MIDI to TBM format with MaxMod sample timing.")
+    parser = argparse.ArgumentParser(description="Convert MIDI to TBM format with millisecond timing.")
     parser.add_argument("midi_file", help="Path to input MIDI file")
     parser.add_argument("output_file", help="Path to output .tbm file")
-    parser.add_argument("--sample-rate", type=int, default=32768, 
-                       help="Audio sample rate (32768 Hz typical for DS MaxMod)")
     parser.add_argument("--fl", action="store_true", 
                        help="Use FL Studio note convention (C5 = MIDI 60)")
 
@@ -164,13 +148,16 @@ def main():
 
     octave_offset = 0 if args.fl else 1
 
-    events = parse_midi(args.midi_file, args.sample_rate, octave_offset)
+    events = parse_midi(args.midi_file, octave_offset)
     if not events:
         print("No valid notes (C, C#, D, D#) found in expected octave.")
     else:
-        write_tbm(events, args.output_file, args.sample_rate)
+        write_tbm(events, args.output_file)
         print(f"Converted {args.midi_file} to {args.output_file}")
-        print(f"Generated {len(events)} events at {args.sample_rate} Hz sample rate")
+        print(f"Generated {len(events)} events with millisecond timing")
+        print(f"First few events:")
+        for i, (direction, start_ms, duration_ms) in enumerate(events[:5]):
+            print(f"  {direction}: starts at {start_ms:.1f}ms, lasts {duration_ms:.1f}ms")
 
 if __name__ == "__main__":
     main()

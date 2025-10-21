@@ -1,21 +1,42 @@
 #include "gameplay.hpp"
+#include "nds/timers.h"
 #include <cstring>
+//#include <nds/arm9/clock.h>
+//#include <ctime>
 
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
 #define TT_LES_GENS 2
+#define TIMER_N 3
+
+u32 current_time;
+
+void initTimer()
+{
+  current_time = 0; 
+  timerStart(TIMER_N, ClockDivider_1024, 2, NULL);
+  timerElapsed(TIMER_N);
+}
+
+u32 getTimer()
+{
+  u16 elapsed = timerElapsed(TIMER_N);
+  current_time += elapsed;
+  printf("time : %ld | %d\n", current_time, elapsed);
+  return current_time / 32;
+}
 
 void Gameplay::Start()
 {
-
+  /*
   consoleInit(
     NULL, 
     0, 
     BgType_Text4bpp, 
     BgSize_T_256x256, 22, 3, false, true
   );
-
+*/
 
   frame = 0;
   drive = 0;
@@ -28,7 +49,7 @@ void Gameplay::Start()
 	NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
   NQME::SetSpritePalette((void*)arrows_pngPal, arrows_pngPalLen);
 
-  consoleSetColor(NULL, CONSOLE_RED);
+  //consoleSetColor(NULL, CONSOLE_RED);
   
   printf("Loading ArrowHeader\n");
   ArrowHeader.Load((void*)arrows_pngTiles, arrows_pngTilesLen, SQ32_256);
@@ -129,7 +150,6 @@ void Gameplay::Start()
   player.transform.position = (Vector2i){127, 160};
   player_animation.sprite = &player;
   player_animation.Play(&idle);
-
   printf("Setting up river\n");
   road1.dimensions = {256, 256};
   road2.dimensions = {256, 256};
@@ -150,6 +170,8 @@ void Gameplay::Start()
   printf("(%s)", song_path);
   NQME::LoadSong(song_path);
 	NQME::PlayStream();
+  //beginning = clock();
+  initTimer();
 
   song_path[0] = 0;
   strcat(song_path, "bms/");
@@ -175,6 +197,7 @@ void Gameplay::Start()
 void Gameplay::Update()
 {
   frame++;
+  ts = getTimer();
   NQME::UpdateInputs(); 
   road1.Draw();
   road2.Draw();
@@ -231,16 +254,21 @@ void Gameplay::Update()
     road1.transform.position.y = -256;
     road2.transform.position.y = 0;
   }
+
+//=========================
+// ARROWS
+//=========================
+
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
   {
     int chnl = arrws[i].channel;
 		arrow_sprites[i]._SetPosition(	
 		  X_Positions[chnl],
-			(-1 * (frame - arrws[i].time_start) * SPEED_MULT) + 16 - SCREEN_HEIGHT - SCREEN_GAP
+			(-1 * (ts - arrws[i].time_start) * SPEED_MULT) + 16 - SCREEN_HEIGHT - SCREEN_GAP
 		);
 
     top_arrows[i].transform.position.x = X_Positions[chnl];
-    top_arrows[i].transform.position.y = (-1 * (frame - arrws[i].time_start) * SPEED_MULT) + 16;
+    top_arrows[i].transform.position.y = (-1 * (ts - arrws[i].time_start) * SPEED_MULT) + 16;
     //top_arrows[i].uv_position = {0, 32 * (chnl - 1)};
     top_arrows[i].tint = arrws_col[chnl];
 		//top_arrows[i].transform.angle = ar
@@ -299,11 +327,11 @@ void Gameplay::Update()
             );
   }
 
-  //eh.Update(frame);
-  eh.Update( NQME::GetSamplePos() );
-
+  eh.Update(ts);
+  //eh.Update(NQME::GetSamplePos());
+  
   //Print events
-  consoleClear();
+  //consoleClear();
   printf("channel [");
   for(int i = 0; i < eh.size; i++)
   {
@@ -313,10 +341,12 @@ void Gameplay::Update()
   printf("distanc [");
   for(int i = 0; i < eh.size; i++)
   {
-    printf("%3ld,", eh.buffer[i].time_start - eh.time );
+    printf("%ld,", eh.buffer[i].time_start - ts );
   } 
-  printf("]");
+  printf("]\n");
+  //printf("%ld", NQME::GetSamplePos());
 
+  
   //accuracy = (float)(game_data.pts)/(num_arrows * 100);
   is_fast = (drive > 55); 
   drive -= 2;

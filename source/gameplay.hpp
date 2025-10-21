@@ -8,12 +8,14 @@ extern "C"{
 #include "nqme_engine.hpp"
 #include "nqmt.hpp"
 //#include "frames.cpp"
+//#include <time.h>
+
 
 #define EVENT_BUFFER_SIZE 20
 #define PROPS_BUFFER_SIZE 4
 #define NUM_ARROWS 20
 
-#define SPEED_MULT 6
+#define SPEED_MULT 1
 
 struct accuracy_level 
 {
@@ -22,6 +24,9 @@ struct accuracy_level
   char *label;
 };
 
+void initTimer();
+u32 getTimer();
+
 class Gameplay: public NQME::Scene
 {
 public:
@@ -29,6 +34,8 @@ public:
   // Size of a color in bytes
   const size_t size_color = 2;
 
+  u32 beginning;
+  u32 ts;
   // Size of a font character in 4 and 8 BPP modes in bytes
   const size_t size_char_4bpp = (8 * 8) / 2;
   const size_t size_char_8bpp = 8 * 8;

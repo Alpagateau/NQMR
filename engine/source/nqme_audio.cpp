@@ -24,15 +24,15 @@ int InitAudio()
     mmInit(&(audioStreamer.sys));
 
     audioStreamer.stream.sampling_rate	= AUDIO_SAMPLE_RATE;
-	audioStreamer.stream.buffer_length	= AUDIO_BUFFER_LEN;
-	audioStreamer.stream.callback		= on_stream_request;
-	audioStreamer.stream.format			= MM_STREAM_8BIT_MONO;
-	audioStreamer.stream.timer			= MM_TIMER0;
-	audioStreamer.stream.manual			= true;
+    audioStreamer.stream.buffer_length	= AUDIO_BUFFER_LEN;
+    audioStreamer.stream.callback		= on_stream_request;
+    audioStreamer.stream.format			= MM_STREAM_8BIT_MONO;
+    audioStreamer.stream.timer			= MM_TIMER0;
+    audioStreamer.stream.manual			= true;
 
     //audioStreamer.time_ms               = 0;
-    irqEnable(IRQ_TIMER(3));
-    irqSet(IRQ_TIMER(3), timer3_interrupt);
+    //irqEnable(IRQ_TIMER(3));
+    //irqSet(IRQ_TIMER(3), timer3_interrupt);
 
     return 0;
 }
