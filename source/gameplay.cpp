@@ -12,32 +12,25 @@ extern GameData game_data;
 
 u32 current_time;
 
+void timerCallback()
+{
+  current_time++;
+
+}
+
 void initTimer()
 {
   current_time = 0; 
-  timerStart(TIMER_N, ClockDivider_1024, 2, NULL);
-  timerElapsed(TIMER_N);
+  timerStart(TIMER_N, ClockDivider_64, 65536 - 524, timerCallback);
 }
 
-u32 getTimer()
+inline u32 getTimer()
 {
-  u16 elapsed = timerElapsed(TIMER_N);
-  current_time += elapsed;
-  printf("time : %ld | %d\n", current_time, elapsed);
-  return current_time / 32;
+  return current_time;
 }
 
 void Gameplay::Start()
 {
-  /*
-  consoleInit(
-    NULL, 
-    0, 
-    BgType_Text4bpp, 
-    BgSize_T_256x256, 22, 3, false, true
-  );
-*/
-
   frame = 0;
   drive = 0;
   num_arrows = 0;
@@ -264,11 +257,11 @@ void Gameplay::Update()
     int chnl = arrws[i].channel;
 		arrow_sprites[i]._SetPosition(	
 		  X_Positions[chnl],
-			(-1 * (ts - arrws[i].time_start) * SPEED_MULT) + 16 - SCREEN_HEIGHT - SCREEN_GAP
+			(-1 * ((ts - arrws[i].time_start) * SPEED_MULT)>>1) + 16 - SCREEN_HEIGHT - SCREEN_GAP
 		);
 
     top_arrows[i].transform.position.x = X_Positions[chnl];
-    top_arrows[i].transform.position.y = (-1 * (ts - arrws[i].time_start) * SPEED_MULT) + 16;
+    top_arrows[i].transform.position.y = (-1 * ((ts - arrws[i].time_start) * SPEED_MULT) >> 1) + 16;
     //top_arrows[i].uv_position = {0, 32 * (chnl - 1)};
     top_arrows[i].tint = arrws_col[chnl];
 		//top_arrows[i].transform.angle = ar
@@ -291,7 +284,7 @@ void Gameplay::Update()
     }
 		if(NQME::JustPressed(controls[i]))
 		{
-      int d = DistForKey(i+1, eh, 15);
+      int d = DistForKey(i+1, eh, 500);
 			if(d >= 0)
 			{
         num_arrows++;
@@ -331,22 +324,20 @@ void Gameplay::Update()
   //eh.Update(NQME::GetSamplePos());
   
   //Print events
-  //consoleClear();
+  /*
   printf("channel [");
-  for(int i = 0; i < eh.size; i++)
+  for(int i = 0; i < eh.size/2; i++)
   {
-    printf(" %2d,", eh.buffer[i].channel);
+    printf(" %d,", eh.buffer[i].channel);
   } 
   printf("]\n");
   printf("distanc [");
-  for(int i = 0; i < eh.size; i++)
+  for(int i = 0; i < eh.size/2; i++)
   {
-    printf("%ld,", eh.buffer[i].time_start - ts );
+    printf("%ld,", eh.buffer[i].time_start - ts);
   } 
   printf("]\n");
-  //printf("%ld", NQME::GetSamplePos());
-
-  
+  */ 
   //accuracy = (float)(game_data.pts)/(num_arrows * 100);
   is_fast = (drive > 55); 
   drive -= 2;

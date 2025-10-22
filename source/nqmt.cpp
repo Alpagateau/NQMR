@@ -25,18 +25,20 @@ int DistForKey(u8 channel, NQME::EventHandler &eventHandler, int grace)
   }
   else 
     min_dist = -1;
+  
   return min_dist;
 }
 
 int PtsForDist(int dist)
 {
+  printf("dist : %d\n", dist);
   if(dist < 0)
     return 0;
-  if(dist > 10)
+  if(dist > 400)
     return 10;
-  if(dist > 5)
+  if(dist > 250)
     return 20;
-  if(dist > 2)
+  if(dist > 100)
     return 30;
   if(dist > 0)
     return 50;
