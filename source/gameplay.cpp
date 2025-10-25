@@ -1,4 +1,7 @@
 #include "gameplay.hpp"
+#include "NE2D.h"
+#include "NEPalette.h"
+#include "NETexture.h"
 #include "nds/timers.h"
 #include <cstring>
 //#include <nds/arm9/clock.h>
@@ -29,6 +32,7 @@ inline u32 getTimer()
   return current_time;
 }
 
+//#include "gfx/allconsumingvoid_background_png.h"
 void Gameplay::Start()
 {
   frame = 0;
@@ -38,8 +42,14 @@ void Gameplay::Start()
   printf("Gameplay settup \n");
   NQME::StopStream();
   printf("Setting up background\n");
-  NQME::SetBackgroundSub(title_screen_bg);
-	NQME::SetBackgroundPaletteSub((void*)new_title_pngPal, new_title_pngPalLen);
+  //NQME::SetBackgroundSub(title_screen_bg);
+  NQME::SetBackgroundSub((NQME::BGHeader){
+    .tiles = (void*)allconsumingvoid_background_pngTiles,
+    .tileSize = allconsumingvoid_background_pngTilesLen,
+		.map = (void*)allconsumingvoid_background_pngMap,
+		.mapSize = allconsumingvoid_background_pngMapLen,
+  });
+	NQME::SetBackgroundPaletteSub((void*)allconsumingvoid_background_pngPal, allconsumingvoid_background_pngPalLen);
   NQME::SetSpritePalette((void*)arrows_pngPal, arrows_pngPalLen);
 
   //consoleSetColor(NULL, CONSOLE_RED);
@@ -50,6 +60,9 @@ void Gameplay::Start()
   printf("Creating materials\n");
   player_mat = NE_MaterialCreate();
 	player_pal = NE_PaletteCreate();
+
+  void_mat = NE_MaterialCreate();
+  void_pal = NE_PaletteCreate();
   printf("Loading global spritesheet\n");
   if(game_data.song_idx == TT_LES_GENS)
   {
@@ -77,7 +90,13 @@ void Gameplay::Start()
       printf("===============\n");
     }
   }
-
+  printf("Loading smol");
+  if(NE_MaterialTexLoadGRF(
+    void_mat, 
+    void_pal, 
+    NE_TEXTURE_COLOR0_TRANSPARENT, 
+    "models/allconsumingvoid_png.grf"
+  )!= 1) printf("Cant Load");
 
   printf("Loading arrow material\n");
   
@@ -143,6 +162,22 @@ void Gameplay::Start()
   player.transform.position = (Vector2i){127, 160};
   player_animation.sprite = &player;
   player_animation.Play(&idle);
+
+  void1.dimensions = {128, 32};
+  void1.centering = SPT_DR;
+  void1.transform.position = (Vector2i){128, 192};
+  void2.dimensions = {128, 32};
+  void2.centering = SPT_DL;
+  void2.transform.position = (Vector2i){128, 192};
+
+  void1_animation.sprite = &void1;
+  void2_animation.sprite = &void2;
+  void1_animation.Play(&void_anim);
+  void2_animation.Play(&void_anim);
+
+  NE_SpriteSetMaterial(void1.sprite, void_mat);
+  NE_SpriteSetMaterial(void2.sprite, void_mat);
+
   printf("Setting up river\n");
   road1.dimensions = {256, 256};
   road2.dimensions = {256, 256};
@@ -194,6 +229,8 @@ void Gameplay::Update()
   NQME::UpdateInputs(); 
   road1.Draw();
   road2.Draw();
+  void1.Draw();
+  void2.Draw();
   road1.transform.position.y += (is_fast) ? 2 : 1;
   road2.transform.position.y += (is_fast) ? 2 : 1;
 
@@ -288,18 +325,19 @@ void Gameplay::Update()
 			if(d >= 0)
 			{
         num_arrows++;
-        int pts = PtsForDist(d);
-        printf("dist : %d -> %d\n", d, pts);
-        game_data.pts += pts;
+        //int pts = PtsForDist(d);
+        //printf("dist : %d -> %d\n", d, pts);
+        //game_data.pts += pts;
         for(int i = 0; i < 4; i++)
         {
-          if(pts <= lvls[i].min_score)
+          if(d <= lvls[i].min_dist)
           {
+            int pts = lvls[i].pts;
             player_animation.Play_then(
               lvls[i].animation,
               is_fast ? &idle1 : &idle
             );
-            drive += pts*2;
+            drive += pts*6;
             //DEBUG_PRINT("Drive : %d\n", drive);
             strcpy(accuracy_text.text, 
                    lvls[i].label);
@@ -344,6 +382,8 @@ void Gameplay::Update()
   drive -= 2;
   if(drive <= 0) drive = 0;
   player_animation.Update(); 
+  void1_animation.Update();
+  void2_animation.Update();
   sprintf(score_text.text, "%d", game_data.pts);
   score_text.Draw();
   accuracy_text.Draw();
@@ -364,7 +404,8 @@ void Gameplay::Cleanup()
 {
   NE_MaterialDelete(player_mat);
   NE_PaletteDelete(player_pal);
-
+  NE_MaterialDelete(void_mat);
+  NE_PaletteDelete(void_pal);
   for(int i = 0; i < EVENT_BUFFER_SIZE; i++)
  	{
     arrow_sprites[i].visible = false;

@@ -10,6 +10,21 @@ NQME::Theme my_theme;
 
 void MainMenu::Start()
 {
+
+   //Load Song List
+  
+  std::string line;
+  std::ifstream list_file("songlist.txt");
+  for(int i = 0; i < NUMBER_OF_SONGS; i++)
+  {
+    std::getline(list_file, line);
+    printf("[SONG]%s\n", line.c_str()); 
+    available_songs[i] = line; 
+  }
+  list_file.close();
+
+
+
   NE_MainScreenSetOnBottom();
   state = MAIN_SCREEN;
   delta = 0;
@@ -166,19 +181,7 @@ void MainMenu::Start()
   start_button.down = &credits_button;
   credits_button.up = &start_button;
 
-  //Load Song List
-  
-  std::string line;
-  std::ifstream list_file("songlist.txt");
-  for(int i = 0; i < NUMBER_OF_SONGS; i++)
-  {
-    std::getline(list_file, line);
-    printf("[SONG]%s\n", line.c_str()); 
-    available_songs[i] = line; 
-  }
-  list_file.close();
-
-  for(int i = 0; i < 5; i++)
+   for(int i = 0; i < 5; i++)
   {
     strcpy(selection[i].label.text, available_songs[i].c_str());
     selection[i].position = {10 + max_delta, 37 * i + 6};

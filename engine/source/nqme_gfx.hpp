@@ -24,7 +24,7 @@ namespace NQME{
 
 
 #define MODEL_STACK_SIZE  3
-#define SPRITE_STACK_SIZE 32
+#define SPRITE_STACK_SIZE 36
 #define TEXT_STACK_SIZE   8
 //Sprite types 
 #define SQ8_16      0

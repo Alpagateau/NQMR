@@ -51,7 +51,9 @@ void Results::Start()
   continue_button.selected_current = true;
   continue_button.selected_before = true;
 
+  score_text.position.x = 10;
   score_text.position.y = 32;
+  best_score.position.x = 10;
   best_score.position.y = 64;
 
   NQME::CloseStream(); 

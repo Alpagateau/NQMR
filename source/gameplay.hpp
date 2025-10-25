@@ -1,6 +1,7 @@
 extern "C"{
 //#include "gfx/title_png.h"
 #include "gfx/new_title_png.h"
+#include "gfx/allconsumingvoid_background_png.h"
 #include "gfx/arrows_png.h"
 #include "gfx/anuvverbubbla_8x8_png.h"
 }
@@ -19,7 +20,8 @@ extern "C"{
 
 struct accuracy_level 
 {
-  int min_score;
+  int min_dist;
+  int pts;
   NQME::NSAnimation *animation;
   char *label;
 };
@@ -67,7 +69,13 @@ public:
   NQME::NitroSprite player;
   NQME::NitroSprite road1;
   NQME::NitroSprite road2;
+
+  NQME::NitroSprite void1;
+  NQME::NitroSprite void2;
+
   NQME::AnimatedSprite player_animation;
+  NQME::AnimatedSprite void1_animation;
+  NQME::AnimatedSprite void2_animation;
 
 	NQME::event arrws[EVENT_BUFFER_SIZE];
   
@@ -77,6 +85,9 @@ public:
 
   NE_Material *player_mat;
 	NE_Palette *player_pal;
+
+  NE_Material *void_mat;
+  NE_Palette *void_pal;
 
   NE_Camera *camera;
 
@@ -220,12 +231,27 @@ sonic
   };
 
   accuracy_level lvls[4] = {
-    {6, &sonic,  accuracy_labels[0]},
-    {10, &kick,   accuracy_labels[1]},
-    {40, &shove,  accuracy_labels[2]},
-    {70, &ollie, accuracy_labels[3]}
+    {6, 100, &sonic,  accuracy_labels[0]},
+    {17, 50, &kick,   accuracy_labels[1]},
+    {40, 25, &shove,  accuracy_labels[2]},
+    {80, 10, &ollie, accuracy_labels[3]}
  };
 
+
+  Rect void_frames[4] = 
+  {
+    {0,  0, 128, 32},
+    {0, 32, 128, 32},
+    {0, 64, 128, 32},
+    {0, 96, 128, 32},
+  };
+
+  NQME::NSAnimation void_anim = (NQME::NSAnimation)
+    {
+      .size = 4,
+      .fpf = 9,
+      .frames = void_frames,
+    };
 
   int frame = 0;
   int drive = 0; 
