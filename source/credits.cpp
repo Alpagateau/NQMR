@@ -49,7 +49,7 @@ void Credits::Start()
   person.centering = TEXT_CENTER;
   
   NQME::CloseStream(); 
-  NQME::LoadSong("songs/ouverture.wav.raw");
+  NQME::LoadSong("songs/mode_d_emploi.wav.raw");
 	NQME::PlayStream();
 }
 

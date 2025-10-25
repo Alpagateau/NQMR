@@ -284,15 +284,16 @@ void Gameplay::Update()
     }
 		if(NQME::JustPressed(controls[i]))
 		{
-      int d = DistForKey(i+1, eh, 500);
+      int d = DistForKey(i+1, eh, 80);
 			if(d >= 0)
 			{
         num_arrows++;
         int pts = PtsForDist(d);
+        printf("dist : %d -> %d\n", d, pts);
         game_data.pts += pts;
         for(int i = 0; i < 4; i++)
         {
-          if(d <= lvls[i].min_score)
+          if(pts <= lvls[i].min_score)
           {
             player_animation.Play_then(
               lvls[i].animation,

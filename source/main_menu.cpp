@@ -4,6 +4,8 @@ extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 extern SaveData save_data;
 
+#define DURATION 140
+
 NQME::Theme my_theme;
 
 void MainMenu::Start()
@@ -25,17 +27,29 @@ void MainMenu::Start()
 
   if(!splash_screen)
   {
+    NQME::LoadSong("songs/le_coude.wav.raw");
+    NQME::PlayStream();
+    
+    for(int i = 0; i < DURATION; i++) 
+    {
+      mmStreamUpdate(); 
+     
+	    NE_WaitForVBL((NE_UpdateFlags)0);
+    }
+
     NE_MaterialTexLoadGRF(
       background_mat,
       background_pal,
       (NE_TextureFlags)0,
       "models/splash_screen1_png.grf"
     );
-    for(int i = 0; i < 80; i++)
+    for(int i = 0; i < DURATION; i++)
     {
       background_sprite.Draw();
       NQME::UpdateGraphics();
 	    NE_WaitForVBL((NE_UpdateFlags)0);
+
+      mmStreamUpdate();
     }
     splash_screen = true;    
     NE_MaterialDelete(background_mat);
@@ -57,11 +71,13 @@ void MainMenu::Start()
     ); 
 
     NE_MainScreenSetOnTop();
-    for(int i = 0; i < 80; i++)
+    for(int i = 0; i < DURATION; i++)
     {
       background_sprite.Draw();
       NQME::UpdateGraphics();
 	    NE_WaitForVBL((NE_UpdateFlags)0);
+
+      mmStreamUpdate();
     }
     splash_screen = true;    
     NE_MaterialDelete(background_mat);
@@ -83,17 +99,22 @@ void MainMenu::Start()
     ); 
 
     NE_MainScreenSetOnBottom();
-    for(int i = 0; i < 80; i++)
+    for(int i = 0; i < DURATION; i++)
     {
       background_sprite.Draw();
       NQME::UpdateGraphics();
 	    NE_WaitForVBL((NE_UpdateFlags)0);
+
+      mmStreamUpdate();
     }
     splash_screen = true;    
     NE_MaterialDelete(background_mat);
     NE_PaletteDelete(background_pal);
-
-
+  }
+  else 
+  {
+    NQME::LoadSong("songs/ouverture.wav.raw");
+    NQME::PlayStream();
   }
 
   background_mat = NE_MaterialCreate();
@@ -125,7 +146,7 @@ void MainMenu::Start()
   //start_button.label.text = "START";
   strcpy(start_button.label.text, "START");
   start_button.label.channel = 0;
-  start_button.position = {80, 25};
+  start_button.position = {85, 25};
   start_button.txt_offset = {5, -2};
   start_button.margin = {10, 0};
   start_button.is_visible = true;
@@ -160,7 +181,7 @@ void MainMenu::Start()
   for(int i = 0; i < 5; i++)
   {
     strcpy(selection[i].label.text, available_songs[i].c_str());
-    selection[i].position = {10 + max_delta, 35 * i};
+    selection[i].position = {10 + max_delta, 37 * i + 6};
     selection[i].selected_current = false;
     selection[i].selected_before = false;
     selection[i].is_visible = true;
@@ -174,9 +195,6 @@ void MainMenu::Start()
 
   //selection[i].selected_current = true;
   //selection[i].selected_before = false;
-
-  NQME::LoadSong("songs/ouverture.wav.raw");
-	NQME::PlayStream();
 }
 
 void MainMenu::Update()

@@ -220,10 +220,10 @@ sonic
   };
 
   accuracy_level lvls[4] = {
-    {1, &sonic,  accuracy_labels[0]},
-    {3, &kick,   accuracy_labels[1]},
-    {8, &shove,  accuracy_labels[2]},
-    {14, &ollie, accuracy_labels[3]}
+    {6, &sonic,  accuracy_labels[0]},
+    {10, &kick,   accuracy_labels[1]},
+    {40, &shove,  accuracy_labels[2]},
+    {70, &ollie, accuracy_labels[3]}
  };
 
 
