@@ -34,7 +34,7 @@ public:
     (section_t){"Music des menus", "Justin Hurwitz"},
     (section_t){"Sous Un Ciel", "Kaci et Score"},
     (section_t){"Tous Les Gens", "Spider ZED et Leo Roi"},
-    (section_t){"Khali il sait", "Khali"},
+    (section_t){"Tout le monde autour", "Jaymee"},
     (section_t){"Trouble du comportement", "Juifboy"},
     (section_t){"Musique des credits", "Jade"},
     (section_t){"Merci d'avoir jouer", "Bon anniversaire"}

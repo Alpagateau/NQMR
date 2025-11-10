@@ -237,7 +237,6 @@ sonic
     {80, 10, &ollie, accuracy_labels[3]}
  };
 
-
   Rect void_frames[4] = 
   {
     {0,  0, 128, 32},
