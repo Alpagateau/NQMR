@@ -1,1 +1,0 @@
-melonDS.exe ./NQMR.nds
