@@ -10,7 +10,7 @@
 extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 
-#define TT_LES_GENS 2
+#define TT_LES_GENS 3
 #define TIMER_N 3
 
 u32 current_time;
@@ -333,6 +333,7 @@ void Gameplay::Update()
           if(d <= lvls[i].min_dist)
           {
             int pts = lvls[i].pts;
+            game_data.pts += pts;
             player_animation.Play_then(
               lvls[i].animation,
               is_fast ? &idle1 : &idle

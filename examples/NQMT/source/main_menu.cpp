@@ -4,7 +4,7 @@ extern NQME::BGHeader title_screen_bg;
 extern GameData game_data;
 extern SaveData save_data;
 
-#define DURATION 140
+#define DURATION 240
 
 NQME::Theme my_theme;
 
