@@ -11,6 +11,8 @@
 #include "nqme_anim.hpp"
 #include "nqme_scene.hpp"
 #include "nqme_gui.hpp"
+#include "nqme_color.hpp"
+#include "nqme_tile.hpp"
 
 namespace NQME
 {
