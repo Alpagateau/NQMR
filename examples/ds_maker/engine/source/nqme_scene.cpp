@@ -1,0 +1,70 @@
+#include "nqme_scene.hpp"
+
+#define FULL_BLACK 198
+
+namespace NQME
+{
+
+  int fade = FULL_BLACK;
+
+  Scene::Scene(Sprite2D *pool, SceneManager *scene_manager)
+  {
+    sprite_pool = pool;
+    sm = scene_manager;
+  }
+
+  void Scene::Start()
+  {
+    return;
+  }
+
+  void Scene::Update()
+  {
+    return;
+  }
+
+  void Scene::Cleanup()
+  {
+    return;
+  }
+
+
+  SceneManager::SceneManager()
+  {
+    printf("Scene System Enabled\n");
+  }
+  
+  void SceneManager::SwitchTo(u8 next_scene)
+  {
+    next = next_scene;
+  }
+
+  void SceneManager::Start()
+  {
+    next = current;
+    scenes[current]->Start();
+  }
+
+  void SceneManager::Update()
+  {
+    if(next != current){
+      if(fade < FULL_BLACK){
+        fade+=2;
+      }else{
+        scenes[current]->Cleanup();
+        current = next;
+        scenes[current]->Start(); 
+      }
+    }
+    else 
+    {
+      if(fade > 0)
+      {
+        fade-=2;
+      }
+    }
+    SetFade(fade);
+    scenes[current]->Update();
+  }
+  
+}
